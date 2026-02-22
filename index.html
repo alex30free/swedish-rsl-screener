@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swedish RSL Screener — Levy Momentum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #080c10;
+      --surface:   #0d1318;
+      --border:    #1c2830;
+      --border2:   #253340;
+      --text:      #c8d8e8;
+      --muted:     #4a6070;
+      --accent:    #00e5a0;
+      --accent2:   #0099ff;
+      --gold:      #f0c040;
+      --red:       #ff4455;
+      --rank1:     #00e5a0;
+      --rank5:     #0dd88a;
+      --rank20:    #08a060;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Scanline overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.06) 2px,
+        rgba(0,0,0,0.06) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Grid noise background */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,160,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,160,0.015) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── HEADER ── */
+    header {
+      padding: 48px 0 32px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+      animation: fadeDown 0.6s ease both;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .logo-area { display: flex; flex-direction: column; gap: 8px; }
+
+    .label-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      text-transform: uppercase;
+      background: rgba(0,229,160,0.08);
+      border: 1px solid rgba(0,229,160,0.2);
+      padding: 4px 10px;
+      display: inline-block;
+    }
+
+    h1 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(22px, 4vw, 36px);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      font-family: 'IBM Plex Mono', monospace;
+      margin-top: 6px;
+    }
+
+    .meta-box {
+      text-align: right;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .meta-box .updated {
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    .pulse {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: 6px;
+      animation: pulse 2s ease infinite;
+    }
+
+    /* ── STRATEGY BOX ── */
+    .strategy {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-left: 3px solid var(--accent);
+      padding: 24px 28px;
+      margin-bottom: 40px;
+      animation: fadeDown 0.6s 0.1s ease both;
+    }
+
+    .strategy h2 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 40px;
+    }
+
+    @media (max-width: 600px) {
+      .strategy-grid { grid-template-columns: 1fr; }
+    }
+
+    .strat-item {}
+    .strat-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 4px;
+    }
+    .strat-val {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .formula {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      color: var(--gold);
+      background: rgba(240,192,64,0.06);
+      border: 1px solid rgba(240,192,64,0.15);
+      padding: 10px 16px;
+      margin-top: 18px;
+      display: inline-block;
+    }
+
+    /* ── STATS ROW ── */
+    .stats-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      animation: fadeDown 0.6s 0.15s ease both;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 14px 22px;
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .stat-card .num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 24px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .stat-card .desc {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-top: 3px;
+    }
+
+    /* ── TABLE ── */
+    .table-wrap {
+      overflow-x: auto;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+    }
+
+    thead tr {
+      border-bottom: 1px solid var(--border2);
+    }
+
+    thead th {
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    thead th.right { text-align: right; }
+    thead th.center { text-align: center; }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+      cursor: default;
+    }
+
+    tbody tr:hover {
+      background: rgba(0,229,160,0.03);
+    }
+
+    tbody td {
+      padding: 13px 14px;
+      white-space: nowrap;
+    }
+
+    tbody td.right { text-align: right; }
+    tbody td.center { text-align: center; }
+
+    /* Rank column */
+    .rank-num {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      min-width: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Top 3 medal */
+    tr:nth-child(1) .rank-num { color: #FFD700; }
+    tr:nth-child(2) .rank-num { color: #C0C0C0; }
+    tr:nth-child(3) .rank-num { color: #CD7F32; }
+
+    .company-name {
+      font-weight: 400;
+      color: #ddeeff;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 13px;
+    }
+
+    .ticker-badge {
+      font-size: 10px;
+      color: var(--muted);
+      font-family: 'IBM Plex Mono', monospace;
+      margin-left: 8px;
+    }
+
+    .rsl-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .rsl-value {
+      font-weight: 600;
+      min-width: 56px;
+      text-align: right;
+    }
+
+    .rsl-bar-bg {
+      width: 60px;
+      height: 4px;
+      background: var(--border2);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .rsl-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      transition: width 0.4s ease;
+    }
+
+    /* RSL color coding */
+    .rsl-high { color: var(--accent); }
+    .rsl-mid  { color: #aaddcc; }
+
+    /* Price */
+    .price-val {
+      color: var(--text);
+      text-align: right;
+    }
+
+    .sma-val {
+      color: var(--muted);
+      text-align: right;
+      font-size: 12px;
+    }
+
+    /* Previous rank */
+    .prev-rank {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .rank-change {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 7px;
+      font-size: 11px;
+      font-weight: 500;
+      border-radius: 2px;
+    }
+
+    .rank-up    { color: var(--accent);  background: rgba(0,229,160,0.08); }
+    .rank-down  { color: var(--red);     background: rgba(255,68,85,0.08); }
+    .rank-same  { color: var(--muted);   background: rgba(255,255,255,0.04); }
+    .rank-new   { color: var(--gold);    background: rgba(240,192,64,0.08); font-size: 10px; letter-spacing: 0.1em; }
+
+    /* ── LOADING / ERROR ── */
+    .loader {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      gap: 12px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid var(--border2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .error-msg {
+      display: none;
+      padding: 24px;
+      border: 1px solid rgba(255,68,85,0.3);
+      color: var(--red);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      background: rgba(255,68,85,0.05);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 60px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.8;
+      animation: fadeDown 0.6s 0.3s ease both;
+    }
+
+    footer a { color: var(--muted); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pulse {
+      0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(0,229,160,0.4); }
+      50%      { opacity:0.7; box-shadow: 0 0 0 5px rgba(0,229,160,0); }
+    }
+
+    /* Row entry animation */
+    tbody tr {
+      animation: rowIn 0.4s ease both;
+    }
+    tbody tr:nth-child(1)  { animation-delay: 0.22s; }
+    tbody tr:nth-child(2)  { animation-delay: 0.25s; }
+    tbody tr:nth-child(3)  { animation-delay: 0.28s; }
+    tbody tr:nth-child(4)  { animation-delay: 0.31s; }
+    tbody tr:nth-child(5)  { animation-delay: 0.34s; }
+    tbody tr:nth-child(6)  { animation-delay: 0.37s; }
+    tbody tr:nth-child(7)  { animation-delay: 0.40s; }
+    tbody tr:nth-child(8)  { animation-delay: 0.43s; }
+    tbody tr:nth-child(9)  { animation-delay: 0.46s; }
+    tbody tr:nth-child(10) { animation-delay: 0.49s; }
+    tbody tr:nth-child(11) { animation-delay: 0.52s; }
+    tbody tr:nth-child(12) { animation-delay: 0.55s; }
+    tbody tr:nth-child(13) { animation-delay: 0.58s; }
+    tbody tr:nth-child(14) { animation-delay: 0.61s; }
+    tbody tr:nth-child(15) { animation-delay: 0.64s; }
+    tbody tr:nth-child(16) { animation-delay: 0.67s; }
+    tbody tr:nth-child(17) { animation-delay: 0.70s; }
+    tbody tr:nth-child(18) { animation-delay: 0.73s; }
+    tbody tr:nth-child(19) { animation-delay: 0.76s; }
+    tbody tr:nth-child(20) { animation-delay: 0.79s; }
+
+    @keyframes rowIn {
+      from { opacity: 0; transform: translateX(-8px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-top">
+      <div class="logo-area">
+        <div class="label-tag">Momentum Screener</div>
+        <h1>Swedish <span>RSL</span> Rankings</h1>
+        <div class="subtitle">Levy Relative Strength · 130 trading days · Large, Mid &amp; Small Cap</div>
+      </div>
+      <div class="meta-box" id="meta-box">
+        <div><span class="pulse"></span><span class="updated" id="updated-time">Loading…</span></div>
+        <div id="stocks-screened">— stocks screened</div>
+        <div>Period: 130 days (26 weeks)</div>
+        <div>Source: Yahoo Finance</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- STRATEGY INFO -->
+  <section class="strategy">
+    <h2>Strategy Overview</h2>
+    <div class="strategy-grid">
+      <div class="strat-item">
+        <div class="strat-label">What is RSL?</div>
+        <div class="strat-val">
+          The Levy Relative Strength (RSL) measures a stock's current price relative to its own 130-day moving average. A value above 1.0 means the stock trades above its 6-month average — a sign of sustained momentum.
+        </div>
+      </div>
+      <div class="strat-item">
+        <div class="strat-label">How to use it</div>
+        <div class="strat-val">
+          Buy the top-ranked stocks (highest RSL). Review and rebalance weekly. Sell any holding that drops out of the top tier or falls below its 130-day average (RSL &lt; 1.0). Always combine with position sizing and risk management.
+        </div>
+      </div>
+      <div class="strat-item">
+        <div class="strat-label">Why it works</div>
+        <div class="strat-val">
+          Academic research confirms price momentum persists across 3–12 months. Stocks that have recently outperformed tend to continue outperforming — the RSL systematically identifies these leaders across the entire Swedish market.
+        </div>
+      </div>
+      <div class="strat-item">
+        <div class="strat-label">Updated</div>
+        <div class="strat-val">
+          Every Friday evening after Nasdaq Stockholm closes (~18:30 CET). Data sourced automatically from Yahoo Finance via GitHub Actions.
+        </div>
+      </div>
+    </div>
+    <div class="formula">RSL = Current Price ÷ 130-day Simple Moving Average</div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-row" id="stats-row">
+    <div class="stat-card">
+      <div class="num" id="stat-total">—</div>
+      <div class="desc">Stocks Screened</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="stat-above">—</div>
+      <div class="desc">RSL Above 1.0</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="stat-top-rsl">—</div>
+      <div class="desc">Highest RSL</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="stat-new">—</div>
+      <div class="desc">New Entries This Week</div>
+    </div>
+  </div>
+
+  <!-- ERROR MSG -->
+  <div class="error-msg" id="error-msg">
+    ⚠ Could not load screener data. Ensure <code>screener_data.json</code> exists and GitHub Pages is enabled.
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-wrap" id="table-wrap">
+    <div class="loader" id="loader">
+      <div class="spinner"></div>
+      Fetching latest data…
+    </div>
+    <table id="rsl-table" style="display:none">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Company</th>
+          <th class="right">Price (SEK)</th>
+          <th class="right">SMA-130</th>
+          <th class="right">RSL Score</th>
+          <th class="center">Last Week Rank</th>
+        </tr>
+      </thead>
+      <tbody id="rsl-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Data sourced from Yahoo Finance via <a href="https://pypi.org/project/yfinance/" target="_blank">yfinance</a>. Updated automatically every Friday via GitHub Actions.</p>
+    <p style="margin-top:6px">⚠ For informational purposes only. Not financial advice. Always do your own research before investing.</p>
+    <p style="margin-top:6px">Based on: R.A. Levy, "Relative Strength as a Criterion for Investment Selection" (1967).</p>
+  </footer>
+
+</div>
+
+<script>
+  async function loadData() {
+    try {
+      const res = await fetch('screener_data.json?_=' + Date.now());
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      render(data);
+    } catch (e) {
+      document.getElementById('loader').style.display = 'none';
+      document.getElementById('error-msg').style.display = 'block';
+      console.error(e);
+    }
+  }
+
+  function render(data) {
+    document.getElementById('loader').style.display = 'none';
+
+    // Meta
+    document.getElementById('updated-time').textContent = 'Updated: ' + data.updated;
+    document.getElementById('stocks-screened').textContent = data.stocks_screened + ' stocks screened';
+
+    const top20 = data.top20 || [];
+
+    // Stats
+    document.getElementById('stat-total').textContent = data.stocks_screened;
+    const newEntries = top20.filter(s => s.prev_rank === null || s.prev_rank === undefined).length;
+    document.getElementById('stat-new').textContent = newEntries;
+    document.getElementById('stat-top-rsl').textContent = top20.length ? top20[0].rsl.toFixed(3) : '—';
+    // We don't have full list here for above-1.0 count, but we can count top20
+    const aboveOne = top20.filter(s => s.rsl >= 1).length;
+    document.getElementById('stat-above').textContent = aboveOne + '/20';
+
+    // Find max RSL for bar scaling
+    const maxRSL = Math.max(...top20.map(s => s.rsl));
+    const minRSL = Math.min(...top20.map(s => s.rsl));
+
+    const tbody = document.getElementById('rsl-tbody');
+    tbody.innerHTML = '';
+
+    top20.forEach((s, i) => {
+      const rank = i + 1;
+      const barPct = ((s.rsl - minRSL) / (maxRSL - minRSL + 0.0001)) * 100;
+      const rslClass = s.rsl >= 1.15 ? 'rsl-high' : 'rsl-mid';
+
+      // Previous rank logic
+      let prevHTML = '';
+      if (s.prev_rank === null || s.prev_rank === undefined) {
+        prevHTML = '<span class="rank-change rank-new">NEW</span>';
+      } else {
+        const diff = s.prev_rank - rank; // positive = moved up
+        if (diff > 0) {
+          prevHTML = `<span class="rank-change rank-up">▲ ${diff} &nbsp;#${s.prev_rank}</span>`;
+        } else if (diff < 0) {
+          prevHTML = `<span class="rank-change rank-down">▼ ${Math.abs(diff)} &nbsp;#${s.prev_rank}</span>`;
+        } else {
+          prevHTML = `<span class="rank-change rank-same">— &nbsp;#${s.prev_rank}</span>`;
+        }
+      }
+
+      const ticker = s.ticker.replace('.ST', '');
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><span class="rank-num">${rank}</span></td>
+        <td>
+          <span class="company-name">${escHtml(s.name)}</span>
+          <span class="ticker-badge">${escHtml(ticker)}</span>
+        </td>
+        <td class="right price-val">${fmt(s.price)}</td>
+        <td class="right sma-val">${fmt(s.sma130)}</td>
+        <td class="right">
+          <div class="rsl-bar-wrap">
+            <span class="rsl-value ${rslClass}">${s.rsl.toFixed(3)}</span>
+            <div class="rsl-bar-bg"><div class="rsl-bar-fill" style="width:${barPct.toFixed(1)}%"></div></div>
+          </div>
+        </td>
+        <td class="center prev-rank">${prevHTML}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    document.getElementById('rsl-table').style.display = 'table';
+  }
+
+  function fmt(n) {
+    if (n === null || n === undefined) return '—';
+    return n.toLocaleString('sv-SE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function escHtml(s) {
+    return String(s)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;');
+  }
+
+  loadData();
+</script>
+</body>
+</html>
