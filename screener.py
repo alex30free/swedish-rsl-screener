@@ -7,9 +7,17 @@ Ranks all stocks, saves top 20 + full skip log to JSON for the webpage.
 
 import json
 import os
+import time
 import datetime
-import yfinance as yf
-import pandas as pd
+import warnings
+warnings.filterwarnings("ignore")
+
+try:
+    import yfinance as yf
+    import pandas as pd
+except ImportError:
+    print("ERROR: Run: pip install yfinance pandas")
+    raise
 
 # --- Load tickers ---
 TICKERS = [
@@ -27,7 +35,7 @@ TICKERS = [
     ("Balco Group", "BALCO.ST"), ("Beijer Alma", "BEIA-B.ST"), ("Beijer Ref", "BEIJ-B.ST"),
     ("Bergman & Beving", "BERG-B.ST"), ("Betsson", "BETS-B.ST"), ("Better Collective", "BETCO.ST"),
     ("Bilia", "BILI-A.ST"), ("Billerud", "BILL.ST"), ("BioArctic", "BIOA-B.ST"),
-    ("BioGaia", "BIOG-B.ST"), ("Björn Borg", "BORG.ST"), ("Boliden", "BOL.ST"),
+    ("BioGaia", "BIOG-B.ST"), ("Bjorn Borg", "BORG.ST"), ("Boliden", "BOL.ST"),
     ("Bonava B", "BONAV-B.ST"), ("Bonesupport", "BONEX.ST"), ("Boozt", "BOOZT.ST"),
     ("Boule Diagnostics", "BOUL.ST"), ("Bravida", "BRAV.ST"), ("Bufab", "BUFAB.ST"),
     ("Bulten", "BULTEN.ST"), ("Bure Equity", "BURE.ST"), ("Byggmax", "BMAX.ST"),
@@ -36,7 +44,7 @@ TICKERS = [
     ("CellaVision", "CEVI.ST"), ("Cibus Nordic", "CIBUS.ST"), ("Cint Group", "CINT.ST"),
     ("Clas Ohlson", "CLAS-B.ST"), ("Cloetta", "CLA-B.ST"), ("CoinShares", "CS.ST"),
     ("Coor Service Management", "COOR.ST"), ("Corem Property B", "CORE-B.ST"),
-    ("Dedicare", "DEDI.ST"), ("Diös Fastigheter", "DIOS.ST"), ("Dometic", "DOM.ST"),
+    ("Dedicare", "DEDI.ST"), ("Dios Fastigheter", "DIOS.ST"), ("Dometic", "DOM.ST"),
     ("Duni", "DUNI.ST"), ("Dustin Group", "DUST.ST"), ("Dynavox Group", "DYVOX.ST"),
     ("EQT", "EQT.ST"), ("Eastnine", "EAST.ST"), ("Elanders", "ELAN-B.ST"),
     ("Electrolux B", "ELUX-B.ST"), ("Electrolux Professional B", "EPRO-B.ST"),
@@ -47,19 +55,19 @@ TICKERS = [
     ("Fabege", "FABG.ST"), ("Fagerhult", "FAG.ST"), ("Fast Balder", "BALD-B.ST"),
     ("Fastpartner A", "FPAR-A.ST"), ("Fenix Outdoor", "FOI-B.ST"), ("Fingerprint Cards", "FING-B.ST"),
     ("Formpipe Software", "FPIP.ST"), ("G5 Entertainment", "G5EN.ST"), ("Garo", "GARO.ST"),
-    ("Genova Property", "GPG.ST"), ("Getinge", "GETI-B.ST"), ("Gränges", "GRNG.ST"),
+    ("Genova Property", "GPG.ST"), ("Getinge", "GETI-B.ST"), ("Granges", "GRNG.ST"),
     ("HMS Networks", "HMS.ST"), ("Handelsbanken B", "SHB-B.ST"), ("Hanza", "HANZA.ST"),
-    ("Heba", "HEBA-B.ST"), ("Hemnet", "HEM.ST"), ("Hennes & Mauritz", "HM-B.ST"),
+    ("Heba", "HEBA-B.ST"), ("Hemnet", "HEM.ST"), ("Hennes and Mauritz", "HM-B.ST"),
     ("Hexagon", "HEXA-B.ST"), ("Hexatronic", "HTRO.ST"), ("Hexpol", "HPOL-B.ST"),
     ("Holmen B", "HOLM-B.ST"), ("Hufvudstaden A", "HUFV-A.ST"), ("Humana", "HUM.ST"),
     ("Husqvarna B", "HUSQ-B.ST"), ("ITAB Shop Concept", "ITAB.ST"),
-    ("Industrivärden C", "INDU-C.ST"), ("Indutrade", "INDT.ST"), ("Instalco", "INSTAL.ST"),
+    ("Industrivarден C", "INDU-C.ST"), ("Indutrade", "INDT.ST"), ("Instalco", "INSTAL.ST"),
     ("International Petroleum", "IPCO.ST"), ("Intrum", "INTRUM.ST"), ("Investor B", "INVE-B.ST"),
     ("Invisio", "IVSO.ST"), ("Inwido", "INWI.ST"), ("JM", "JM.ST"),
     ("K-Fast Holding", "KFAST-B.ST"), ("Kinnevik B", "KINV-B.ST"), ("KnowIT", "KNOW.ST"),
     ("Lagercrantz", "LAGR-B.ST"), ("Latour", "LATO-B.ST"), ("Lifco", "LIFCO-B.ST"),
     ("Lime Technologies", "LIME.ST"), ("Lindab", "LIAB.ST"), ("Loomis", "LOOMIS.ST"),
-    ("Lundbergföretagen", "LUND-B.ST"), ("Lundin Gold", "LUG.ST"), ("Lundin Mining", "LUMI.ST"),
+    ("Lundbergforetagen", "LUND-B.ST"), ("Lundin Gold", "LUG.ST"), ("Lundin Mining", "LUMI.ST"),
     ("MEKO", "MEKO.ST"), ("Malmbergs Elektriska", "MEAB-B.ST"), ("MedCap", "MCAP.ST"),
     ("Medicover", "MCOV-B.ST"), ("Midsona B", "MSON-B.ST"), ("Mildef Group", "MILDEF.ST"),
     ("Mips", "MIPS.ST"), ("Modern Times Group B", "MTG-B.ST"), ("Momentum Group", "MMGR-B.ST"),
@@ -69,7 +77,7 @@ TICKERS = [
     ("Neobo Fastigheter", "NEOBO.ST"), ("New Wave", "NEWA-B.ST"), ("Nobia", "NOBI.ST"),
     ("Nolato", "NOLA-B.ST"), ("Nordea Bank", "NDA-SE.ST"), ("Nordnet", "SAVE.ST"),
     ("Nyfosa", "NYF.ST"), ("OEM International", "OEM-B.ST"), ("Orexo", "ORX.ST"),
-    ("Orrön Energy", "ORRON.ST"), ("Pandox", "PNDX-B.ST"), ("Peab", "PEAB-B.ST"),
+    ("Orron Energy", "ORRON.ST"), ("Pandox", "PNDX-B.ST"), ("Peab", "PEAB-B.ST"),
     ("Platzer Fastigheter", "PLAZ-B.ST"), ("Pricer", "PRIC-B.ST"), ("Proact IT", "PACT.ST"),
     ("Profoto", "PRFO.ST"), ("Ratos B", "RATO-B.ST"), ("RaySearch Laboratories", "RAY-B.ST"),
     ("Rejlers", "REJL-B.ST"), ("Revolutionrace", "RVRC.ST"), ("Rottneros", "RROS.ST"),
@@ -88,7 +96,7 @@ TICKERS = [
     ("Volvo B", "VOLV-B.ST"), ("Volvo Car", "VOLCAR-B.ST"), ("Wallenstam", "WALL-B.ST"),
     ("Wihlborgs Fastigheter", "WIHL.ST"), ("XANO Industri", "XANO-B.ST"),
     ("Xvivo Perfusion", "XVIVO.ST"), ("Yubico", "YUBICO.ST"), ("eWork", "EWRK.ST"),
-    ("Öresund", "ORES.ST"),
+    ("Oresund", "ORES.ST"),
 ]
 
 RSL_PERIOD = 130  # trading days (~26 weeks)
@@ -98,85 +106,87 @@ PREV_RANKS_FILE = "prev_ranks.json"
 
 def compute_rsl(tickers, period=130):
     results = []
-    skipped = []  # will hold dicts with name, ticker, reason, days_available
-    ticker_symbols = [t[1] for t in tickers]
-    name_map = {t[1]: t[0] for t in tickers}
+    skipped = []
+    total = len(tickers)
 
-    print(f"Downloading data for {len(ticker_symbols)} tickers...")
-    raw = yf.download(
-        ticker_symbols,
-        period="9mo",
-        interval="1d",
-        auto_adjust=True,
-        progress=False,
-        threads=True,
-    )
+    end_date   = datetime.datetime.today()
+    start_date = end_date - datetime.timedelta(days=400)
 
-    close = raw["Close"] if "Close" in raw else raw
+    print("=" * 65)
+    print("  Levy RSL Screener — OMX Stockholm")
+    print("  Universe: " + str(total) + " tickers (Large + Mid + Small Cap)")
+    print("  Running at: " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
+    print("=" * 65)
+    print("")
 
-    for symbol in ticker_symbols:
-        name = name_map[symbol]
+    for i, (name, symbol) in enumerate(tickers):
+        print("[" + str(i + 1).rjust(3) + "/" + str(total) + "] " + symbol.ljust(20), end="", flush=True)
+
         try:
-            if symbol not in close.columns:
+            stock = yf.Ticker(symbol)
+            hist  = stock.history(
+                start=start_date.strftime("%Y-%m-%d"),
+                end=end_date.strftime("%Y-%m-%d"),
+                auto_adjust=True
+            )
+
+            if hist.empty or len(hist) == 0:
                 skipped.append({
-                    "name": name,
-                    "ticker": symbol,
-                    "reason": "Not found on Yahoo Finance",
-                    "days_available": 0,
+                    "name": name, "ticker": symbol,
+                    "reason": "No price data returned", "days_available": 0
                 })
-                print(f"  SKIP (not found): {name} [{symbol}]")
+                print("X  No price data")
+                time.sleep(0.3)
                 continue
 
-            series = close[symbol].dropna()
-            days = len(series)
-
-            if days == 0:
-                skipped.append({
-                    "name": name,
-                    "ticker": symbol,
-                    "reason": "No price data returned",
-                    "days_available": 0,
-                })
-                print(f"  SKIP (no data): {name} [{symbol}]")
-                continue
+            series = hist["Close"].dropna()
+            days   = len(series)
 
             if days < period:
                 skipped.append({
-                    "name": name,
-                    "ticker": symbol,
-                    "reason": f"Insufficient history — needs {period} days, only {days} available",
-                    "days_available": days,
+                    "name": name, "ticker": symbol,
+                    "reason": "Insufficient history - needs " + str(period) + " days, only " + str(days) + " available",
+                    "days_available": days
                 })
-                print(f"  SKIP (only {days}/{period} days): {name} [{symbol}]")
+                print("X  Only " + str(days) + "/" + str(period) + " days of history")
+                time.sleep(0.3)
                 continue
 
             current_price = float(series.iloc[-1])
-            sma = float(series.iloc[-period:].mean())
-            rsl = current_price / sma
+            sma           = float(series.iloc[-period:].mean())
+            rsl           = current_price / sma
+
             results.append({
-                "name": name,
+                "name":   name,
                 "ticker": symbol,
-                "price": round(current_price, 2),
+                "price":  round(current_price, 2),
                 "sma130": round(sma, 2),
-                "rsl": round(rsl, 4),
+                "rsl":    round(rsl, 4),
             })
+
+            print("OK  Price=" + str(round(current_price, 2)).rjust(9) +
+                  "  SMA130=" + str(round(sma, 2)).rjust(9) +
+                  "  RSL=" + str(round(rsl, 4)))
 
         except Exception as e:
             skipped.append({
-                "name": name,
-                "ticker": symbol,
-                "reason": f"Error: {str(e)}",
-                "days_available": 0,
+                "name": name, "ticker": symbol,
+                "reason": "Error: " + str(e)[:60], "days_available": 0
             })
-            print(f"  SKIP (error): {name} [{symbol}] — {e}")
+            print("X  " + str(e)[:50])
+
+        time.sleep(0.3)
+
+    print("")
+    print("-" * 65)
+    print("  Valid: " + str(len(results)) + " stocks   Skipped: " + str(len(skipped)))
+    print("-" * 65)
 
     results.sort(key=lambda x: x["rsl"], reverse=True)
     for i, r in enumerate(results):
         r["rank"] = i + 1
 
-    # Sort skipped: "not found" first, then by days available ascending
     skipped.sort(key=lambda x: x["days_available"])
-
     return results, skipped
 
 
@@ -195,7 +205,6 @@ def save_prev_ranks(top20):
 
 def main():
     now = datetime.datetime.now(datetime.timezone.utc)
-    print(f"Running RSL screener at {now.isoformat()}")
 
     all_stocks, skipped = compute_rsl(TICKERS, RSL_PERIOD)
     top20 = all_stocks[:20]
@@ -206,39 +215,45 @@ def main():
 
     save_prev_ranks(top20)
 
-    # Summary counts by skip reason category
-    not_found   = [s for s in skipped if s["days_available"] == 0 and "Not found" in s["reason"]]
-    no_data     = [s for s in skipped if s["days_available"] == 0 and "No price" in s["reason"]]
-    short_hist  = [s for s in skipped if s["days_available"] > 0]
-    errors      = [s for s in skipped if "Error:" in s["reason"]]
+    not_found  = [s for s in skipped if s["days_available"] == 0 and "Not found" in s["reason"]]
+    no_data    = [s for s in skipped if s["days_available"] == 0 and "No price" in s["reason"]]
+    short_hist = [s for s in skipped if s["days_available"] > 0]
+    errors     = [s for s in skipped if "Error:" in s["reason"]]
 
-    print(f"\n--- SKIP SUMMARY ---")
-    print(f"  Total attempted : {len(TICKERS)}")
-    print(f"  Successfully loaded : {len(all_stocks)}")
-    print(f"  Skipped total   : {len(skipped)}")
-    print(f"    Not found on Yahoo Finance : {len(not_found)}")
-    print(f"    No price data              : {len(no_data)}")
-    print(f"    Insufficient history (<{RSL_PERIOD}d): {len(short_hist)}")
-    print(f"    Other errors               : {len(errors)}")
+    print("")
+    print("--- SKIP SUMMARY ---")
+    print("  Total attempted     : " + str(len(TICKERS)))
+    print("  Successfully loaded : " + str(len(all_stocks)))
+    print("  Skipped total       : " + str(len(skipped)))
+    print("    Not found on Yahoo Finance   : " + str(len(not_found)))
+    print("    No price data                : " + str(len(no_data)))
+    print("    Insufficient history <130d   : " + str(len(short_hist)))
+    print("    Other errors                 : " + str(len(errors)))
 
     output = {
-        "updated": now.strftime("%Y-%m-%d %H:%M UTC"),
-        "period_days": RSL_PERIOD,
+        "updated":         now.strftime("%Y-%m-%d %H:%M UTC"),
+        "period_days":     RSL_PERIOD,
         "total_attempted": len(TICKERS),
         "stocks_screened": len(all_stocks),
-        "skipped_count": len(skipped),
-        "top20": top20,
-        "skipped": skipped,
+        "skipped_count":   len(skipped),
+        "top20":           top20,
+        "skipped":         skipped,
     }
 
     with open(OUTPUT_JSON, "w") as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
-    print(f"\nDone! Saved {OUTPUT_JSON}")
-    print("\n--- TOP 20 ---")
+    print("")
+    print("=" * 65)
+    print("  TOP 20 — LEVY RSL RANKING")
+    print("=" * 65)
     for r in top20:
-        prev = f"(prev #{r['prev_rank']})" if r["prev_rank"] else "(new)"
-        print(f"  #{r['rank']:2d}  RSL={r['rsl']:.4f}  {r['name']} {prev}")
+        prev = "(prev #" + str(r["prev_rank"]) + ")" if r["prev_rank"] else "(new)"
+        print("  #" + str(r["rank"]).rjust(2) + "  RSL=" + str(r["rsl"]) +
+              "  " + r["name"] + "  " + prev)
+
+    print("")
+    print("Saved " + OUTPUT_JSON)
 
 
 if __name__ == "__main__":
