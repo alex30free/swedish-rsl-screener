@@ -6,7 +6,7 @@
   <title>Swedish RSL Screener — Levy Momentum</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg:        #080c10;
@@ -285,34 +285,37 @@
     tbody td.right { text-align: right; }
     tbody td.center { text-align: center; }
 
-    /* Rank column */
+    /* Rank column — big Syne style matching Van Vliet screener */
     .rank-num {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--muted);
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--border2);
       min-width: 28px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
     }
 
-    /* Top 3 medal */
-    tr:nth-child(1) .rank-num { color: #FFD700; }
-    tr:nth-child(2) .rank-num { color: #C0C0C0; }
-    tr:nth-child(3) .rank-num { color: #CD7F32; }
+    tr:nth-child(1) .rank-num { color: var(--accent); }
+    tr:nth-child(2) .rank-num { color: rgba(0,229,160,0.5); }
+    tr:nth-child(3) .rank-num { color: rgba(0,229,160,0.3); }
 
-    .company-name {
-      font-weight: 400;
-      color: #ddeeff;
-      font-family: 'IBM Plex Sans', sans-serif;
+    .ticker-main {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 500;
+      color: #ffffff;
+      letter-spacing: 1px;
       font-size: 13px;
+      display: block;
     }
 
-    .ticker-badge {
-      font-size: 10px;
-      color: var(--muted);
+    .company-name {
       font-family: 'IBM Plex Mono', monospace;
-      margin-left: 8px;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+      display: block;
     }
 
     .rsl-bar-wrap {
@@ -492,38 +495,6 @@
     </div>
   </header>
 
-  <!-- STRATEGY INFO -->
-  <section class="strategy">
-    <h2>Strategy Overview</h2>
-    <div class="strategy-grid">
-      <div class="strat-item">
-        <div class="strat-label">What is RSL?</div>
-        <div class="strat-val">
-          The Levy Relative Strength (RSL) measures a stock's current price relative to its own 130-day moving average. A value above 1.0 means the stock trades above its 6-month average — a sign of sustained momentum.
-        </div>
-      </div>
-      <div class="strat-item">
-        <div class="strat-label">How to use it</div>
-        <div class="strat-val">
-          Buy the top-ranked stocks (highest RSL). Review and rebalance weekly. Sell any holding that drops out of the top tier or falls below its 130-day average (RSL &lt; 1.0). Always combine with position sizing and risk management.
-        </div>
-      </div>
-      <div class="strat-item">
-        <div class="strat-label">Why it works</div>
-        <div class="strat-val">
-          Academic research confirms price momentum persists across 3–12 months. Stocks that have recently outperformed tend to continue outperforming — the RSL systematically identifies these leaders across the entire Swedish market.
-        </div>
-      </div>
-      <div class="strat-item">
-        <div class="strat-label">Updated</div>
-        <div class="strat-val">
-          Every Friday evening after Nasdaq Stockholm closes (~18:30 CET). Data sourced automatically from Yahoo Finance via GitHub Actions.
-        </div>
-      </div>
-    </div>
-    <div class="formula">RSL = Current Price ÷ 130-day Simple Moving Average</div>
-  </section>
-
   <!-- STATS -->
   <div class="stats-row" id="stats-row">
     <div class="stat-card">
@@ -559,10 +530,10 @@
       <thead>
         <tr>
           <th>Rank</th>
-          <th>Company</th>
+          <th>Ticker / Company</th>
+          <th class="right">RSL Score</th>
           <th class="right">Price (SEK)</th>
           <th class="right">SMA-130</th>
-          <th class="right">RSL Score</th>
           <th class="center">Last Week Rank</th>
         </tr>
       </thead>
@@ -616,6 +587,92 @@
     <p style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); margin-top:16px; line-height:1.7; max-width:700px;">
       ℹ The most common reason for skipping is <strong style="color:#aabbcc">insufficient history</strong> — stocks need at least 130 trading days (~6 months) of data to calculate RSL. Recently listed companies (IPOs) will appear here until they have enough history. Stocks listed as "Not found" may have changed their Yahoo Finance ticker symbol.
     </p>
+  </div>
+
+  <!-- STRATEGY OVERVIEW + LEVY RESEARCH -->
+  <div style="margin-top: 60px;">
+
+    <!-- Strategy Overview -->
+    <div style="background:var(--surface); border:1px solid var(--border2); border-left:3px solid var(--accent);
+                padding:32px 40px; margin-bottom:28px;">
+      <h2 style="font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500; letter-spacing:0.2em;
+                 color:var(--accent); text-transform:uppercase; margin-bottom:20px;">Strategy Overview</h2>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px 40px;">
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted);
+                      text-transform:uppercase; letter-spacing:0.15em; margin-bottom:5px;">What is RSL?</div>
+          <div style="font-size:13px; color:var(--text); line-height:1.6;">The Levy Relative Strength (RSL) measures a stock's current price relative to its own 130-day moving average. A value above 1.0 means the stock trades above its 6-month average — a sign of sustained momentum.</div>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted);
+                      text-transform:uppercase; letter-spacing:0.15em; margin-bottom:5px;">How to use it</div>
+          <div style="font-size:13px; color:var(--text); line-height:1.6;">Buy the top-ranked stocks (highest RSL). Review and rebalance weekly. Sell any holding that drops out of the top tier or falls below its 130-day average (RSL &lt; 1.0). Always combine with position sizing and risk management.</div>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted);
+                      text-transform:uppercase; letter-spacing:0.15em; margin-bottom:5px;">Why it works</div>
+          <div style="font-size:13px; color:var(--text); line-height:1.6;">Academic research confirms price momentum persists across 3–12 months. Stocks that have recently outperformed tend to continue outperforming — the RSL systematically identifies these leaders across the entire Swedish market.</div>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted);
+                      text-transform:uppercase; letter-spacing:0.15em; margin-bottom:5px;">Updated</div>
+          <div style="font-size:13px; color:var(--text); line-height:1.6;">Every Friday evening after Nasdaq Stockholm closes (~18:30 CET). Data sourced automatically from Yahoo Finance via GitHub Actions.</div>
+        </div>
+      </div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:14px; color:var(--gold);
+                  background:rgba(240,192,64,0.06); border:1px solid rgba(240,192,64,0.15);
+                  padding:10px 16px; margin-top:20px; display:inline-block;">
+        RSL = Current Price ÷ 130-day Simple Moving Average
+      </div>
+    </div>
+
+    <!-- Levy Research Section -->
+    <div style="background:var(--surface); border:1px solid var(--border2); border-left:3px solid var(--gold);
+                padding:32px 40px;">
+      <h2 style="font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500; letter-spacing:0.2em;
+                 color:var(--gold); text-transform:uppercase; margin-bottom:6px;">What the Research Shows</h2>
+      <p style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); margin-bottom:24px; font-style:italic;">
+        R.A. Levy — "Relative Strength as a Criterion for Investment Selection", <em>The Journal of Finance</em> (1967)
+      </p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:24px;">
+
+        <div>
+          <h3 style="font-size:12px; color:var(--accent); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px;">01 · The Original Study</h3>
+          <p style="font-size:12px; color:var(--muted); line-height:1.7;">In his 1967 doctoral research, Robert Levy analysed 625 NYSE stocks over a 5-year period. He found that stocks with the highest relative strength — price divided by their 26-week (130 trading day) moving average — <strong style="color:var(--text);">significantly outperformed the market</strong> in the subsequent period.</p>
+        </div>
+
+        <div>
+          <h3 style="font-size:12px; color:var(--accent); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px;">02 · The 130-Day Formula</h3>
+          <p style="font-size:12px; color:var(--muted); line-height:1.7;">Levy tested multiple lookback windows and found <strong style="color:var(--text);">26 weeks (130 trading days)</strong> to be the optimal period — long enough to capture a genuine trend, short enough to react when momentum shifts. Stocks with RSL above 1.0 are in an uptrend relative to their own history.</p>
+        </div>
+
+        <div>
+          <h3 style="font-size:12px; color:var(--accent); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px;">03 · Outperformance Results</h3>
+          <p style="font-size:12px; color:var(--muted); line-height:1.7;">Levy's top-ranked stocks by RSL produced <strong style="color:var(--accent);">excess annual returns of roughly 10–14%</strong> above the market average in his backtests. The strategy worked best when buying only those stocks with RSL clearly above 1.0 and rotating out when they dropped below.</p>
+        </div>
+
+        <div>
+          <h3 style="font-size:12px; color:var(--accent); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px;">04 · Why It Still Works</h3>
+          <p style="font-size:12px; color:var(--muted); line-height:1.7;">Subsequent academic research by Jegadeesh & Titman (1993) and others confirmed momentum effects persist across markets and decades. The core insight — <strong style="color:var(--text);">winners keep winning over 3–12 month horizons</strong> — remains one of the most robust anomalies in finance.</p>
+        </div>
+
+      </div>
+
+      <div style="margin-top:24px; padding-top:20px; border-top:1px solid var(--border);
+                  display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.2em;
+                    text-transform:uppercase; color:var(--muted);">Sell Signal</div>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; padding:5px 14px;
+                     border:1px solid rgba(255,68,85,0.3); color:var(--red);
+                     background:rgba(255,68,85,0.06);">RSL drops below 1.0</span>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.2em;
+                    text-transform:uppercase; color:var(--muted); margin-left:8px;">Buy Signal</div>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; padding:5px 14px;
+                     border:1px solid rgba(0,229,160,0.3); color:var(--accent);
+                     background:rgba(0,229,160,0.06);">RSL above 1.0 &amp; in top tier</span>
+      </div>
+    </div>
+
   </div>
 
   <!-- FOOTER -->
@@ -687,19 +744,19 @@
       const ticker = s.ticker.replace('.ST', '');
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td><span class="rank-num">${rank}</span></td>
+        <td><span class="rank-num">${String(rank).padStart(2,'0')}</span></td>
         <td>
+          <span class="ticker-main">${escHtml(ticker)}</span>
           <span class="company-name">${escHtml(s.name)}</span>
-          <span class="ticker-badge">${escHtml(ticker)}</span>
         </td>
-        <td class="right price-val">${fmt(s.price)}</td>
-        <td class="right sma-val">${fmt(s.sma130)}</td>
         <td class="right">
           <div class="rsl-bar-wrap">
             <span class="rsl-value ${rslClass}">${s.rsl.toFixed(3)}</span>
             <div class="rsl-bar-bg"><div class="rsl-bar-fill" style="width:${barPct.toFixed(1)}%"></div></div>
           </div>
         </td>
+        <td class="right price-val">${fmt(s.price)}</td>
+        <td class="right sma-val">${fmt(s.sma130)}</td>
         <td class="center prev-rank">${prevHTML}</td>
       `;
       tbody.appendChild(tr);
