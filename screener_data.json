@@ -1,7 +1,9 @@
 {
-  "updated": "2026-02-22 19:10 UTC",
+  "updated": "2026-02-22 20:41 UTC",
   "period_days": 130,
+  "total_attempted": 223,
   "stocks_screened": 223,
+  "skipped_count": 0,
   "top20": [
     {
       "name": "Lundin Mining",
@@ -10,7 +12,7 @@
       "sma130": 167.75,
       "rsl": 1.5094,
       "rank": 1,
-      "prev_rank": null
+      "prev_rank": 1
     },
     {
       "name": "Boliden",
@@ -19,16 +21,16 @@
       "sma130": 459.51,
       "rsl": 1.4372,
       "rank": 2,
-      "prev_rank": null
+      "prev_rank": 2
     },
     {
-      "name": "Orrön Energy",
+      "name": "Orron Energy",
       "ticker": "ORRON.ST",
       "price": 6.93,
       "sma130": 4.9,
       "rsl": 1.4158,
       "rank": 3,
-      "prev_rank": null
+      "prev_rank": 3
     },
     {
       "name": "Instalco",
@@ -37,7 +39,7 @@
       "sma130": 25.71,
       "rsl": 1.4151,
       "rank": 4,
-      "prev_rank": null
+      "prev_rank": 4
     },
     {
       "name": "Cloetta",
@@ -46,7 +48,7 @@
       "sma130": 38.14,
       "rsl": 1.3529,
       "rank": 5,
-      "prev_rank": null
+      "prev_rank": 5
     },
     {
       "name": "Sandvik",
@@ -55,7 +57,7 @@
       "sma130": 291.84,
       "rsl": 1.3007,
       "rank": 6,
-      "prev_rank": null
+      "prev_rank": 6
     },
     {
       "name": "Peab",
@@ -64,7 +66,7 @@
       "sma130": 80.92,
       "rsl": 1.2803,
       "rank": 7,
-      "prev_rank": null
+      "prev_rank": 7
     },
     {
       "name": "Attendo",
@@ -73,7 +75,7 @@
       "sma130": 78.82,
       "rsl": 1.2739,
       "rank": 8,
-      "prev_rank": null
+      "prev_rank": 8
     },
     {
       "name": "Electrolux B",
@@ -82,7 +84,7 @@
       "sma130": 61.19,
       "rsl": 1.263,
       "rank": 9,
-      "prev_rank": null
+      "prev_rank": 9
     },
     {
       "name": "Scandi Standard",
@@ -91,7 +93,7 @@
       "sma130": 99.28,
       "rsl": 1.259,
       "rank": 10,
-      "prev_rank": null
+      "prev_rank": 10
     },
     {
       "name": "Midsona B",
@@ -100,7 +102,7 @@
       "sma130": 8.65,
       "rsl": 1.2543,
       "rank": 11,
-      "prev_rank": null
+      "prev_rank": 11
     },
     {
       "name": "Swedish Orphan Biovitrum",
@@ -109,7 +111,7 @@
       "sma130": 323.5,
       "rsl": 1.2439,
       "rank": 12,
-      "prev_rank": null
+      "prev_rank": 12
     },
     {
       "name": "FM Mattsson",
@@ -118,7 +120,7 @@
       "sma130": 61.15,
       "rsl": 1.2331,
       "rank": 13,
-      "prev_rank": null
+      "prev_rank": 13
     },
     {
       "name": "Hexatronic",
@@ -127,7 +129,7 @@
       "sma130": 21.51,
       "rsl": 1.2305,
       "rank": 14,
-      "prev_rank": null
+      "prev_rank": 14
     },
     {
       "name": "Volvo B",
@@ -136,7 +138,7 @@
       "sma130": 289.72,
       "rsl": 1.2119,
       "rank": 15,
-      "prev_rank": null
+      "prev_rank": 15
     },
     {
       "name": "Tele2 B",
@@ -145,16 +147,16 @@
       "sma130": 157.72,
       "rsl": 1.2091,
       "rank": 16,
-      "prev_rank": null
+      "prev_rank": 16
     },
     {
-      "name": "Industrivärden C",
+      "name": "Industrivarден C",
       "ticker": "INDU-C.ST",
       "price": 488.3,
       "sma130": 404.72,
       "rsl": 1.2065,
       "rank": 17,
-      "prev_rank": null
+      "prev_rank": 17
     },
     {
       "name": "Coor Service Management",
@@ -163,7 +165,7 @@
       "sma130": 48.81,
       "rsl": 1.2047,
       "rank": 18,
-      "prev_rank": null
+      "prev_rank": 18
     },
     {
       "name": "Telia Company",
@@ -172,7 +174,7 @@
       "sma130": 37.37,
       "rsl": 1.2024,
       "rank": 19,
-      "prev_rank": null
+      "prev_rank": 19
     },
     {
       "name": "SSAB B",
@@ -181,7 +183,8 @@
       "sma130": 64.2,
       "rsl": 1.2006,
       "rank": 20,
-      "prev_rank": null
+      "prev_rank": 20
     }
-  ]
+  ],
+  "skipped": []
 }
