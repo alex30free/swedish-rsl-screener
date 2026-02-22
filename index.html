@@ -570,6 +570,54 @@
     </table>
   </div>
 
+  <!-- SKIPPED STOCKS LOG -->
+  <div id="skip-section" style="display:none; margin-top:52px; animation: fadeUp 0.6s 0.4s ease both;">
+
+    <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
+      <div>
+        <div class="label-tag" style="margin-bottom:8px;">Coverage Log</div>
+        <h2 style="font-family:'IBM Plex Mono',monospace; font-size:15px; font-weight:600; color:#ddeeff; letter-spacing:-0.01em;">
+          Skipped Stocks — <span id="skip-count" style="color:var(--gold)">0</span> not included in screener
+        </h2>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); margin-top:5px;">
+          Attempted: <span id="stat-attempted">—</span> &nbsp;|&nbsp; Loaded: <span id="stat-loaded">—</span> &nbsp;|&nbsp; Skipped: <span id="skip-count-2" style="color:var(--gold)">—</span>
+        </div>
+      </div>
+      <button id="skip-toggle" onclick="toggleSkipTable()"
+        style="font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500;
+               letter-spacing:0.12em; text-transform:uppercase; background:transparent;
+               border:1px solid var(--border2); color:var(--muted); padding:8px 18px;
+               cursor:pointer; transition: border-color 0.2s, color 0.2s;"
+        onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
+        onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--muted)'">
+        Show List ▾
+      </button>
+    </div>
+
+    <!-- Summary pills -->
+    <div id="skip-pills" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;"></div>
+
+    <!-- Skip table (hidden by default) -->
+    <div id="skip-table-wrap" style="display:none; overflow-x:auto;">
+      <table id="skip-table" style="width:100%; border-collapse:collapse; font-family:'IBM Plex Mono',monospace; font-size:12px;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border2);">
+            <th style="padding:9px 14px; text-align:left; font-size:10px; font-weight:500; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; white-space:nowrap;">#</th>
+            <th style="padding:9px 14px; text-align:left; font-size:10px; font-weight:500; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; white-space:nowrap;">Company</th>
+            <th style="padding:9px 14px; text-align:left; font-size:10px; font-weight:500; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; white-space:nowrap;">Yahoo Ticker</th>
+            <th style="padding:9px 14px; text-align:center; font-size:10px; font-weight:500; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; white-space:nowrap;">Days Available</th>
+            <th style="padding:9px 14px; text-align:left; font-size:10px; font-weight:500; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase;">Reason</th>
+          </tr>
+        </thead>
+        <tbody id="skip-tbody"></tbody>
+      </table>
+    </div>
+
+    <p style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); margin-top:16px; line-height:1.7; max-width:700px;">
+      ℹ The most common reason for skipping is <strong style="color:#aabbcc">insufficient history</strong> — stocks need at least 130 trading days (~6 months) of data to calculate RSL. Recently listed companies (IPOs) will appear here until they have enough history. Stocks listed as "Not found" may have changed their Yahoo Finance ticker symbol.
+    </p>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <p>Data sourced from Yahoo Finance via <a href="https://pypi.org/project/yfinance/" target="_blank">yfinance</a>. Updated automatically every Friday via GitHub Actions.</p>
@@ -598,23 +646,22 @@
 
     // Meta
     document.getElementById('updated-time').textContent = 'Updated: ' + data.updated;
-    document.getElementById('stocks-screened').textContent = data.stocks_screened + ' stocks screened';
+    document.getElementById('stocks-screened').textContent = data.stocks_screened + ' of ' + (data.total_attempted || '?') + ' stocks screened';
 
     const top20 = data.top20 || [];
+    const skipped = data.skipped || [];
 
-    // Stats
+    // Stats cards
     document.getElementById('stat-total').textContent = data.stocks_screened;
     const newEntries = top20.filter(s => s.prev_rank === null || s.prev_rank === undefined).length;
     document.getElementById('stat-new').textContent = newEntries;
     document.getElementById('stat-top-rsl').textContent = top20.length ? top20[0].rsl.toFixed(3) : '—';
-    // We don't have full list here for above-1.0 count, but we can count top20
     const aboveOne = top20.filter(s => s.rsl >= 1).length;
     document.getElementById('stat-above').textContent = aboveOne + '/20';
 
-    // Find max RSL for bar scaling
+    // ── TOP 20 TABLE ──
     const maxRSL = Math.max(...top20.map(s => s.rsl));
     const minRSL = Math.min(...top20.map(s => s.rsl));
-
     const tbody = document.getElementById('rsl-tbody');
     tbody.innerHTML = '';
 
@@ -623,12 +670,11 @@
       const barPct = ((s.rsl - minRSL) / (maxRSL - minRSL + 0.0001)) * 100;
       const rslClass = s.rsl >= 1.15 ? 'rsl-high' : 'rsl-mid';
 
-      // Previous rank logic
       let prevHTML = '';
       if (s.prev_rank === null || s.prev_rank === undefined) {
         prevHTML = '<span class="rank-change rank-new">NEW</span>';
       } else {
-        const diff = s.prev_rank - rank; // positive = moved up
+        const diff = s.prev_rank - rank;
         if (diff > 0) {
           prevHTML = `<span class="rank-change rank-up">▲ ${diff} &nbsp;#${s.prev_rank}</span>`;
         } else if (diff < 0) {
@@ -639,7 +685,6 @@
       }
 
       const ticker = s.ticker.replace('.ST', '');
-
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td><span class="rank-num">${rank}</span></td>
@@ -659,8 +704,80 @@
       `;
       tbody.appendChild(tr);
     });
-
     document.getElementById('rsl-table').style.display = 'table';
+
+    // ── SKIP LOG ──
+    if (skipped.length > 0) {
+      document.getElementById('skip-section').style.display = 'block';
+      document.getElementById('skip-count').textContent = skipped.length;
+      document.getElementById('skip-count-2').textContent = skipped.length;
+      document.getElementById('stat-attempted').textContent = data.total_attempted || '?';
+      document.getElementById('stat-loaded').textContent = data.stocks_screened;
+
+      // Categorise
+      const notFound    = skipped.filter(s => s.reason.includes('Not found'));
+      const noData      = skipped.filter(s => s.reason.includes('No price'));
+      const shortHist   = skipped.filter(s => s.days_available > 0);
+      const errors      = skipped.filter(s => s.reason.startsWith('Error:'));
+
+      // Pills
+      const pillsEl = document.getElementById('skip-pills');
+      pillsEl.innerHTML = '';
+      const pills = [
+        { label: 'Insufficient History', count: shortHist.length, color: 'rgba(240,192,64,0.12)', border: 'rgba(240,192,64,0.3)', text: '#f0c040' },
+        { label: 'Not Found on Yahoo',   count: notFound.length,  color: 'rgba(255,68,85,0.08)',  border: 'rgba(255,68,85,0.25)',  text: '#ff4455' },
+        { label: 'No Price Data',        count: noData.length,    color: 'rgba(100,130,160,0.1)', border: 'rgba(100,130,160,0.25)',text: '#7a9bb0' },
+        { label: 'Other Errors',         count: errors.length,    color: 'rgba(100,130,160,0.1)', border: 'rgba(100,130,160,0.25)',text: '#7a9bb0' },
+      ];
+      pills.forEach(p => {
+        if (p.count === 0) return;
+        const span = document.createElement('span');
+        span.style.cssText = `font-family:'IBM Plex Mono',monospace; font-size:11px; padding:5px 12px;
+          background:${p.color}; border:1px solid ${p.border}; color:${p.text}; white-space:nowrap;`;
+        span.textContent = `${p.label}: ${p.count}`;
+        pillsEl.appendChild(span);
+      });
+
+      // Skip table rows
+      const skipTbody = document.getElementById('skip-tbody');
+      skipTbody.innerHTML = '';
+      skipped.forEach((s, i) => {
+        const isShortHist = s.days_available > 0;
+        const isNotFound  = s.reason.includes('Not found') || s.reason.includes('No price');
+        let reasonColor = isShortHist ? '#f0c040' : '#ff4455';
+        if (s.reason.startsWith('Error:')) reasonColor = '#7a9bb0';
+
+        // Progress bar for days available
+        const pct = isShortHist ? Math.round((s.days_available / 130) * 100) : 0;
+        const daysCell = isShortHist
+          ? `<div style="display:flex;align-items:center;gap:8px;justify-content:center;">
+               <span style="color:#aabbcc;">${s.days_available}</span>
+               <div style="width:50px;height:3px;background:var(--border2);border-radius:2px;overflow:hidden;">
+                 <div style="width:${pct}%;height:100%;background:var(--gold);border-radius:2px;"></div>
+               </div>
+             </div>`
+          : `<span style="color:var(--muted);">—</span>`;
+
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid var(--border)';
+        tr.innerHTML = `
+          <td style="padding:10px 14px; color:var(--muted); font-size:11px;">${i + 1}</td>
+          <td style="padding:10px 14px; color:#ddeeff; font-family:'IBM Plex Sans',sans-serif; font-size:13px;">${escHtml(s.name)}</td>
+          <td style="padding:10px 14px; color:var(--muted);">${escHtml(s.ticker)}</td>
+          <td style="padding:10px 14px; text-align:center;">${daysCell}</td>
+          <td style="padding:10px 14px; color:${reasonColor}; font-size:12px;">${escHtml(s.reason)}</td>
+        `;
+        skipTbody.appendChild(tr);
+      });
+    }
+  }
+
+  function toggleSkipTable() {
+    const wrap = document.getElementById('skip-table-wrap');
+    const btn  = document.getElementById('skip-toggle');
+    const open = wrap.style.display === 'none';
+    wrap.style.display = open ? 'block' : 'none';
+    btn.textContent = open ? 'Hide List ▴' : 'Show List ▾';
   }
 
   function fmt(n) {
