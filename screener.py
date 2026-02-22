@@ -2,7 +2,7 @@
 """
 Levy RSL Momentum Screener for Swedish Stocks
 Computes Relative Strength Levy (RSL) = Current Price / 130-day (26-week) SMA
-Ranks all stocks, saves top 20 to JSON for the webpage.
+Ranks all stocks, saves top 20 + full skip log to JSON for the webpage.
 """
 
 import json
@@ -95,13 +95,14 @@ RSL_PERIOD = 130  # trading days (~26 weeks)
 OUTPUT_JSON = "screener_data.json"
 PREV_RANKS_FILE = "prev_ranks.json"
 
+
 def compute_rsl(tickers, period=130):
     results = []
+    skipped = []  # will hold dicts with name, ticker, reason, days_available
     ticker_symbols = [t[1] for t in tickers]
     name_map = {t[1]: t[0] for t in tickers}
 
     print(f"Downloading data for {len(ticker_symbols)} tickers...")
-    # Download enough history: period + buffer
     raw = yf.download(
         ticker_symbols,
         period="9mo",
@@ -116,9 +117,39 @@ def compute_rsl(tickers, period=130):
     for symbol in ticker_symbols:
         name = name_map[symbol]
         try:
-            series = close[symbol].dropna()
-            if len(series) < period:
+            if symbol not in close.columns:
+                skipped.append({
+                    "name": name,
+                    "ticker": symbol,
+                    "reason": "Not found on Yahoo Finance",
+                    "days_available": 0,
+                })
+                print(f"  SKIP (not found): {name} [{symbol}]")
                 continue
+
+            series = close[symbol].dropna()
+            days = len(series)
+
+            if days == 0:
+                skipped.append({
+                    "name": name,
+                    "ticker": symbol,
+                    "reason": "No price data returned",
+                    "days_available": 0,
+                })
+                print(f"  SKIP (no data): {name} [{symbol}]")
+                continue
+
+            if days < period:
+                skipped.append({
+                    "name": name,
+                    "ticker": symbol,
+                    "reason": f"Insufficient history — needs {period} days, only {days} available",
+                    "days_available": days,
+                })
+                print(f"  SKIP (only {days}/{period} days): {name} [{symbol}]")
+                continue
+
             current_price = float(series.iloc[-1])
             sma = float(series.iloc[-period:].mean())
             rsl = current_price / sma
@@ -129,14 +160,25 @@ def compute_rsl(tickers, period=130):
                 "sma130": round(sma, 2),
                 "rsl": round(rsl, 4),
             })
+
         except Exception as e:
-            print(f"  Skipping {symbol}: {e}")
+            skipped.append({
+                "name": name,
+                "ticker": symbol,
+                "reason": f"Error: {str(e)}",
+                "days_available": 0,
+            })
+            print(f"  SKIP (error): {name} [{symbol}] — {e}")
 
     results.sort(key=lambda x: x["rsl"], reverse=True)
     for i, r in enumerate(results):
         r["rank"] = i + 1
 
-    return results
+    # Sort skipped: "not found" first, then by days available ascending
+    skipped.sort(key=lambda x: x["days_available"])
+
+    return results, skipped
+
 
 def load_prev_ranks():
     if os.path.exists(PREV_RANKS_FILE):
@@ -144,41 +186,60 @@ def load_prev_ranks():
             return json.load(f)
     return {}
 
+
 def save_prev_ranks(top20):
     ranks = {r["ticker"]: r["rank"] for r in top20}
     with open(PREV_RANKS_FILE, "w") as f:
         json.dump(ranks, f)
 
+
 def main():
     now = datetime.datetime.now(datetime.timezone.utc)
     print(f"Running RSL screener at {now.isoformat()}")
 
-    all_stocks = compute_rsl(TICKERS, RSL_PERIOD)
+    all_stocks, skipped = compute_rsl(TICKERS, RSL_PERIOD)
     top20 = all_stocks[:20]
 
     prev_ranks = load_prev_ranks()
-
-    # Attach previous rank
     for r in top20:
         r["prev_rank"] = prev_ranks.get(r["ticker"], None)
 
-    # Save current top20 ranks as next week's "prev"
     save_prev_ranks(top20)
+
+    # Summary counts by skip reason category
+    not_found   = [s for s in skipped if s["days_available"] == 0 and "Not found" in s["reason"]]
+    no_data     = [s for s in skipped if s["days_available"] == 0 and "No price" in s["reason"]]
+    short_hist  = [s for s in skipped if s["days_available"] > 0]
+    errors      = [s for s in skipped if "Error:" in s["reason"]]
+
+    print(f"\n--- SKIP SUMMARY ---")
+    print(f"  Total attempted : {len(TICKERS)}")
+    print(f"  Successfully loaded : {len(all_stocks)}")
+    print(f"  Skipped total   : {len(skipped)}")
+    print(f"    Not found on Yahoo Finance : {len(not_found)}")
+    print(f"    No price data              : {len(no_data)}")
+    print(f"    Insufficient history (<{RSL_PERIOD}d): {len(short_hist)}")
+    print(f"    Other errors               : {len(errors)}")
 
     output = {
         "updated": now.strftime("%Y-%m-%d %H:%M UTC"),
         "period_days": RSL_PERIOD,
+        "total_attempted": len(TICKERS),
         "stocks_screened": len(all_stocks),
+        "skipped_count": len(skipped),
         "top20": top20,
+        "skipped": skipped,
     }
 
     with open(OUTPUT_JSON, "w") as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
-    print(f"Done! Saved {OUTPUT_JSON}")
+    print(f"\nDone! Saved {OUTPUT_JSON}")
+    print("\n--- TOP 20 ---")
     for r in top20:
         prev = f"(prev #{r['prev_rank']})" if r["prev_rank"] else "(new)"
         print(f"  #{r['rank']:2d}  RSL={r['rsl']:.4f}  {r['name']} {prev}")
+
 
 if __name__ == "__main__":
     main()
