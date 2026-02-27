@@ -42,6 +42,21 @@ WATCHLIST_COUNT = 3            # how many low-F-Score momentum stocks to show
 OUTPUT_JSON     = "screener_data.json"
 PREV_RANKS_FILE = "prev_ranks.json"
 
+# Sectors excluded entirely — financials use different accounting standards
+# that make Piotroski F-Score and standard ratios unreliable / misleading.
+EXCLUDED_SECTORS = {
+    "Financial Services",
+    "Financials",
+    "Banking",
+    "Insurance",
+    "Asset Management",
+    "Capital Markets",
+    "Banks",
+    "Diversified Financials",
+    "Consumer Finance",
+    "Mortgage Finance",
+}
+
 
 # -----------------------------------------------------------------------------
 # F-SCORE
@@ -198,6 +213,7 @@ def compute_all(tickers, period=130):
     print("  Levy RSL + Piotroski F-Score Screener -- OMX Stockholm")
     print("  Universe   : " + str(total) + " tickers (Large + Mid + Small Cap)")
     print("  Min MCap   : " + str(MIN_MARKET_CAP // 1_000_000) + "M SEK")
+    print("  Excluded   : Financial sector (all sub-sectors)")
     print("  Min F-Score: " + str(MIN_FSCORE) + "  (1-" + str(MIN_FSCORE - 1) + " -> Watchlist, 0 -> excluded)")
     print("  Running at : " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
     print("=" * 70)
@@ -219,6 +235,18 @@ def compute_all(tickers, period=130):
                     "days_available": 0
                 })
                 print("X  MCap " + str(round(mcap / 1e6)) + "M SEK -- below minimum")
+                time.sleep(0.35)
+                continue
+
+            # Sector filter — exclude financials
+            sector = (info.get("sector") or info.get("industry") or "").strip()
+            if any(sector.lower() == ex.lower() for ex in EXCLUDED_SECTORS):
+                skipped.append({
+                    "name": name, "ticker": symbol,
+                    "reason": "Excluded sector: " + sector,
+                    "days_available": 0
+                })
+                print("X  Sector excluded: " + sector)
                 time.sleep(0.35)
                 continue
 
@@ -343,11 +371,12 @@ def main():
         r["prev_rank"] = prev_ranks.get(r["ticker"], None)
     save_prev_ranks(top20)
 
-    mcap_skip  = [s for s in skipped if "Market cap" in s["reason"]]
-    short_hist = [s for s in skipped if s["days_available"] > 0]
-    no_data    = [s for s in skipped if "No price" in s["reason"]]
-    not_found  = [s for s in skipped if "Not found" in s["reason"]]
-    errors     = [s for s in skipped if "Error:" in s["reason"]]
+    mcap_skip    = [s for s in skipped if "Market cap" in s["reason"]]
+    sector_skip  = [s for s in skipped if "Excluded sector" in s["reason"]]
+    short_hist   = [s for s in skipped if s["days_available"] > 0]
+    no_data      = [s for s in skipped if "No price" in s["reason"]]
+    not_found    = [s for s in skipped if "Not found" in s["reason"]]
+    errors       = [s for s in skipped if "Error:" in s["reason"]]
 
     print("")
     print("--- SKIP SUMMARY ---")
@@ -355,6 +384,7 @@ def main():
     print("  Passed all filters       : " + str(len(all_stocks)))
     print("  Watchlist (F<" + str(MIN_FSCORE) + ")         : " + str(len(watchlist)))
     print("  Skipped total            : " + str(len(skipped)))
+    print("    Financial sector       : " + str(len(sector_skip)))
     print("    Market cap too small   : " + str(len(mcap_skip)))
     print("    Insufficient history   : " + str(len(short_hist)))
     print("    No price data          : " + str(len(no_data)))

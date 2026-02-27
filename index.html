@@ -383,7 +383,7 @@
       <div class="logo-area">
         <div class="label-tag">Momentum + Quality Screener</div>
         <h1>Swedish <span>RSL</span> Rankings</h1>
-        <div class="subtitle">Levy Relative Strength · 130 days · F-Score ≥ 5 · MCap ≥ 500M SEK</div>
+        <div class="subtitle">Levy Relative Strength · 130 days · F-Score ≥ 5 · MCap ≥ 500M SEK · No Financials</div>
       </div>
       <div class="meta-box" id="meta-box">
         <div><span class="pulse"></span><span class="updated" id="updated-time">Loading…</span></div>
@@ -514,8 +514,8 @@
           <div style="font-size:13px; color:var(--text); line-height:1.6;">Piotroski F-Score (0–9) checks 9 fundamental signals. Score ≥ 5 enters the Top 20. Score 1–4 goes to Watchlist. Score 0 excluded.</div>
         </div>
         <div>
-          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.15em; margin-bottom:5px;">Step 3 — MCap Filter</div>
-          <div style="font-size:13px; color:var(--text); line-height:1.6;">Minimum 500M SEK market cap removes illiquid nano-caps and penny stocks from the universe entirely.</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.15em; margin-bottom:5px;">Step 3 — Universe Filters</div>
+          <div style="font-size:13px; color:var(--text); line-height:1.6;">Minimum 500M SEK market cap removes illiquid nano-caps. The entire <strong style="color:#aa77ff">Financial sector</strong> is excluded — banks, insurers and asset managers use different accounting standards that make RSL momentum and F-Score signals unreliable.</div>
         </div>
       </div>
       <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--gold); background:rgba(240,192,64,.06); border:1px solid rgba(240,192,64,.15); padding:10px 16px; margin-top:18px; display:inline-block;">
@@ -720,10 +720,11 @@ function render(data) {
     document.getElementById('stat-loaded').textContent    = data.stocks_screened;
 
     const pills = [
-      { label:'Market Cap < 500M',   count: skipped.filter(s => s.reason.includes('Market cap')).length,      color:'rgba(255,68,85,.08)',    border:'rgba(255,68,85,.25)',   text:'#ff4455' },
-      { label:'Insufficient History',count: skipped.filter(s => s.days_available > 0).length,                 color:'rgba(240,192,64,.12)',   border:'rgba(240,192,64,.3)',   text:'#f0c040' },
-      { label:'No Price Data',       count: skipped.filter(s => s.reason.includes('No price')).length,        color:'rgba(100,130,160,.1)',   border:'rgba(100,130,160,.25)',  text:'#7a9bb0' },
-      { label:'Other Errors',        count: skipped.filter(s => s.reason.startsWith('Error:')).length,        color:'rgba(100,130,160,.1)',   border:'rgba(100,130,160,.25)',  text:'#7a9bb0' },
+      { label:'Financial Sector',    count: skipped.filter(s => s.reason.includes('Excluded sector')).length,  color:'rgba(153,99,255,.08)',   border:'rgba(153,99,255,.25)',  text:'#aa77ff' },
+      { label:'Market Cap < 500M',   count: skipped.filter(s => s.reason.includes('Market cap')).length,       color:'rgba(255,68,85,.08)',    border:'rgba(255,68,85,.25)',   text:'#ff4455' },
+      { label:'Insufficient History',count: skipped.filter(s => s.days_available > 0).length,                  color:'rgba(240,192,64,.12)',   border:'rgba(240,192,64,.3)',   text:'#f0c040' },
+      { label:'No Price Data',       count: skipped.filter(s => s.reason.includes('No price')).length,         color:'rgba(100,130,160,.1)',   border:'rgba(100,130,160,.25)', text:'#7a9bb0' },
+      { label:'Other Errors',        count: skipped.filter(s => s.reason.startsWith('Error:')).length,         color:'rgba(100,130,160,.1)',   border:'rgba(100,130,160,.25)', text:'#7a9bb0' },
     ];
     const pillsEl = document.getElementById('skip-pills');
     pillsEl.innerHTML = '';
