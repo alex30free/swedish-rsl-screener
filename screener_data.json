@@ -1,21 +1,12 @@
 {
-  "updated": "2026-02-27 18:01 UTC",
+  "updated": "2026-02-27 18:45 UTC",
   "period_days": 130,
   "min_market_cap_m": 500,
+  "min_fscore": 5,
   "total_attempted": 461,
-  "stocks_screened": 398,
+  "stocks_screened": 280,
   "skipped_count": 63,
   "top20": [
-    {
-      "name": "Medivir AB (publ)",
-      "ticker": "MVIR.ST",
-      "price": 1.71,
-      "sma130": 0.89,
-      "rsl": 1.9146,
-      "market_cap": 720,
-      "rank": 1,
-      "prev_rank": 1
-    },
     {
       "name": "Lundin Mining Corporation",
       "ticker": "LUMI.ST",
@@ -23,18 +14,20 @@
       "sma130": 173.14,
       "rsl": 1.6079,
       "market_cap": 248926,
-      "rank": 2,
+      "fscore": 5,
+      "fscore_detail": {
+        "f1_roa": 0,
+        "f2_cfo": 1,
+        "f3_roa_change": 0,
+        "f4_accruals": 1,
+        "f5_leverage": 0,
+        "f6_liquidity": 1,
+        "f7_dilution": 0,
+        "f8_gross_margin": 1,
+        "f9_asset_turnover": 1
+      },
+      "rank": 1,
       "prev_rank": 2
-    },
-    {
-      "name": "Africa Energy Corp.",
-      "ticker": "AEC.ST",
-      "price": 1.57,
-      "sma130": 0.99,
-      "rsl": 1.5893,
-      "market_cap": 759,
-      "rank": 3,
-      "prev_rank": 3
     },
     {
       "name": "Navigo Invest AB (publ)",
@@ -43,18 +36,20 @@
       "sma130": 2.12,
       "rsl": 1.5634,
       "market_cap": 569,
-      "rank": 4,
+      "fscore": 5,
+      "fscore_detail": {
+        "f1_roa": 0,
+        "f2_cfo": 0,
+        "f3_roa_change": 0,
+        "f4_accruals": 1,
+        "f5_leverage": 1,
+        "f6_liquidity": 0,
+        "f7_dilution": 1,
+        "f8_gross_margin": 1,
+        "f9_asset_turnover": 1
+      },
+      "rank": 2,
       "prev_rank": 4
-    },
-    {
-      "name": "Nanexa AB (publ)",
-      "ticker": "NANEXA.ST",
-      "price": 4.01,
-      "sma130": 2.66,
-      "rsl": 1.507,
-      "market_cap": 632,
-      "rank": 5,
-      "prev_rank": 5
     },
     {
       "name": "Boliden AB (publ)",
@@ -63,7 +58,19 @@
       "sma130": 471.26,
       "rsl": 1.4845,
       "market_cap": 203710,
-      "rank": 6,
+      "fscore": 5,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 0,
+        "f4_accruals": 1,
+        "f5_leverage": 0,
+        "f6_liquidity": 1,
+        "f7_dilution": 0,
+        "f8_gross_margin": 1,
+        "f9_asset_turnover": 0
+      },
+      "rank": 3,
       "prev_rank": 6
     },
     {
@@ -73,7 +80,19 @@
       "sma130": 243.8,
       "rsl": 1.4245,
       "market_cap": null,
-      "rank": 7,
+      "fscore": 6,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 0,
+        "f4_accruals": 1,
+        "f5_leverage": 1,
+        "f6_liquidity": 0,
+        "f7_dilution": 1,
+        "f8_gross_margin": 0,
+        "f9_asset_turnover": 1
+      },
+      "rank": 4,
       "prev_rank": 7
     },
     {
@@ -83,7 +102,19 @@
       "sma130": 40.16,
       "rsl": 1.4119,
       "market_cap": 6692,
-      "rank": 8,
+      "fscore": 8,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 1,
+        "f4_accruals": 1,
+        "f5_leverage": 0,
+        "f6_liquidity": 1,
+        "f7_dilution": 1,
+        "f8_gross_margin": 1,
+        "f9_asset_turnover": 1
+      },
+      "rank": 5,
       "prev_rank": 8
     },
     {
@@ -93,7 +124,19 @@
       "sma130": 4.98,
       "rsl": 1.3954,
       "market_cap": 2020,
-      "rank": 9,
+      "fscore": 5,
+      "fscore_detail": {
+        "f1_roa": 0,
+        "f2_cfo": 0,
+        "f3_roa_change": 0,
+        "f4_accruals": 1,
+        "f5_leverage": 1,
+        "f6_liquidity": 1,
+        "f7_dilution": 1,
+        "f8_gross_margin": 0,
+        "f9_asset_turnover": 1
+      },
+      "rank": 6,
       "prev_rank": 9
     },
     {
@@ -103,7 +146,19 @@
       "sma130": 26.04,
       "rsl": 1.3625,
       "market_cap": 9465,
-      "rank": 10,
+      "fscore": 6,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 1,
+        "f4_accruals": 1,
+        "f5_leverage": 0,
+        "f6_liquidity": 1,
+        "f7_dilution": 0,
+        "f8_gross_margin": 1,
+        "f9_asset_turnover": 0
+      },
+      "rank": 7,
       "prev_rank": 10
     },
     {
@@ -113,7 +168,19 @@
       "sma130": 38.75,
       "rsl": 1.3432,
       "market_cap": 15022,
-      "rank": 11,
+      "fscore": 8,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 1,
+        "f4_accruals": 1,
+        "f5_leverage": 1,
+        "f6_liquidity": 0,
+        "f7_dilution": 1,
+        "f8_gross_margin": 1,
+        "f9_asset_turnover": 1
+      },
+      "rank": 8,
       "prev_rank": 11
     },
     {
@@ -123,18 +190,20 @@
       "sma130": 296.54,
       "rsl": 1.3422,
       "market_cap": 501002,
-      "rank": 12,
+      "fscore": 8,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 1,
+        "f4_accruals": 1,
+        "f5_leverage": 0,
+        "f6_liquidity": 1,
+        "f7_dilution": 1,
+        "f8_gross_margin": 1,
+        "f9_asset_turnover": 1
+      },
+      "rank": 9,
       "prev_rank": 12
-    },
-    {
-      "name": "Solid Försäkringsaktiebolag (publ)",
-      "ticker": "SFAB.ST",
-      "price": 109.0,
-      "sma130": 81.38,
-      "rsl": 1.3394,
-      "market_cap": 1923,
-      "rank": 13,
-      "prev_rank": 13
     },
     {
       "name": "Lucara Diamond Corp.",
@@ -143,7 +212,19 @@
       "sma130": 1.42,
       "rsl": 1.3375,
       "market_cap": 2900,
-      "rank": 14,
+      "fscore": 8,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 1,
+        "f4_accruals": 1,
+        "f5_leverage": 0,
+        "f6_liquidity": 1,
+        "f7_dilution": 1,
+        "f8_gross_margin": 1,
+        "f9_asset_turnover": 1
+      },
+      "rank": 10,
       "prev_rank": 14
     },
     {
@@ -153,7 +234,19 @@
       "sma130": 108.13,
       "rsl": 1.3308,
       "market_cap": 12606,
-      "rank": 15,
+      "fscore": 5,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 1,
+        "f4_accruals": 1,
+        "f5_leverage": 0,
+        "f6_liquidity": 0,
+        "f7_dilution": 1,
+        "f8_gross_margin": 0,
+        "f9_asset_turnover": 0
+      },
+      "rank": 11,
       "prev_rank": 15
     },
     {
@@ -163,7 +256,19 @@
       "sma130": 235.23,
       "rsl": 1.3179,
       "market_cap": 3945,
-      "rank": 16,
+      "fscore": 7,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 1,
+        "f4_accruals": 1,
+        "f5_leverage": 0,
+        "f6_liquidity": 1,
+        "f7_dilution": 1,
+        "f8_gross_margin": 1,
+        "f9_asset_turnover": 0
+      },
+      "rank": 12,
       "prev_rank": 16
     },
     {
@@ -173,7 +278,19 @@
       "sma130": 100.8,
       "rsl": 1.3145,
       "market_cap": 23007,
-      "rank": 17,
+      "fscore": 6,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 1,
+        "f4_accruals": 1,
+        "f5_leverage": 0,
+        "f6_liquidity": 0,
+        "f7_dilution": 1,
+        "f8_gross_margin": 1,
+        "f9_asset_turnover": 0
+      },
+      "rank": 13,
       "prev_rank": 17
     },
     {
@@ -183,7 +300,19 @@
       "sma130": 8.76,
       "rsl": 1.3132,
       "market_cap": 1643,
-      "rank": 18,
+      "fscore": 6,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 0,
+        "f4_accruals": 1,
+        "f5_leverage": 0,
+        "f6_liquidity": 1,
+        "f7_dilution": 1,
+        "f8_gross_margin": 0,
+        "f9_asset_turnover": 1
+      },
+      "rank": 14,
       "prev_rank": 18
     },
     {
@@ -193,7 +322,19 @@
       "sma130": 7.78,
       "rsl": 1.3132,
       "market_cap": 796,
-      "rank": 19,
+      "fscore": 7,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 1,
+        "f4_accruals": 0,
+        "f5_leverage": 1,
+        "f6_liquidity": 1,
+        "f7_dilution": 1,
+        "f8_gross_margin": 1,
+        "f9_asset_turnover": 0
+      },
+      "rank": 15,
       "prev_rank": 19
     },
     {
@@ -203,8 +344,173 @@
       "sma130": 84.87,
       "rsl": 1.296,
       "market_cap": 2117,
-      "rank": 20,
+      "fscore": 6,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 1,
+        "f4_accruals": 1,
+        "f5_leverage": 0,
+        "f6_liquidity": 1,
+        "f7_dilution": 0,
+        "f8_gross_margin": 1,
+        "f9_asset_turnover": 0
+      },
+      "rank": 16,
       "prev_rank": 20
+    },
+    {
+      "name": "Peab AB (publ)",
+      "ticker": "PEAB-B.ST",
+      "price": 105.8,
+      "sma130": 81.87,
+      "rsl": 1.2922,
+      "market_cap": 29957,
+      "fscore": 6,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 0,
+        "f4_accruals": 1,
+        "f5_leverage": 0,
+        "f6_liquidity": 1,
+        "f7_dilution": 1,
+        "f8_gross_margin": 0,
+        "f9_asset_turnover": 1
+      },
+      "rank": 17,
+      "prev_rank": null
+    },
+    {
+      "name": "Attendo AB (publ)",
+      "ticker": "ATT.ST",
+      "price": 101.8,
+      "sma130": 79.88,
+      "rsl": 1.2744,
+      "market_cap": 15120,
+      "fscore": 7,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 1,
+        "f4_accruals": 1,
+        "f5_leverage": 0,
+        "f6_liquidity": 1,
+        "f7_dilution": 1,
+        "f8_gross_margin": 0,
+        "f9_asset_turnover": 1
+      },
+      "rank": 18,
+      "prev_rank": null
+    },
+    {
+      "name": "Kongsberg Gruppen ASA",
+      "ticker": "KOGO.ST",
+      "price": 378.8,
+      "sma130": 298.32,
+      "rsl": 1.2698,
+      "market_cap": 977019,
+      "fscore": 8,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 1,
+        "f4_accruals": 1,
+        "f5_leverage": 1,
+        "f6_liquidity": 1,
+        "f7_dilution": 1,
+        "f8_gross_margin": 0,
+        "f9_asset_turnover": 1
+      },
+      "rank": 19,
+      "prev_rank": null
+    },
+    {
+      "name": "Scandi Standard AB (publ)",
+      "ticker": "SCST.ST",
+      "price": 127.2,
+      "sma130": 100.26,
+      "rsl": 1.2687,
+      "market_cap": 8485,
+      "fscore": 8,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 1,
+        "f4_accruals": 1,
+        "f5_leverage": 0,
+        "f6_liquidity": 1,
+        "f7_dilution": 1,
+        "f8_gross_margin": 1,
+        "f9_asset_turnover": 1
+      },
+      "rank": 20,
+      "prev_rank": null
+    }
+  ],
+  "watchlist": [
+    {
+      "name": "Africa Energy Corp.",
+      "ticker": "AEC.ST",
+      "price": 1.57,
+      "sma130": 0.99,
+      "rsl": 1.5893,
+      "market_cap": 759,
+      "fscore": 2,
+      "fscore_detail": {
+        "f1_roa": 0,
+        "f2_cfo": 0,
+        "f3_roa_change": 0,
+        "f4_accruals": 1,
+        "f5_leverage": 0,
+        "f6_liquidity": 0,
+        "f7_dilution": 1,
+        "f8_gross_margin": 0,
+        "f9_asset_turnover": 0
+      },
+      "watchlist_rank": 1
+    },
+    {
+      "name": "Nanexa AB (publ)",
+      "ticker": "NANEXA.ST",
+      "price": 4.01,
+      "sma130": 2.66,
+      "rsl": 1.507,
+      "market_cap": 632,
+      "fscore": 3,
+      "fscore_detail": {
+        "f1_roa": 0,
+        "f2_cfo": 0,
+        "f3_roa_change": 1,
+        "f4_accruals": 0,
+        "f5_leverage": 0,
+        "f6_liquidity": 0,
+        "f7_dilution": 1,
+        "f8_gross_margin": 0,
+        "f9_asset_turnover": 1
+      },
+      "watchlist_rank": 2
+    },
+    {
+      "name": "Solid Försäkringsaktiebolag (publ)",
+      "ticker": "SFAB.ST",
+      "price": 109.0,
+      "sma130": 81.38,
+      "rsl": 1.3394,
+      "market_cap": 1923,
+      "fscore": 3,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 0,
+        "f4_accruals": 0,
+        "f5_leverage": 0,
+        "f6_liquidity": 0,
+        "f7_dilution": 1,
+        "f8_gross_margin": 0,
+        "f9_asset_turnover": 0
+      },
+      "watchlist_rank": 3
     }
   ],
   "skipped": [
