@@ -1,190 +1,251 @@
 {
-  "updated": "2026-02-22 20:41 UTC",
+  "updated": "2026-02-27 13:22 UTC",
   "period_days": 130,
-  "total_attempted": 223,
-  "stocks_screened": 223,
-  "skipped_count": 0,
+  "total_attempted": 461,
+  "stocks_screened": 451,
+  "skipped_count": 10,
   "top20": [
     {
-      "name": "Lundin Mining",
-      "ticker": "LUMI.ST",
-      "price": 253.2,
-      "sma130": 167.75,
-      "rsl": 1.5094,
+      "name": "Medivir AB (publ)",
+      "ticker": "MVIR.ST",
+      "price": 1.71,
+      "sma130": 0.89,
+      "rsl": 1.9146,
       "rank": 1,
+      "prev_rank": null
+    },
+    {
+      "name": "Lundin Mining Corporation",
+      "ticker": "LUMI.ST",
+      "price": 278.4,
+      "sma130": 173.14,
+      "rsl": 1.6079,
+      "rank": 2,
       "prev_rank": 1
     },
     {
-      "name": "Boliden",
+      "name": "Africa Energy Corp.",
+      "ticker": "AEC.ST",
+      "price": 1.57,
+      "sma130": 0.99,
+      "rsl": 1.5893,
+      "rank": 3,
+      "prev_rank": null
+    },
+    {
+      "name": "Navigo Invest AB (publ)",
+      "ticker": "NAVIGO-STAM.ST",
+      "price": 3.31,
+      "sma130": 2.12,
+      "rsl": 1.5634,
+      "rank": 4,
+      "prev_rank": null
+    },
+    {
+      "name": "Nanexa AB (publ)",
+      "ticker": "NANEXA.ST",
+      "price": 4.01,
+      "sma130": 2.66,
+      "rsl": 1.507,
+      "rank": 5,
+      "prev_rank": null
+    },
+    {
+      "name": "Boliden AB (publ)",
       "ticker": "BOL.ST",
-      "price": 660.4,
-      "sma130": 459.51,
-      "rsl": 1.4372,
-      "rank": 2,
+      "price": 699.6,
+      "sma130": 471.26,
+      "rsl": 1.4845,
+      "rank": 6,
       "prev_rank": 2
     },
     {
-      "name": "Orron Energy",
+      "name": "TagMaster AB (publ)",
+      "ticker": "TAGM-B.ST",
+      "price": 25.8,
+      "sma130": 17.58,
+      "rsl": 1.4679,
+      "rank": 7,
+      "prev_rank": null
+    },
+    {
+      "name": "Frontline plc",
+      "ticker": "FROO.ST",
+      "price": 347.3,
+      "sma130": 243.8,
+      "rsl": 1.4245,
+      "rank": 8,
+      "prev_rank": null
+    },
+    {
+      "name": "Ovzon AB (publ)",
+      "ticker": "OVZON.ST",
+      "price": 56.7,
+      "sma130": 40.16,
+      "rsl": 1.4119,
+      "rank": 9,
+      "prev_rank": null
+    },
+    {
+      "name": "OrrÃ¶n Energy AB (publ)",
       "ticker": "ORRON.ST",
-      "price": 6.93,
-      "sma130": 4.9,
-      "rsl": 1.4158,
-      "rank": 3,
+      "price": 6.95,
+      "sma130": 4.98,
+      "rsl": 1.3954,
+      "rank": 10,
       "prev_rank": 3
     },
     {
-      "name": "Instalco",
+      "name": "Ferroamp AB (publ)",
+      "ticker": "FERRO.ST",
+      "price": 3.01,
+      "sma130": 2.2,
+      "rsl": 1.3663,
+      "rank": 11,
+      "prev_rank": null
+    },
+    {
+      "name": "Instalco AB (publ)",
       "ticker": "INSTAL.ST",
-      "price": 36.38,
-      "sma130": 25.71,
-      "rsl": 1.4151,
-      "rank": 4,
+      "price": 35.48,
+      "sma130": 26.04,
+      "rsl": 1.3625,
+      "rank": 12,
       "prev_rank": 4
     },
     {
-      "name": "Cloetta",
+      "name": "Eniro Group AB (publ)",
+      "ticker": "ENRO.ST",
+      "price": 0.54,
+      "sma130": 0.4,
+      "rsl": 1.3492,
+      "rank": 13,
+      "prev_rank": null
+    },
+    {
+      "name": "Cloetta AB (publ)",
       "ticker": "CLA-B.ST",
-      "price": 51.6,
-      "sma130": 38.14,
-      "rsl": 1.3529,
-      "rank": 5,
+      "price": 52.05,
+      "sma130": 38.75,
+      "rsl": 1.3432,
+      "rank": 14,
       "prev_rank": 5
     },
     {
-      "name": "Sandvik",
+      "name": "Sandvik AB (publ)",
       "ticker": "SAND.ST",
-      "price": 379.6,
-      "sma130": 291.84,
-      "rsl": 1.3007,
-      "rank": 6,
+      "price": 398.0,
+      "sma130": 296.54,
+      "rsl": 1.3422,
+      "rank": 15,
       "prev_rank": 6
     },
     {
-      "name": "Peab",
-      "ticker": "PEAB-B.ST",
-      "price": 103.6,
-      "sma130": 80.92,
-      "rsl": 1.2803,
-      "rank": 7,
-      "prev_rank": 7
-    },
-    {
-      "name": "Attendo",
-      "ticker": "ATT.ST",
-      "price": 100.4,
-      "sma130": 78.82,
-      "rsl": 1.2739,
-      "rank": 8,
-      "prev_rank": 8
-    },
-    {
-      "name": "Electrolux B",
-      "ticker": "ELUX-B.ST",
-      "price": 77.28,
-      "sma130": 61.19,
-      "rsl": 1.263,
-      "rank": 9,
-      "prev_rank": 9
-    },
-    {
-      "name": "Scandi Standard",
-      "ticker": "SCST.ST",
-      "price": 125.0,
-      "sma130": 99.28,
-      "rsl": 1.259,
-      "rank": 10,
-      "prev_rank": 10
-    },
-    {
-      "name": "Midsona B",
-      "ticker": "MSON-B.ST",
-      "price": 10.85,
-      "sma130": 8.65,
-      "rsl": 1.2543,
-      "rank": 11,
-      "prev_rank": 11
-    },
-    {
-      "name": "Swedish Orphan Biovitrum",
-      "ticker": "SOBI.ST",
-      "price": 402.4,
-      "sma130": 323.5,
-      "rsl": 1.2439,
-      "rank": 12,
-      "prev_rank": 12
-    },
-    {
-      "name": "FM Mattsson",
-      "ticker": "FMM-B.ST",
-      "price": 75.4,
-      "sma130": 61.15,
-      "rsl": 1.2331,
-      "rank": 13,
-      "prev_rank": 13
-    },
-    {
-      "name": "Hexatronic",
-      "ticker": "HTRO.ST",
-      "price": 26.47,
-      "sma130": 21.51,
-      "rsl": 1.2305,
-      "rank": 14,
-      "prev_rank": 14
-    },
-    {
-      "name": "Volvo B",
-      "ticker": "VOLV-B.ST",
-      "price": 351.1,
-      "sma130": 289.72,
-      "rsl": 1.2119,
-      "rank": 15,
-      "prev_rank": 15
-    },
-    {
-      "name": "Tele2 B",
-      "ticker": "TEL2-B.ST",
-      "price": 190.7,
-      "sma130": 157.72,
-      "rsl": 1.2091,
+      "name": "Solid FÃ¶rsÃ¤kringsaktiebolag (publ)",
+      "ticker": "SFAB.ST",
+      "price": 109.0,
+      "sma130": 81.38,
+      "rsl": 1.3394,
       "rank": 16,
-      "prev_rank": 16
+      "prev_rank": null
     },
     {
-      "name": "Industrivarден C",
-      "ticker": "INDU-C.ST",
-      "price": 488.3,
-      "sma130": 404.72,
-      "rsl": 1.2065,
+      "name": "Lucara Diamond Corp.",
+      "ticker": "LUC.ST",
+      "price": 1.9,
+      "sma130": 1.42,
+      "rsl": 1.3375,
       "rank": 17,
-      "prev_rank": 17
+      "prev_rank": null
     },
     {
-      "name": "Coor Service Management",
-      "ticker": "COOR.ST",
-      "price": 58.8,
-      "sma130": 48.81,
-      "rsl": 1.2047,
+      "name": "Hoist Finance AB (publ)",
+      "ticker": "HOFI.ST",
+      "price": 143.9,
+      "sma130": 108.13,
+      "rsl": 1.3308,
       "rank": 18,
-      "prev_rank": 18
+      "prev_rank": null
     },
     {
-      "name": "Telia Company",
-      "ticker": "TELIA.ST",
-      "price": 44.93,
-      "sma130": 37.37,
-      "rsl": 1.2024,
+      "name": "Arctic Minerals AB (publ)",
+      "ticker": "ARCT.ST",
+      "price": 8.15,
+      "sma130": 6.15,
+      "rsl": 1.3246,
       "rank": 19,
-      "prev_rank": 19
+      "prev_rank": null
     },
     {
-      "name": "SSAB B",
-      "ticker": "SSAB-B.ST",
-      "price": 77.08,
-      "sma130": 64.2,
-      "rsl": 1.2006,
+      "name": "Nordrest Holding AB (publ)",
+      "ticker": "NREST.ST",
+      "price": 310.0,
+      "sma130": 235.23,
+      "rsl": 1.3179,
       "rank": 20,
-      "prev_rank": 20
+      "prev_rank": null
     }
   ],
-  "skipped": []
+  "skipped": [
+    {
+      "name": "Verisure plc",
+      "ticker": "VSURE.ST",
+      "reason": "No price data returned",
+      "days_available": 0
+    },
+    {
+      "name": "Cmb.Tech NV",
+      "ticker": "CMBTOO.ST",
+      "reason": "No price data returned",
+      "days_available": 0
+    },
+    {
+      "name": "Paratus Energy Services Ltd.",
+      "ticker": "PLSVO.ST",
+      "reason": "No price data returned",
+      "days_available": 0
+    },
+    {
+      "name": "Envipco Holding N.V.",
+      "ticker": "ENVIPO.ST",
+      "reason": "No price data returned",
+      "days_available": 0
+    },
+    {
+      "name": "Norse Atlantic ASA",
+      "ticker": "NORSEO.ST",
+      "reason": "No price data returned",
+      "days_available": 0
+    },
+    {
+      "name": "Morrow Bank AB",
+      "ticker": "MORROW.ST",
+      "reason": "Insufficient history - needs 130 days, only 35 available",
+      "days_available": 35
+    },
+    {
+      "name": "Coffee Stain Group AB (publ)",
+      "ticker": "COFFEE-B.ST",
+      "reason": "Insufficient history - needs 130 days, only 50 available",
+      "days_available": 50
+    },
+    {
+      "name": "Siljansvik AB (publ)",
+      "ticker": "SIVI.ST",
+      "reason": "Insufficient history - needs 130 days, only 53 available",
+      "days_available": 53
+    },
+    {
+      "name": "Guldbrev Holding AB (publ)",
+      "ticker": "GULD.ST",
+      "reason": "Insufficient history - needs 130 days, only 92 available",
+      "days_available": 92
+    },
+    {
+      "name": "NOBA Bank Group AB (publ)",
+      "ticker": "NOBA.ST",
+      "reason": "Insufficient history - needs 130 days, only 104 available",
+      "days_available": 104
+    }
+  ]
 }
