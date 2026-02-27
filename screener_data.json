@@ -1,11 +1,11 @@
 {
-  "updated": "2026-02-27 18:45 UTC",
+  "updated": "2026-02-27 19:20 UTC",
   "period_days": 130,
   "min_market_cap_m": 500,
   "min_fscore": 5,
   "total_attempted": 461,
-  "stocks_screened": 280,
-  "skipped_count": 63,
+  "stocks_screened": 265,
+  "skipped_count": 98,
   "top20": [
     {
       "name": "Lundin Mining Corporation",
@@ -27,29 +27,7 @@
         "f9_asset_turnover": 1
       },
       "rank": 1,
-      "prev_rank": 2
-    },
-    {
-      "name": "Navigo Invest AB (publ)",
-      "ticker": "NAVIGO-STAM.ST",
-      "price": 3.31,
-      "sma130": 2.12,
-      "rsl": 1.5634,
-      "market_cap": 569,
-      "fscore": 5,
-      "fscore_detail": {
-        "f1_roa": 0,
-        "f2_cfo": 0,
-        "f3_roa_change": 0,
-        "f4_accruals": 1,
-        "f5_leverage": 1,
-        "f6_liquidity": 0,
-        "f7_dilution": 1,
-        "f8_gross_margin": 1,
-        "f9_asset_turnover": 1
-      },
-      "rank": 2,
-      "prev_rank": 4
+      "prev_rank": 1
     },
     {
       "name": "Boliden AB (publ)",
@@ -70,8 +48,8 @@
         "f8_gross_margin": 1,
         "f9_asset_turnover": 0
       },
-      "rank": 3,
-      "prev_rank": 6
+      "rank": 2,
+      "prev_rank": 3
     },
     {
       "name": "Frontline plc",
@@ -92,8 +70,8 @@
         "f8_gross_margin": 0,
         "f9_asset_turnover": 1
       },
-      "rank": 4,
-      "prev_rank": 7
+      "rank": 3,
+      "prev_rank": 4
     },
     {
       "name": "Ovzon AB (publ)",
@@ -114,8 +92,8 @@
         "f8_gross_margin": 1,
         "f9_asset_turnover": 1
       },
-      "rank": 5,
-      "prev_rank": 8
+      "rank": 4,
+      "prev_rank": 5
     },
     {
       "name": "Orrön Energy AB (publ)",
@@ -136,8 +114,8 @@
         "f8_gross_margin": 0,
         "f9_asset_turnover": 1
       },
-      "rank": 6,
-      "prev_rank": 9
+      "rank": 5,
+      "prev_rank": 6
     },
     {
       "name": "Instalco AB (publ)",
@@ -158,8 +136,8 @@
         "f8_gross_margin": 1,
         "f9_asset_turnover": 0
       },
-      "rank": 7,
-      "prev_rank": 10
+      "rank": 6,
+      "prev_rank": 7
     },
     {
       "name": "Cloetta AB (publ)",
@@ -180,8 +158,8 @@
         "f8_gross_margin": 1,
         "f9_asset_turnover": 1
       },
-      "rank": 8,
-      "prev_rank": 11
+      "rank": 7,
+      "prev_rank": 8
     },
     {
       "name": "Sandvik AB (publ)",
@@ -202,8 +180,8 @@
         "f8_gross_margin": 1,
         "f9_asset_turnover": 1
       },
-      "rank": 9,
-      "prev_rank": 12
+      "rank": 8,
+      "prev_rank": 9
     },
     {
       "name": "Lucara Diamond Corp.",
@@ -224,30 +202,8 @@
         "f8_gross_margin": 1,
         "f9_asset_turnover": 1
       },
-      "rank": 10,
-      "prev_rank": 14
-    },
-    {
-      "name": "Hoist Finance AB (publ)",
-      "ticker": "HOFI.ST",
-      "price": 143.9,
-      "sma130": 108.13,
-      "rsl": 1.3308,
-      "market_cap": 12606,
-      "fscore": 5,
-      "fscore_detail": {
-        "f1_roa": 1,
-        "f2_cfo": 1,
-        "f3_roa_change": 1,
-        "f4_accruals": 1,
-        "f5_leverage": 0,
-        "f6_liquidity": 0,
-        "f7_dilution": 1,
-        "f8_gross_margin": 0,
-        "f9_asset_turnover": 0
-      },
-      "rank": 11,
-      "prev_rank": 15
+      "rank": 9,
+      "prev_rank": 10
     },
     {
       "name": "Nordrest Holding AB (publ)",
@@ -268,8 +224,8 @@
         "f8_gross_margin": 1,
         "f9_asset_turnover": 0
       },
-      "rank": 12,
-      "prev_rank": 16
+      "rank": 10,
+      "prev_rank": 12
     },
     {
       "name": "Höegh Autoliners ASA",
@@ -290,8 +246,8 @@
         "f8_gross_margin": 1,
         "f9_asset_turnover": 0
       },
-      "rank": 13,
-      "prev_rank": 17
+      "rank": 11,
+      "prev_rank": 13
     },
     {
       "name": "Midsona AB (publ)",
@@ -312,8 +268,8 @@
         "f8_gross_margin": 0,
         "f9_asset_turnover": 1
       },
-      "rank": 14,
-      "prev_rank": 18
+      "rank": 12,
+      "prev_rank": 14
     },
     {
       "name": "Done.ai Group AB",
@@ -334,8 +290,8 @@
         "f8_gross_margin": 1,
         "f9_asset_turnover": 0
       },
-      "rank": 15,
-      "prev_rank": 19
+      "rank": 13,
+      "prev_rank": 15
     },
     {
       "name": "Berner Industrier AB",
@@ -356,8 +312,8 @@
         "f8_gross_margin": 1,
         "f9_asset_turnover": 0
       },
-      "rank": 16,
-      "prev_rank": 20
+      "rank": 14,
+      "prev_rank": 16
     },
     {
       "name": "Peab AB (publ)",
@@ -378,8 +334,8 @@
         "f8_gross_margin": 0,
         "f9_asset_turnover": 1
       },
-      "rank": 17,
-      "prev_rank": null
+      "rank": 15,
+      "prev_rank": 17
     },
     {
       "name": "Attendo AB (publ)",
@@ -400,8 +356,8 @@
         "f8_gross_margin": 0,
         "f9_asset_turnover": 1
       },
-      "rank": 18,
-      "prev_rank": null
+      "rank": 16,
+      "prev_rank": 18
     },
     {
       "name": "Kongsberg Gruppen ASA",
@@ -422,8 +378,8 @@
         "f8_gross_margin": 0,
         "f9_asset_turnover": 1
       },
-      "rank": 19,
-      "prev_rank": null
+      "rank": 17,
+      "prev_rank": 19
     },
     {
       "name": "Scandi Standard AB (publ)",
@@ -443,6 +399,50 @@
         "f7_dilution": 1,
         "f8_gross_margin": 1,
         "f9_asset_turnover": 1
+      },
+      "rank": 18,
+      "prev_rank": 20
+    },
+    {
+      "name": "Inission AB (publ)",
+      "ticker": "INISS-B.ST",
+      "price": 55.4,
+      "sma130": 44.39,
+      "rsl": 1.248,
+      "market_cap": 1273,
+      "fscore": 5,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 0,
+        "f4_accruals": 0,
+        "f5_leverage": 1,
+        "f6_liquidity": 1,
+        "f7_dilution": 0,
+        "f8_gross_margin": 1,
+        "f9_asset_turnover": 0
+      },
+      "rank": 19,
+      "prev_rank": null
+    },
+    {
+      "name": "ByggPartner Gruppen AB (publ)",
+      "ticker": "BYGGP.ST",
+      "price": 45.4,
+      "sma130": 36.48,
+      "rsl": 1.2446,
+      "market_cap": 2004,
+      "fscore": 7,
+      "fscore_detail": {
+        "f1_roa": 1,
+        "f2_cfo": 1,
+        "f3_roa_change": 1,
+        "f4_accruals": 1,
+        "f5_leverage": 1,
+        "f6_liquidity": 0,
+        "f7_dilution": 1,
+        "f8_gross_margin": 1,
+        "f9_asset_turnover": 0
       },
       "rank": 20,
       "prev_rank": null
@@ -492,32 +492,92 @@
       "watchlist_rank": 2
     },
     {
-      "name": "Solid Försäkringsaktiebolag (publ)",
-      "ticker": "SFAB.ST",
-      "price": 109.0,
-      "sma130": 81.38,
-      "rsl": 1.3394,
-      "market_cap": 1923,
-      "fscore": 3,
+      "name": "Acconeer AB (publ)",
+      "ticker": "ACCON.ST",
+      "price": 11.44,
+      "sma130": 8.87,
+      "rsl": 1.2904,
+      "market_cap": 868,
+      "fscore": 4,
       "fscore_detail": {
-        "f1_roa": 1,
-        "f2_cfo": 1,
-        "f3_roa_change": 0,
-        "f4_accruals": 0,
+        "f1_roa": 0,
+        "f2_cfo": 0,
+        "f3_roa_change": 1,
+        "f4_accruals": 1,
         "f5_leverage": 0,
-        "f6_liquidity": 0,
-        "f7_dilution": 1,
+        "f6_liquidity": 1,
+        "f7_dilution": 0,
         "f8_gross_margin": 0,
-        "f9_asset_turnover": 0
+        "f9_asset_turnover": 1
       },
       "watchlist_rank": 3
     }
   ],
   "skipped": [
     {
+      "name": "Investor AB (publ)",
+      "ticker": "INVE-B.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Nordea Bank Abp",
+      "ticker": "NDA-SE.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Swedbank AB (publ)",
+      "ticker": "SWED-A.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Skandinaviska Enskilda Banken AB (publ)",
+      "ticker": "SEB-A.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "EQT AB (publ)",
+      "ticker": "EQT.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Svenska Handelsbanken AB (publ)",
+      "ticker": "SHB-B.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "AB Industrivärden (publ)",
+      "ticker": "INDU-A.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
       "name": "Verisure plc",
       "ticker": "VSURE.ST",
       "reason": "No price data returned",
+      "days_available": 0
+    },
+    {
+      "name": "Nordnet AB (publ)",
+      "ticker": "SAVE.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Avanza Bank Holding AB (publ)",
+      "ticker": "AZA.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "NOBA Bank Group AB (publ)",
+      "ticker": "NOBA.ST",
+      "reason": "Excluded sector: Financial Services",
       "days_available": 0
     },
     {
@@ -527,9 +587,111 @@
       "days_available": 0
     },
     {
+      "name": "Röko AB (publ)",
+      "ticker": "ROKO-B.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Arion banki hf.",
+      "ticker": "ARION-SDB.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Kinnevik AB",
+      "ticker": "KINV-B.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Bure Equity AB (publ)",
+      "ticker": "BURE.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Hoist Finance AB (publ)",
+      "ticker": "HOFI.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Norion Bank AB (publ)",
+      "ticker": "NORION.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "TF Bank AB (publ)",
+      "ticker": "TFBANK.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Creades AB",
+      "ticker": "CRED-A.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
       "name": "Paratus Energy Services Ltd.",
       "ticker": "PLSVO.ST",
       "reason": "No price data returned",
+      "days_available": 0
+    },
+    {
+      "name": "Investment AB Öresund (publ)",
+      "ticker": "ORES.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Svolder AB (publ)",
+      "ticker": "SVOL-B.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Intrum AB (publ)",
+      "ticker": "INTRUM.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "CoinShares International Limited",
+      "ticker": "CS.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Enity Holding AB (publ)",
+      "ticker": "ENITY.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Linc AB",
+      "ticker": "LINC.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "AB Traction",
+      "ticker": "TRAC-B.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Idun Industrier AB (publ)",
+      "ticker": "IDUN-B.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Morrow Bank AB",
+      "ticker": "MORROW.ST",
+      "reason": "Excluded sector: Financial Services",
       "days_available": 0
     },
     {
@@ -539,9 +701,63 @@
       "days_available": 0
     },
     {
+      "name": "VNV Global AB (publ)",
+      "ticker": "VNV.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "VEF AB (publ)",
+      "ticker": "VEFAB.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Solid Försäkringsaktiebolag (publ)",
+      "ticker": "SFAB.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Catella AB (publ)",
+      "ticker": "CAT-B.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Lea Bank AB (publ)",
+      "ticker": "LEA.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
       "name": "Norse Atlantic ASA",
       "ticker": "NORSEO.ST",
       "reason": "No price data returned",
+      "days_available": 0
+    },
+    {
+      "name": "Mangold Fondkommission AB",
+      "ticker": "MANG.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Case Group AB (publ)",
+      "ticker": "CASE.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Hilbert Group AB (publ)",
+      "ticker": "HILB-B.ST",
+      "reason": "Excluded sector: Financial Services",
+      "days_available": 0
+    },
+    {
+      "name": "Qliro AB (publ)",
+      "ticker": "QLIRO.ST",
+      "reason": "Excluded sector: Financial Services",
       "days_available": 0
     },
     {
@@ -587,6 +803,12 @@
       "days_available": 0
     },
     {
+      "name": "Moberg Pharma AB (publ)",
+      "ticker": "MOB.ST",
+      "reason": "Market cap too small (486M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
       "name": "Oncopeptides AB (publ)",
       "ticker": "ONCO.ST",
       "reason": "Market cap too small (466M SEK < 500M SEK)",
@@ -599,9 +821,9 @@
       "days_available": 0
     },
     {
-      "name": "Moberg Pharma AB (publ)",
-      "ticker": "MOB.ST",
-      "reason": "Market cap too small (486M SEK < 500M SEK)",
+      "name": "Navigo Invest AB (publ)",
+      "ticker": "NAVIGO-STAM.ST",
+      "reason": "Excluded sector: Financial Services",
       "days_available": 0
     },
     {
@@ -869,12 +1091,6 @@
       "days_available": 0
     },
     {
-      "name": "Morrow Bank AB",
-      "ticker": "MORROW.ST",
-      "reason": "Insufficient history - needs 130 days, only 35 available",
-      "days_available": 35
-    },
-    {
       "name": "Coffee Stain Group AB (publ)",
       "ticker": "COFFEE-B.ST",
       "reason": "Insufficient history - needs 130 days, only 50 available",
@@ -885,12 +1101,6 @@
       "ticker": "SIVI.ST",
       "reason": "Insufficient history - needs 130 days, only 53 available",
       "days_available": 53
-    },
-    {
-      "name": "NOBA Bank Group AB (publ)",
-      "ticker": "NOBA.ST",
-      "reason": "Insufficient history - needs 130 days, only 104 available",
-      "days_available": 104
     }
   ]
 }
