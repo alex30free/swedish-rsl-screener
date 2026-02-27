@@ -1,9 +1,10 @@
 {
-  "updated": "2026-02-27 13:22 UTC",
+  "updated": "2026-02-27 17:53 UTC",
   "period_days": 130,
+  "min_market_cap_m": 500,
   "total_attempted": 461,
-  "stocks_screened": 451,
-  "skipped_count": 10,
+  "stocks_screened": 398,
+  "skipped_count": 63,
   "top20": [
     {
       "name": "Medivir AB (publ)",
@@ -11,8 +12,9 @@
       "price": 1.71,
       "sma130": 0.89,
       "rsl": 1.9146,
+      "market_cap": 720,
       "rank": 1,
-      "prev_rank": null
+      "prev_rank": 1
     },
     {
       "name": "Lundin Mining Corporation",
@@ -20,8 +22,9 @@
       "price": 278.4,
       "sma130": 173.14,
       "rsl": 1.6079,
+      "market_cap": 248926,
       "rank": 2,
-      "prev_rank": 1
+      "prev_rank": 2
     },
     {
       "name": "Africa Energy Corp.",
@@ -29,8 +32,9 @@
       "price": 1.57,
       "sma130": 0.99,
       "rsl": 1.5893,
+      "market_cap": 759,
       "rank": 3,
-      "prev_rank": null
+      "prev_rank": 3
     },
     {
       "name": "Navigo Invest AB (publ)",
@@ -38,8 +42,9 @@
       "price": 3.31,
       "sma130": 2.12,
       "rsl": 1.5634,
+      "market_cap": 569,
       "rank": 4,
-      "prev_rank": null
+      "prev_rank": 4
     },
     {
       "name": "Nanexa AB (publ)",
@@ -47,8 +52,9 @@
       "price": 4.01,
       "sma130": 2.66,
       "rsl": 1.507,
+      "market_cap": 632,
       "rank": 5,
-      "prev_rank": null
+      "prev_rank": 5
     },
     {
       "name": "Boliden AB (publ)",
@@ -56,17 +62,9 @@
       "price": 699.6,
       "sma130": 471.26,
       "rsl": 1.4845,
+      "market_cap": 203710,
       "rank": 6,
-      "prev_rank": 2
-    },
-    {
-      "name": "TagMaster AB (publ)",
-      "ticker": "TAGM-B.ST",
-      "price": 25.8,
-      "sma130": 17.58,
-      "rsl": 1.4679,
-      "rank": 7,
-      "prev_rank": null
+      "prev_rank": 6
     },
     {
       "name": "Frontline plc",
@@ -74,8 +72,9 @@
       "price": 347.3,
       "sma130": 243.8,
       "rsl": 1.4245,
-      "rank": 8,
-      "prev_rank": null
+      "market_cap": null,
+      "rank": 7,
+      "prev_rank": 8
     },
     {
       "name": "Ovzon AB (publ)",
@@ -83,26 +82,19 @@
       "price": 56.7,
       "sma130": 40.16,
       "rsl": 1.4119,
-      "rank": 9,
-      "prev_rank": null
+      "market_cap": 6692,
+      "rank": 8,
+      "prev_rank": 9
     },
     {
-      "name": "OrrÃ¶n Energy AB (publ)",
+      "name": "Orrön Energy AB (publ)",
       "ticker": "ORRON.ST",
       "price": 6.95,
       "sma130": 4.98,
       "rsl": 1.3954,
-      "rank": 10,
-      "prev_rank": 3
-    },
-    {
-      "name": "Ferroamp AB (publ)",
-      "ticker": "FERRO.ST",
-      "price": 3.01,
-      "sma130": 2.2,
-      "rsl": 1.3663,
-      "rank": 11,
-      "prev_rank": null
+      "market_cap": 2020,
+      "rank": 9,
+      "prev_rank": 10
     },
     {
       "name": "Instalco AB (publ)",
@@ -110,17 +102,9 @@
       "price": 35.48,
       "sma130": 26.04,
       "rsl": 1.3625,
-      "rank": 12,
-      "prev_rank": 4
-    },
-    {
-      "name": "Eniro Group AB (publ)",
-      "ticker": "ENRO.ST",
-      "price": 0.54,
-      "sma130": 0.4,
-      "rsl": 1.3492,
-      "rank": 13,
-      "prev_rank": null
+      "market_cap": 9465,
+      "rank": 10,
+      "prev_rank": 12
     },
     {
       "name": "Cloetta AB (publ)",
@@ -128,8 +112,9 @@
       "price": 52.05,
       "sma130": 38.75,
       "rsl": 1.3432,
-      "rank": 14,
-      "prev_rank": 5
+      "market_cap": 15022,
+      "rank": 11,
+      "prev_rank": 14
     },
     {
       "name": "Sandvik AB (publ)",
@@ -137,17 +122,19 @@
       "price": 398.0,
       "sma130": 296.54,
       "rsl": 1.3422,
-      "rank": 15,
-      "prev_rank": 6
+      "market_cap": 501002,
+      "rank": 12,
+      "prev_rank": 15
     },
     {
-      "name": "Solid FÃ¶rsÃ¤kringsaktiebolag (publ)",
+      "name": "Solid Försäkringsaktiebolag (publ)",
       "ticker": "SFAB.ST",
       "price": 109.0,
       "sma130": 81.38,
       "rsl": 1.3394,
-      "rank": 16,
-      "prev_rank": null
+      "market_cap": 1923,
+      "rank": 13,
+      "prev_rank": 16
     },
     {
       "name": "Lucara Diamond Corp.",
@@ -155,8 +142,9 @@
       "price": 1.9,
       "sma130": 1.42,
       "rsl": 1.3375,
-      "rank": 17,
-      "prev_rank": null
+      "market_cap": 2900,
+      "rank": 14,
+      "prev_rank": 17
     },
     {
       "name": "Hoist Finance AB (publ)",
@@ -164,17 +152,9 @@
       "price": 143.9,
       "sma130": 108.13,
       "rsl": 1.3308,
-      "rank": 18,
-      "prev_rank": null
-    },
-    {
-      "name": "Arctic Minerals AB (publ)",
-      "ticker": "ARCT.ST",
-      "price": 8.15,
-      "sma130": 6.15,
-      "rsl": 1.3246,
-      "rank": 19,
-      "prev_rank": null
+      "market_cap": 12606,
+      "rank": 15,
+      "prev_rank": 18
     },
     {
       "name": "Nordrest Holding AB (publ)",
@@ -182,6 +162,47 @@
       "price": 310.0,
       "sma130": 235.23,
       "rsl": 1.3179,
+      "market_cap": 3945,
+      "rank": 16,
+      "prev_rank": 20
+    },
+    {
+      "name": "Höegh Autoliners ASA",
+      "ticker": "HAUTOO.ST",
+      "price": 132.5,
+      "sma130": 100.8,
+      "rsl": 1.3145,
+      "market_cap": 23007,
+      "rank": 17,
+      "prev_rank": null
+    },
+    {
+      "name": "Midsona AB (publ)",
+      "ticker": "MSON-B.ST",
+      "price": 11.5,
+      "sma130": 8.76,
+      "rsl": 1.3132,
+      "market_cap": 1643,
+      "rank": 18,
+      "prev_rank": null
+    },
+    {
+      "name": "Done.ai Group AB",
+      "ticker": "DONE.ST",
+      "price": 10.22,
+      "sma130": 7.78,
+      "rsl": 1.3132,
+      "market_cap": 796,
+      "rank": 19,
+      "prev_rank": null
+    },
+    {
+      "name": "Berner Industrier AB",
+      "ticker": "BERNER-B.ST",
+      "price": 110.0,
+      "sma130": 84.87,
+      "rsl": 1.296,
+      "market_cap": 2117,
       "rank": 20,
       "prev_rank": null
     }
@@ -218,6 +239,330 @@
       "days_available": 0
     },
     {
+      "name": "Careium AB (Publ)",
+      "ticker": "CARE.ST",
+      "reason": "Market cap too small (499M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Midsummer AB (publ)",
+      "ticker": "MIDS.ST",
+      "reason": "Market cap too small (462M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "White Pearl Technology Group AB",
+      "ticker": "WPTG-B.ST",
+      "reason": "Market cap too small (496M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Infrea AB",
+      "ticker": "INFREA.ST",
+      "reason": "Market cap too small (498M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Bonäsudden Holding AB (publ)",
+      "ticker": "BONAS.ST",
+      "reason": "Market cap too small (307M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Envar Holding AB (publ)",
+      "ticker": "ENVAR.ST",
+      "reason": "Market cap too small (459M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Pricer AB (publ)",
+      "ticker": "PRIC-B.ST",
+      "reason": "Market cap too small (495M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Oncopeptides AB (publ)",
+      "ticker": "ONCO.ST",
+      "reason": "Market cap too small (466M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "BE Group AB (publ)",
+      "ticker": "BEGR.ST",
+      "reason": "Market cap too small (478M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Moberg Pharma AB (publ)",
+      "ticker": "MOB.ST",
+      "reason": "Market cap too small (486M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Generic Sweden AB",
+      "ticker": "GENI.ST",
+      "reason": "Market cap too small (463M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Enzymatica AB (publ)",
+      "ticker": "ENZY.ST",
+      "reason": "Market cap too small (476M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Ortoma AB (publ)",
+      "ticker": "ORT-B.ST",
+      "reason": "Market cap too small (436M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Q-linea AB (publ)",
+      "ticker": "QLINEA.ST",
+      "reason": "Market cap too small (466M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Sensys Gatso Group AB (publ)",
+      "ticker": "SGG.ST",
+      "reason": "Market cap too small (440M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Mentice AB (publ)",
+      "ticker": "MNTC.ST",
+      "reason": "Market cap too small (432M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Wall to Wall Group AB",
+      "ticker": "WTW-A.ST",
+      "reason": "Market cap too small (435M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Guldbrev Holding AB (publ)",
+      "ticker": "GULD.ST",
+      "reason": "Market cap too small (428M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Fractal Gaming Group AB (publ)",
+      "ticker": "FRACTL.ST",
+      "reason": "Market cap too small (429M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Freja eID Group AB (publ)",
+      "ticker": "FREJA.ST",
+      "reason": "Market cap too small (461M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Solnaberg Property AB (publ)",
+      "ticker": "SOLNA.ST",
+      "reason": "Market cap too small (429M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "TradeDoubler AB (publ)",
+      "ticker": "TRAD.ST",
+      "reason": "Market cap too small (412M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "NAXS AB (publ)",
+      "ticker": "NAXS.ST",
+      "reason": "Market cap too small (420M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "mySafety Group AB",
+      "ticker": "SAFETY-B.ST",
+      "reason": "Market cap too small (411M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Opter AB (publ)",
+      "ticker": "OPTER.ST",
+      "reason": "Market cap too small (420M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Metacon AB (publ)",
+      "ticker": "META.ST",
+      "reason": "Market cap too small (434M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Gapwaves AB (publ)",
+      "ticker": "GAPW-B.ST",
+      "reason": "Market cap too small (458M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "AVTECH Sweden AB (publ)",
+      "ticker": "AVT-B.ST",
+      "reason": "Market cap too small (416M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "QleanAir AB (publ)",
+      "ticker": "QAIR.ST",
+      "reason": "Market cap too small (404M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "BeammWave AB (publ)",
+      "ticker": "BEAMMW-B.ST",
+      "reason": "Market cap too small (426M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Upsales Technology AB (publ)",
+      "ticker": "UPSALE.ST",
+      "reason": "Market cap too small (387M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Ascelia Pharma AB (publ)",
+      "ticker": "ACE.ST",
+      "reason": "Market cap too small (398M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Acuvi AB",
+      "ticker": "ACUVI.ST",
+      "reason": "Market cap too small (403M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "G5 Entertainment AB (publ)",
+      "ticker": "G5EN.ST",
+      "reason": "Market cap too small (400M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "KebNi AB (publ)",
+      "ticker": "KEBNI-B.ST",
+      "reason": "Market cap too small (401M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "K2A Knaust & Andersson Fastigheter AB (publ)",
+      "ticker": "K2A-B.ST",
+      "reason": "Market cap too small (388M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Eniro Group AB (publ)",
+      "ticker": "ENRO.ST",
+      "reason": "Market cap too small (381M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Corline Biomedical AB",
+      "ticker": "CLBIO.ST",
+      "reason": "Market cap too small (406M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Sibek AB (publ)",
+      "ticker": "SIBEK.ST",
+      "reason": "Market cap too small (389M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Brock Milton Capital AB (publ)",
+      "ticker": "BMC.ST",
+      "reason": "Market cap too small (390M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Arctic Minerals AB (publ)",
+      "ticker": "ARCT.ST",
+      "reason": "Market cap too small (340M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Tobii AB (publ)",
+      "ticker": "TOBII.ST",
+      "reason": "Market cap too small (392M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Dedicare AB (publ)",
+      "ticker": "DEDI.ST",
+      "reason": "Market cap too small (378M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "TagMaster AB (publ)",
+      "ticker": "TAGM-B.ST",
+      "reason": "Market cap too small (366M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Seafire AB (publ)",
+      "ticker": "SEAF.ST",
+      "reason": "Market cap too small (359M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Balco Group AB",
+      "ticker": "BALCO.ST",
+      "reason": "Market cap too small (367M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Online Brands Nordic AB (publ)",
+      "ticker": "OBAB.ST",
+      "reason": "Market cap too small (353M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Profoto Holding AB (publ)",
+      "ticker": "PRFO.ST",
+      "reason": "Market cap too small (372M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "AGES Industri AB (publ)",
+      "ticker": "AGES-B.ST",
+      "reason": "Market cap too small (346M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "4C Group AB (publ)",
+      "ticker": "4C.ST",
+      "reason": "Market cap too small (341M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "B3 Consulting Group AB (publ)",
+      "ticker": "B3.ST",
+      "reason": "Market cap too small (321M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Candles Scandinavia AB (publ)",
+      "ticker": "CANDLE-B.ST",
+      "reason": "Market cap too small (354M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
+      "name": "Capsol Technologies ASA",
+      "ticker": "CAPSLO.ST",
+      "reason": "No price data returned",
+      "days_available": 0
+    },
+    {
+      "name": "Ferroamp AB (publ)",
+      "ticker": "FERRO.ST",
+      "reason": "Market cap too small (326M SEK < 500M SEK)",
+      "days_available": 0
+    },
+    {
       "name": "Morrow Bank AB",
       "ticker": "MORROW.ST",
       "reason": "Insufficient history - needs 130 days, only 35 available",
@@ -234,12 +579,6 @@
       "ticker": "SIVI.ST",
       "reason": "Insufficient history - needs 130 days, only 53 available",
       "days_available": 53
-    },
-    {
-      "name": "Guldbrev Holding AB (publ)",
-      "ticker": "GULD.ST",
-      "reason": "Insufficient history - needs 130 days, only 92 available",
-      "days_available": 92
     },
     {
       "name": "NOBA Bank Group AB (publ)",
