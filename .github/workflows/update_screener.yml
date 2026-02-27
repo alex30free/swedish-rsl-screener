@@ -25,7 +25,8 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install yfinance pandas
+        run: pip install yfinance pandas requests beautifulsoup4
+
 
       - name: Run RSL Screener
         run: python screener.py
