@@ -1,0 +1,38 @@
+name: RSL Backtest
+
+on:
+  workflow_dispatch:   # Manual trigger only — runs on demand, not scheduled
+                       # Go to Actions tab → RSL Backtest → Run workflow
+
+permissions:
+  contents: write
+
+jobs:
+  run-backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90   # Backtest takes 20-40 min; 90 min safety limit
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install yfinance pandas numpy
+
+      - name: Run backtest
+        run: python backtest.py
+
+      - name: Commit & push results
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add backtest_results.json
+          git diff --cached --quiet || git commit -m "chore: backtest results $(date -u +'%Y-%m-%d')"
+          git push
