@@ -34,6 +34,9 @@ HEADERS   = {
         "Chrome/120.0.0.0 Safari/537.36"
     ),
     "Accept-Language": "en-US,en;q=0.9",
+    # Ask for UTF-8 explicitly
+    "Accept": "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+    "Accept-Charset": "utf-8",
 }
 
 
@@ -47,14 +50,21 @@ def _sa_ticker_to_yf(sa_ticker: str) -> str:
       ALIV.SDB → ALIV-SDB.ST
       Tickers without a dot → just append .ST
     """
-    # Multi-character suffixes like .SE, .SDB, .SEK already contain the exchange
-    # info that must be kept.  We replace the last dot with a hyphen and add .ST.
     parts = sa_ticker.split(".")
     if len(parts) == 1:
         return f"{sa_ticker}.ST"
-    # Rejoin with hyphen between all parts, then add .ST
-    # e.g. ALIV.SDB → ALIV-SDB.ST | VOLV.B → VOLV-B.ST | NDA.SE → NDA-SE.ST
     return "-".join(parts) + ".ST"
+
+
+def _fix_encoding(text: str) -> str:
+    """
+    Fix double-encoded UTF-8 strings that arrive as latin-1 interpreted bytes.
+    e.g. 'OrrÃ¶n' → 'Orron'  (we just re-encode/decode to fix it)
+    """
+    try:
+        return text.encode("latin-1").decode("utf-8")
+    except (UnicodeEncodeError, UnicodeDecodeError):
+        return text  # already correct, return as-is
 
 
 def _scrape_page(url: str, session: requests.Session) -> list[tuple[str, str]]:
@@ -62,27 +72,28 @@ def _scrape_page(url: str, session: requests.Session) -> list[tuple[str, str]]:
     resp = session.get(url, headers=HEADERS, timeout=15)
     resp.raise_for_status()
 
+    # Force correct encoding — stockanalysis.com is UTF-8
+    resp.encoding = "utf-8"
+
     soup = BeautifulSoup(resp.text, "html.parser")
     results = []
 
-    # The table rows: each has a link /quote/sto/TICKER/ and a company name
     for row in soup.select("tbody tr"):
         cells = row.find_all("td")
         if len(cells) < 3:
             continue
 
-        # Cell 1 (index 1) contains the ticker link
         link = cells[1].find("a")
         if not link:
             continue
         href = link.get("href", "")
-        # href looks like /quote/sto/VOLV.B/
         m = re.search(r"/quote/sto/([^/]+)/", href)
         if not m:
             continue
 
-        sa_ticker    = m.group(1)             # e.g. VOLV.B
-        company_name = cells[2].get_text(strip=True) if len(cells) > 2 else sa_ticker
+        sa_ticker    = m.group(1)
+        raw_name     = cells[2].get_text(strip=True) if len(cells) > 2 else sa_ticker
+        company_name = _fix_encoding(raw_name)
         yf_ticker    = _sa_ticker_to_yf(sa_ticker)
 
         results.append((company_name, yf_ticker))
@@ -97,22 +108,7 @@ def get_tickers(
 ) -> list[tuple[str, str]]:
     """
     Fetch all Nasdaq Stockholm stocks from stockanalysis.com.
-
-    Parameters
-    ----------
-    max_pages : int
-        Safety cap on number of pages to scrape (site currently has 2 pages of
-        ~500 stocks each, so 5 is more than enough).
-    verbose : bool
-        Print progress.
-    dedupe_companies : bool
-        If True (default), keep only one share class per company.
-        Prefers B shares over A shares (more liquid), keeps first occurrence
-        otherwise.  Set to False to include all share classes (A, B, D, SDB…).
-
-    Returns
-    -------
-    list of (company_name, yahoo_ticker) tuples — ready to use in screener.py
+    Returns list of (company_name, yahoo_ticker) tuples.
     """
     session  = requests.Session()
     all_rows: list[tuple[str, str]] = []
@@ -131,7 +127,7 @@ def get_tickers(
             break
 
         if not rows:
-            break  # No more data
+            break
 
         all_rows.extend(rows)
 
@@ -139,7 +135,7 @@ def get_tickers(
             print(f"  Page {page}: {len(rows)} tickers found (total so far: {len(all_rows)})")
 
         page += 1
-        time.sleep(0.8)   # polite delay between pages
+        time.sleep(0.8)
 
     if verbose:
         print(f"\n  Raw tickers scraped: {len(all_rows)}")
@@ -153,16 +149,11 @@ def get_tickers(
 
 
 def _deduplicate(rows: list[tuple[str, str]]) -> list[tuple[str, str]]:
-    """
-    Keep only the most liquid share class per company.
-    Priority order: B > A > D > SDB > first seen.
-    """
-    # Group by company name
+    """Keep only the most liquid share class per company."""
     from collections import defaultdict
     by_company: dict[str, list[tuple[str, str]]] = defaultdict(list)
 
     for name, ticker in rows:
-        # Normalise name slightly: strip share-class suffixes like " (publ)"
         base_name = re.sub(r"\s*\(publ[.\)]*", "", name, flags=re.IGNORECASE).strip()
         by_company[base_name].append((name, ticker))
 
@@ -174,7 +165,6 @@ def _deduplicate(rows: list[tuple[str, str]]) -> list[tuple[str, str]]:
             result.append(variants[0])
             continue
 
-        # Try to find preferred share class
         chosen = None
         for suffix in PRIORITY:
             for name, ticker in variants:
@@ -185,26 +175,20 @@ def _deduplicate(rows: list[tuple[str, str]]) -> list[tuple[str, str]]:
                 break
 
         if not chosen:
-            chosen = variants[0]   # fall back to first
+            chosen = variants[0]
 
         result.append(chosen)
 
     return result
 
 
-# ── CLI usage ────────────────────────────────────────────────────────────────
-
 if __name__ == "__main__":
     import sys
-
     verbose    = "--verbose" in sys.argv or "-v" in sys.argv
-    all_shares = "--all"     in sys.argv          # include all share classes
+    all_shares = "--all" in sys.argv
 
     print("Fetching Nasdaq Stockholm ticker list from stockanalysis.com…\n")
-    tickers = get_tickers(
-        verbose=True,
-        dedupe_companies=not all_shares,
-    )
+    tickers = get_tickers(verbose=True, dedupe_companies=not all_shares)
 
     print(f"\n{'─'*55}")
     print(f"  Total tickers: {len(tickers)}")
