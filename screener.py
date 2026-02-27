@@ -19,13 +19,10 @@ except ImportError:
     print("ERROR: Run: pip install yfinance pandas")
     raise
 
-# --- Load tickers ---
-TICKERS = [
 from fetch_swedish_tickers import get_tickers
 
 TICKERS = get_tickers(verbose=True)
-```
-]
+
 
 RSL_PERIOD = 130  # trading days (~26 weeks)
 OUTPUT_JSON = "screener_data.json"
