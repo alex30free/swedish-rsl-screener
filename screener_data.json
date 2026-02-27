@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-27 17:53 UTC",
+  "updated": "2026-02-27 18:01 UTC",
   "period_days": 130,
   "min_market_cap_m": 500,
   "total_attempted": 461,
@@ -74,7 +74,7 @@
       "rsl": 1.4245,
       "market_cap": null,
       "rank": 7,
-      "prev_rank": 8
+      "prev_rank": 7
     },
     {
       "name": "Ovzon AB (publ)",
@@ -84,7 +84,7 @@
       "rsl": 1.4119,
       "market_cap": 6692,
       "rank": 8,
-      "prev_rank": 9
+      "prev_rank": 8
     },
     {
       "name": "Orrön Energy AB (publ)",
@@ -94,7 +94,7 @@
       "rsl": 1.3954,
       "market_cap": 2020,
       "rank": 9,
-      "prev_rank": 10
+      "prev_rank": 9
     },
     {
       "name": "Instalco AB (publ)",
@@ -104,7 +104,7 @@
       "rsl": 1.3625,
       "market_cap": 9465,
       "rank": 10,
-      "prev_rank": 12
+      "prev_rank": 10
     },
     {
       "name": "Cloetta AB (publ)",
@@ -114,7 +114,7 @@
       "rsl": 1.3432,
       "market_cap": 15022,
       "rank": 11,
-      "prev_rank": 14
+      "prev_rank": 11
     },
     {
       "name": "Sandvik AB (publ)",
@@ -124,7 +124,7 @@
       "rsl": 1.3422,
       "market_cap": 501002,
       "rank": 12,
-      "prev_rank": 15
+      "prev_rank": 12
     },
     {
       "name": "Solid Försäkringsaktiebolag (publ)",
@@ -134,7 +134,7 @@
       "rsl": 1.3394,
       "market_cap": 1923,
       "rank": 13,
-      "prev_rank": 16
+      "prev_rank": 13
     },
     {
       "name": "Lucara Diamond Corp.",
@@ -144,7 +144,7 @@
       "rsl": 1.3375,
       "market_cap": 2900,
       "rank": 14,
-      "prev_rank": 17
+      "prev_rank": 14
     },
     {
       "name": "Hoist Finance AB (publ)",
@@ -154,7 +154,7 @@
       "rsl": 1.3308,
       "market_cap": 12606,
       "rank": 15,
-      "prev_rank": 18
+      "prev_rank": 15
     },
     {
       "name": "Nordrest Holding AB (publ)",
@@ -164,7 +164,7 @@
       "rsl": 1.3179,
       "market_cap": 3945,
       "rank": 16,
-      "prev_rank": 20
+      "prev_rank": 16
     },
     {
       "name": "Höegh Autoliners ASA",
@@ -174,7 +174,7 @@
       "rsl": 1.3145,
       "market_cap": 23007,
       "rank": 17,
-      "prev_rank": null
+      "prev_rank": 17
     },
     {
       "name": "Midsona AB (publ)",
@@ -184,7 +184,7 @@
       "rsl": 1.3132,
       "market_cap": 1643,
       "rank": 18,
-      "prev_rank": null
+      "prev_rank": 18
     },
     {
       "name": "Done.ai Group AB",
@@ -194,7 +194,7 @@
       "rsl": 1.3132,
       "market_cap": 796,
       "rank": 19,
-      "prev_rank": null
+      "prev_rank": 19
     },
     {
       "name": "Berner Industrier AB",
@@ -204,7 +204,7 @@
       "rsl": 1.296,
       "market_cap": 2117,
       "rank": 20,
-      "prev_rank": null
+      "prev_rank": 20
     }
   ],
   "skipped": [
