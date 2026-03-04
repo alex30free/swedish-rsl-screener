@@ -366,6 +366,9 @@
     tbody tr:nth-child(15) { animation-delay:0.64s; } tbody tr:nth-child(16) { animation-delay:0.67s; }
     tbody tr:nth-child(17) { animation-delay:0.70s; } tbody tr:nth-child(18) { animation-delay:0.73s; }
     tbody tr:nth-child(19) { animation-delay:0.76s; } tbody tr:nth-child(20) { animation-delay:0.79s; }
+    tbody tr:nth-child(21) { animation-delay:0.82s; } tbody tr:nth-child(22) { animation-delay:0.85s; }
+    tbody tr:nth-child(23) { animation-delay:0.88s; } tbody tr:nth-child(24) { animation-delay:0.91s; }
+    tbody tr:nth-child(25) { animation-delay:0.94s; }
   </style>
 </head>
 <body>
@@ -413,7 +416,7 @@
     <div class="filter-status">
       <div class="filter-status-dot" id="filter-dot-f"></div>
       <div class="filter-status-dot" id="filter-dot-m"></div>
-      <span class="filter-count" id="filter-count-label">Showing all 20 stocks</span>
+      <span class="filter-count" id="filter-count-label">Showing all 25 stocks</span>
     </div>
   </div>
 
@@ -527,6 +530,8 @@
             <th style="padding:9px 14px; text-align:center; font-size:10px; font-weight:500; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase;">Days</th>
             <th style="padding:9px 14px; text-align:left; font-size:10px; font-weight:500; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase;">Reason</th>
             <th class="skip-rank-col" style="display:none; padding:9px 14px; text-align:center; font-size:10px; font-weight:500; letter-spacing:0.15em; color:var(--accent2); text-transform:uppercase;">Hyp. Rank (if listed)</th>
+            <th style="padding:9px 14px; text-align:right; font-size:10px; font-weight:500; letter-spacing:0.15em; color:var(--muted2); text-transform:uppercase;">SMA-130</th>
+            <th style="padding:9px 14px; text-align:right; font-size:10px; font-weight:500; letter-spacing:0.15em; color:var(--muted2); text-transform:uppercase;">RSL (approx)</th>
           </tr>
         </thead>
         <tbody id="skip-tbody"></tbody>
@@ -621,7 +626,8 @@
 
     if (mcapEnabled && renderedData) {
       // Trigger mcap fetch for all rows that don't have data yet
-      renderedData.top20.forEach((s, i) => {
+      renderedData.top25 = renderedData.top25 || renderedData.top20 || [];
+      renderedData.top25.forEach((s, i) => {
         if (mcapCache[s.ticker] === undefined) {
           fetchMcap(s.ticker).then(() => {
             renderMcapCell(i, mcapCache[s.ticker]);
@@ -819,47 +825,54 @@
   // ── Compute hypothetical ranks for skipped stocks ─────────────────────────
   async function computeSkipRanks() {
     if (!renderedData) return;
-    const top20    = renderedData.top20 || [];
+    const top25    = renderedData.top25 || renderedData.top20 || [];
     const skipped  = renderedData.skipped || [];
-    const minTopRSL = Math.min(...top20.map(s => s.rsl));
-
-    const skipRows = document.querySelectorAll('#skip-tbody tr');
 
     skipped.forEach((s, i) => {
-      const cell = document.getElementById(`skip-rank-cell-${i}`);
-      if (!cell) return;
+      const rankCell = document.getElementById(`skip-rank-cell-${i}`);
+      const smaCell  = document.getElementById(`skip-sma-cell-${i}`);
+      const rslCell  = document.getElementById(`skip-rsl-cell-${i}`);
+      if (!rankCell) return;
 
-      // If we have RSL data from screener_data (days_available > 0 means partial data)
-      // For stocks with partial history, compute approximate RSL
-      if (s.rsl !== undefined && s.rsl !== null) {
-        // Stock has RSL data stored — rank it
-        renderHypRank(cell, s.rsl, top20);
+      if (s.rsl !== undefined && s.rsl !== null && s.sma130 !== undefined) {
+        renderHypRank(rankCell, s.rsl, top25);
+        if (smaCell) smaCell.textContent = fmt(s.sma130);
+        if (rslCell) rslCell.innerHTML = `<span style="color:var(--muted2)">${s.rsl.toFixed(3)}</span>`;
       } else if (s.days_available > 0) {
-        cell.innerHTML = `<span style="color:var(--muted); font-size:10px;">Partial data</span>`;
+        if (rankCell) rankCell.innerHTML = `<span style="color:var(--muted);font-size:10px;">Partial data</span>`;
+        // Try fetching live anyway
+        fetchLiveRSL(s.ticker).then(result => {
+          if (result) {
+            renderHypRank(rankCell, result.rsl, top25);
+            if (smaCell) smaCell.textContent = fmt(result.sma130);
+            if (rslCell) rslCell.innerHTML = `<span style="color:var(--muted2)">${result.rsl.toFixed(3)}</span>`;
+          }
+        });
       } else {
-        // Try fetching live
-        cell.innerHTML = `<span class="mcap-loading">fetching…</span>`;
-        fetchLiveRSL(s.ticker).then(rsl => {
-          if (rsl !== null) {
-            renderHypRank(cell, rsl, top20);
+        rankCell.innerHTML = `<span class="mcap-loading">fetching…</span>`;
+        if (smaCell) smaCell.innerHTML = `<span class="mcap-loading">…</span>`;
+        fetchLiveRSL(s.ticker).then(result => {
+          if (result) {
+            renderHypRank(rankCell, result.rsl, top25);
+            if (smaCell) smaCell.textContent = fmt(result.sma130);
+            if (rslCell) rslCell.innerHTML = `<span style="color:var(--muted2)">${result.rsl.toFixed(3)}</span>`;
           } else {
-            cell.innerHTML = `<span class="hyp-rank-badge unranked">N/A</span>`;
+            rankCell.innerHTML = `<span class="hyp-rank-badge unranked">N/A</span>`;
+            if (smaCell) smaCell.innerHTML = `<span style="color:var(--muted)">—</span>`;
+            if (rslCell) rslCell.innerHTML = `<span style="color:var(--muted)">—</span>`;
           }
         });
       }
     });
   }
 
-  function renderHypRank(cell, rsl, top20) {
-    // Find where this RSL would rank among current top20 + itself
-    const allRSLs = [...top20.map(s => s.rsl), rsl].sort((a,b) => b-a);
+  function renderHypRank(cell, rsl, top25) {
+    const allRSLs = [...top25.map(s => s.rsl), rsl].sort((a,b) => b-a);
     const rank = allRSLs.indexOf(rsl) + 1;
-    const inTop20 = rank <= 20;
-    const cls = rank <= 5 ? 'top5' : inTop20 ? '' : 'unranked';
-    const label = inTop20 ? `#${rank}` : `#${rank} (outside top 20)`;
+    const inTop25 = rank <= 25;
+    const cls = rank <= 5 ? 'top5' : inTop25 ? '' : 'unranked';
     cell.innerHTML = `<div style="display:flex;align-items:center;gap:6px;justify-content:center;">
-      <span class="hyp-rank-badge ${cls}">${inTop20 ? '#'+rank : '—'}</span>
-      <span class="hyp-rsl">${rsl.toFixed(3)}</span>
+      <span class="hyp-rank-badge ${cls}">${inTop25 ? '#'+rank : '—'}</span>
     </div>`;
   }
 
@@ -877,7 +890,7 @@
       if (valid.length < 130) return null;
       const price  = valid[valid.length - 1];
       const sma130 = valid.slice(-130).reduce((a,b) => a+b, 0) / 130;
-      return price / sma130;
+      return { rsl: price / sma130, sma130, price };
     } catch (e) { return null; }
   }
 
@@ -889,20 +902,20 @@
     document.getElementById('updated-time').textContent   = 'Updated: ' + data.updated;
     document.getElementById('stocks-screened').textContent = data.stocks_screened + ' of ' + (data.total_attempted || '?') + ' stocks screened';
 
-    const top20   = data.top20   || [];
+    const top25   = data.top25 || data.top20 || [];
     const skipped = data.skipped || [];
 
     document.getElementById('stat-total').textContent   = data.stocks_screened;
-    document.getElementById('stat-new').textContent     = top20.filter(s => s.prev_rank == null).length;
-    document.getElementById('stat-top-rsl').textContent = top20.length ? top20[0].rsl.toFixed(3) : '—';
-    document.getElementById('stat-above').textContent   = top20.filter(s => s.rsl >= 1).length + '/20';
+    document.getElementById('stat-new').textContent     = top25.filter(s => s.prev_rank == null).length;
+    document.getElementById('stat-top-rsl').textContent = top25.length ? top25[0].rsl.toFixed(3) : '—';
+    document.getElementById('stat-above').textContent   = top25.filter(s => s.rsl >= 1).length + '/25';
 
-    const maxRSL = Math.max(...top20.map(s => s.rsl));
-    const minRSL = Math.min(...top20.map(s => s.rsl));
+    const maxRSL = Math.max(...top25.map(s => s.rsl));
+    const minRSL = Math.min(...top25.map(s => s.rsl));
     const tbody  = document.getElementById('rsl-tbody');
     tbody.innerHTML = '';
 
-    top20.forEach((s, i) => {
+    top25.forEach((s, i) => {
       const rank   = i + 1;
       const barPct = ((s.rsl - minRSL) / (maxRSL - minRSL + 0.0001)) * 100;
       const rslCls = s.rsl >= 1.15 ? 'rsl-high' : 'rsl-mid';
@@ -1013,6 +1026,8 @@
           <td id="skip-rank-cell-${i}" class="skip-rank-col" style="display:none; padding:10px 14px; text-align:center;">
             <span class="mcap-loading">—</span>
           </td>
+          <td id="skip-sma-cell-${i}" style="padding:10px 14px; text-align:right; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted);">—</td>
+          <td id="skip-rsl-cell-${i}" style="padding:10px 14px; text-align:right; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted);">—</td>
         `;
         skipTbody.appendChild(tr);
       });
@@ -1039,7 +1054,30 @@
     const open = wrap.style.display === 'none';
     wrap.style.display = open ? 'block' : 'none';
     btn.textContent    = open ? 'Hide List ▴' : 'Show List ▾';
-    if (open && skipRankEnabled) computeSkipRanks();
+    if (open) {
+      if (skipRankEnabled) computeSkipRanks();
+      else fetchSkipSmaRsl(); // always fetch SMA/RSL regardless of rank toggle
+    }
+  }
+
+  function fetchSkipSmaRsl() {
+    if (!renderedData) return;
+    const skipped = renderedData.skipped || [];
+    skipped.forEach((s, i) => {
+      const smaCell = document.getElementById(`skip-sma-cell-${i}`);
+      const rslCell = document.getElementById(`skip-rsl-cell-${i}`);
+      if (!smaCell || smaCell.textContent !== '—') return; // already fetched
+      fetchLiveRSL(s.ticker).then(result => {
+        if (result) {
+          smaCell.textContent = fmt(result.sma130);
+          smaCell.style.color = 'var(--muted2)';
+          rslCell.innerHTML   = `<span style="color:${result.rsl >= 1 ? 'var(--accent)' : 'var(--muted2)'}">${result.rsl.toFixed(3)}</span>`;
+        } else {
+          smaCell.innerHTML = `<span style="color:var(--muted)">N/A</span>`;
+          rslCell.innerHTML = `<span style="color:var(--muted)">N/A</span>`;
+        }
+      });
+    });
   }
 
   function fmt(n) {
