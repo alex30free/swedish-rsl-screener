@@ -19,8 +19,8 @@
       --accent:    #00e5a0;
       --accent2:   #0099ff;
       --gold:      #f0c040;
+      --purple:    #a78bfa;
       --red:       #ff4455;
-      --rank1:     #00e5a0;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,788 +35,337 @@
       overflow-x: hidden;
     }
 
-    /* Scanline overlay */
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg, transparent, transparent 2px,
-        rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px
-      );
-      pointer-events: none;
-      z-index: 9999;
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px);
+      pointer-events: none; z-index: 9999;
     }
 
-    /* Grid background */
     body::after {
       content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0,229,160,0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,229,160,0.015) 1px, transparent 1px);
+      position: fixed; inset: 0;
+      background-image: linear-gradient(rgba(0,229,160,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,160,0.015) 1px, transparent 1px);
       background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px 80px;
-      position: relative;
-      z-index: 1;
-    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; position: relative; z-index: 1; }
 
     /* ── HEADER ── */
-    header {
-      padding: 48px 0 32px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 40px;
-      animation: fadeDown 0.6s ease both;
-    }
-
-    .header-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
+    header { padding: 48px 0 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px; animation: fadeDown 0.6s ease both; }
+    .header-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
     .logo-area { display: flex; flex-direction: column; gap: 8px; }
 
     .label-tag {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      color: var(--accent);
-      text-transform: uppercase;
-      background: rgba(0,229,160,0.08);
-      border: 1px solid rgba(0,229,160,0.2);
-      padding: 4px 10px;
-      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.25em; color: var(--accent); text-transform: uppercase;
+      background: rgba(0,229,160,0.08); border: 1px solid rgba(0,229,160,0.2);
+      padding: 4px 10px; display: inline-block;
     }
 
-    h1 {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: clamp(22px, 4vw, 36px);
-      font-weight: 600;
-      color: #fff;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-
+    h1 { font-family: 'IBM Plex Mono', monospace; font-size: clamp(22px, 4vw, 36px); font-weight: 600; color: #fff; line-height: 1.1; letter-spacing: -0.02em; }
     h1 span { color: var(--accent); }
+    .subtitle { font-size: 13px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; margin-top: 6px; }
 
-    .subtitle {
-      font-size: 13px;
-      color: var(--muted);
-      font-family: 'IBM Plex Mono', monospace;
-      margin-top: 6px;
-    }
-
-    .meta-box {
-      text-align: right;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
+    .meta-box { text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); line-height: 1.8; }
     .meta-box .updated { color: var(--accent); font-size: 12px; }
 
-    .pulse {
-      display: inline-block;
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      margin-right: 6px;
-      animation: pulse 2s ease infinite;
-    }
+    .pulse { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-right: 6px; animation: pulse 2s ease infinite; }
 
     /* ── FILTER TOOLBAR ── */
     .filter-bar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 14px 20px;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 32px;
       flex-wrap: wrap;
       animation: fadeDown 0.6s 0.08s ease both;
     }
 
-    .filter-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+    .filter-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
-    .filter-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* F-Score Toggle Button */
-    .fscore-toggle {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      padding: 10px 18px;
-      cursor: pointer;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted2);
-      transition: border-color 0.2s, color 0.2s, background 0.2s;
-      position: relative;
-      overflow: hidden;
-      user-select: none;
-    }
-
-    .fscore-toggle::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(240,192,64,0.04);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .fscore-toggle:hover { border-color: var(--gold); color: var(--gold); }
-    .fscore-toggle:hover::before { opacity: 1; }
-
-    .fscore-toggle.active {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: rgba(240,192,64,0.08);
-    }
-
-    .fscore-toggle.active::before { opacity: 1; }
-
-    /* Toggle switch inside button */
-    .toggle-track {
-      width: 32px;
-      height: 16px;
-      border-radius: 8px;
+    .filter-divider {
+      width: 1px; height: 28px;
       background: var(--border2);
-      position: relative;
-      transition: background 0.2s;
       flex-shrink: 0;
     }
 
-    .fscore-toggle.active .toggle-track {
-      background: rgba(240,192,64,0.35);
+    .filter-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+      white-space: nowrap;
     }
 
+    /* Generic filter toggle button */
+    .filter-btn {
+      display: flex; align-items: center; gap: 9px;
+      background: transparent;
+      border: 1px solid var(--border2);
+      padding: 8px 14px;
+      cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted2);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      position: relative; user-select: none;
+    }
+
+    /* F-Score button — gold theme */
+    .filter-btn.fscore-btn:hover  { border-color: var(--gold);   color: var(--gold);   background: rgba(240,192,64,0.05); }
+    .filter-btn.fscore-btn.active { border-color: var(--gold);   color: var(--gold);   background: rgba(240,192,64,0.08); }
+
+    /* Market Cap button — purple theme */
+    .filter-btn.mcap-btn:hover  { border-color: var(--purple); color: var(--purple); background: rgba(167,139,250,0.05); }
+    .filter-btn.mcap-btn.active { border-color: var(--purple); color: var(--purple); background: rgba(167,139,250,0.08); }
+
+    /* Toggle track + thumb */
+    .toggle-track {
+      width: 28px; height: 14px; border-radius: 7px;
+      background: var(--border2); position: relative;
+      transition: background 0.2s; flex-shrink: 0;
+    }
     .toggle-thumb {
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
+      position: absolute; top: 2px; left: 2px;
+      width: 10px; height: 10px; border-radius: 50%;
       background: var(--muted);
       transition: transform 0.2s, background 0.2s;
     }
 
-    .fscore-toggle.active .toggle-thumb {
-      transform: translateX(16px);
-      background: var(--gold);
-    }
+    .filter-btn.fscore-btn.active .toggle-track { background: rgba(240,192,64,0.35); }
+    .filter-btn.fscore-btn.active .toggle-thumb { transform: translateX(14px); background: var(--gold); }
 
-    .toggle-icon {
-      font-size: 13px;
-    }
+    .filter-btn.mcap-btn.active .toggle-track { background: rgba(167,139,250,0.35); }
+    .filter-btn.mcap-btn.active .toggle-thumb { transform: translateX(14px); background: var(--purple); }
 
-    /* F-Score badge in the button */
-    .fscore-badge {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      padding: 2px 7px;
-      border: 1px solid rgba(240,192,64,0.3);
-      color: var(--gold);
-      background: rgba(240,192,64,0.08);
-      opacity: 0;
-      transform: translateX(-4px);
+    /* Inline badge (shown when active) */
+    .filter-badge {
+      font-size: 10px; padding: 1px 6px;
+      border: 1px solid; border-radius: 2px;
+      opacity: 0; transform: translateX(-4px);
       transition: opacity 0.2s, transform 0.2s;
+      white-space: nowrap;
     }
+    .filter-btn.fscore-btn .filter-badge { border-color: rgba(240,192,64,0.3); color: var(--gold); background: rgba(240,192,64,0.08); }
+    .filter-btn.mcap-btn   .filter-badge { border-color: rgba(167,139,250,0.3); color: var(--purple); background: rgba(167,139,250,0.08); }
+    .filter-btn.active .filter-badge { opacity: 1; transform: translateX(0); }
 
-    .fscore-toggle.active .fscore-badge {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    /* Filter status right side */
+    .filter-status { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .filter-status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); transition: background 0.3s; }
+    .filter-status-dot.active-gold   { background: var(--gold); }
+    .filter-status-dot.active-purple { background: var(--purple); }
+    .filter-count { transition: color 0.2s; }
+    .filter-count.filtered-gold   { color: var(--gold); }
+    .filter-count.filtered-purple { color: var(--purple); }
+    .filter-count.filtered-both   { color: var(--accent); }
 
-    /* Filter status info */
-    .filter-status {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .filter-status-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--muted);
-      transition: background 0.3s;
-    }
-
-    .filter-status-dot.active { background: var(--gold); }
-
-    .filter-count {
-      transition: color 0.2s;
-    }
-
-    .filter-count.filtered { color: var(--gold); }
-
-    /* ── STATS ROW ── */
-    .stats-row {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 32px;
-      flex-wrap: wrap;
-      animation: fadeDown 0.6s 0.15s ease both;
-    }
-
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 14px 22px;
-      flex: 1;
-      min-width: 140px;
-    }
-
-    .stat-card .num {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 24px;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .stat-card .desc {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-top: 3px;
-    }
-
-    /* ── F-SCORE INFO BOX (shown when filter is active) ── */
-    .fscore-info-box {
-      background: var(--surface);
-      border: 1px solid rgba(240,192,64,0.2);
-      border-left: 3px solid var(--gold);
-      padding: 18px 24px;
-      margin-bottom: 24px;
+    /* ── INFO BOXES (shown when filters are active) ── */
+    .filter-info-box {
+      border-left: 3px solid;
+      padding: 14px 20px;
+      margin-bottom: 16px;
       font-family: 'IBM Plex Mono', monospace;
       font-size: 12px;
       display: none;
-      animation: slideDown 0.3s ease both;
+      animation: slideDown 0.25s ease both;
     }
+    .filter-info-box.visible { display: block; }
 
-    .fscore-info-box.visible { display: block; }
+    .fscore-info-box  { background: var(--surface); border-color: var(--gold);   border: 1px solid rgba(240,192,64,0.2);  border-left: 3px solid var(--gold); }
+    .mcap-info-box    { background: var(--surface); border-color: var(--purple); border: 1px solid rgba(167,139,250,0.2); border-left: 3px solid var(--purple); }
 
-    .fscore-info-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+    .info-box-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+    .info-box-title { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+    .fscore-info-box .info-box-title { color: var(--gold); }
+    .mcap-info-box   .info-box-title { color: var(--purple); }
 
-    .fscore-info-title {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
+    .info-box-desc { color: var(--muted2); line-height: 1.6; font-size: 11px; max-width: 760px; }
+    .info-box-desc strong { color: var(--text); font-weight: 400; }
 
-    .fscore-threshold-selector {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .fscore-threshold-label {
-      font-size: 10px;
-      color: var(--muted);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-
-    .threshold-btns {
-      display: flex;
-      gap: 4px;
-    }
+    /* Threshold selector for F-Score */
+    .threshold-selector { display: flex; align-items: center; gap: 8px; }
+    .threshold-label { font-size: 10px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
+    .threshold-btns { display: flex; gap: 4px; }
 
     .threshold-btn {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      width: 32px;
-      height: 26px;
-      border: 1px solid var(--border2);
-      background: transparent;
-      color: var(--muted2);
-      cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+      width: 30px; height: 24px;
+      border: 1px solid var(--border2); background: transparent;
+      color: var(--muted2); cursor: pointer;
       transition: border-color 0.15s, color 0.15s, background 0.15s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
     }
-
     .threshold-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .threshold-btn.active { border-color: var(--gold); color: var(--bg); background: var(--gold); }
 
-    .threshold-btn.active {
-      border-color: var(--gold);
-      color: var(--bg);
-      background: var(--gold);
+    /* Market cap selector */
+    .mcap-selector { display: flex; align-items: center; gap: 8px; }
+    .mcap-btns { display: flex; gap: 4px; }
+    .mcap-btn-sel {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500;
+      padding: 3px 10px; height: 24px;
+      border: 1px solid var(--border2); background: transparent;
+      color: var(--muted2); cursor: pointer; white-space: nowrap;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+      display: flex; align-items: center; justify-content: center;
     }
+    .mcap-btn-sel:hover { border-color: var(--purple); color: var(--purple); }
+    .mcap-btn-sel.active { border-color: var(--purple); color: var(--bg); background: var(--purple); }
 
-    .fscore-info-desc {
-      color: var(--muted2);
-      line-height: 1.65;
-      font-size: 11px;
-      max-width: 760px;
-    }
-
-    .fscore-info-desc strong { color: var(--text); font-weight: 400; }
+    /* ── STATS ROW ── */
+    .stats-row { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; animation: fadeDown 0.6s 0.15s ease both; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); padding: 14px 22px; flex: 1; min-width: 140px; }
+    .stat-card .num { font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600; color: #fff; }
+    .stat-card .desc { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.15em; margin-top: 3px; }
 
     /* ── TABLE ── */
-    .table-wrap {
-      overflow-x: auto;
-      animation: fadeUp 0.6s 0.2s ease both;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-    }
-
+    .table-wrap { overflow-x: auto; animation: fadeUp 0.6s 0.2s ease both; }
+    table { width: 100%; border-collapse: collapse; font-family: 'IBM Plex Mono', monospace; font-size: 13px; }
     thead tr { border-bottom: 1px solid var(--border2); }
-
-    thead th {
-      padding: 10px 14px;
-      text-align: left;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      color: var(--muted);
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    thead th.right { text-align: right; }
+    thead th { padding: 10px 14px; text-align: left; font-size: 10px; font-weight: 500; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; white-space: nowrap; }
+    thead th.right  { text-align: right; }
     thead th.center { text-align: center; }
 
-    /* F-Score column header — toggleable visibility */
-    .th-fscore {
-      transition: opacity 0.3s, max-width 0.3s;
-    }
-
     .th-fscore.hidden { display: none; }
+    .th-mcap.hidden   { display: none; }
 
-    tbody tr {
-      border-bottom: 1px solid var(--border);
-      transition: background 0.15s;
-      cursor: default;
-    }
-
+    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; cursor: default; position: relative; }
     tbody tr:hover { background: rgba(0,229,160,0.03); }
-
-    tbody tr.filtered-out {
-      opacity: 0.25;
-      filter: grayscale(0.5);
-    }
-
-    tbody td {
-      padding: 13px 14px;
-      white-space: nowrap;
-    }
-
-    tbody td.right { text-align: right; }
+    tbody tr.filtered-out { opacity: 0.22; filter: grayscale(0.5); }
+    tbody td { padding: 13px 14px; white-space: nowrap; }
+    tbody td.right  { text-align: right; }
     tbody td.center { text-align: center; }
 
-    .rank-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--border2);
-      min-width: 28px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
+    .rank-num { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--border2); min-width: 28px; display: inline-flex; align-items: center; justify-content: center; }
     tr:nth-child(1) .rank-num { color: var(--accent); }
     tr:nth-child(2) .rank-num { color: rgba(0,229,160,0.5); }
     tr:nth-child(3) .rank-num { color: rgba(0,229,160,0.3); }
 
-    .ticker-main {
-      font-family: 'IBM Plex Mono', monospace;
-      font-weight: 500;
-      color: #ffffff;
-      letter-spacing: 1px;
-      font-size: 13px;
-      display: block;
-    }
+    .ticker-main  { font-family: 'IBM Plex Mono', monospace; font-weight: 500; color: #ffffff; letter-spacing: 1px; font-size: 13px; display: block; }
+    .company-name { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 2px; display: block; }
 
-    .company-name {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      color: var(--muted);
-      margin-top: 2px;
-      display: block;
-    }
-
-    .rsl-bar-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      justify-content: flex-end;
-    }
-
-    .rsl-value { font-weight: 600; min-width: 56px; text-align: right; }
-
-    .rsl-bar-bg {
-      width: 60px;
-      height: 4px;
-      background: var(--border2);
-      border-radius: 2px;
-      overflow: hidden;
-    }
-
-    .rsl-bar-fill {
-      height: 100%;
-      border-radius: 2px;
-      background: linear-gradient(90deg, var(--accent2), var(--accent));
-      transition: width 0.4s ease;
-    }
-
+    .rsl-bar-wrap { display: flex; align-items: center; gap: 10px; justify-content: flex-end; }
+    .rsl-value    { font-weight: 600; min-width: 56px; text-align: right; }
+    .rsl-bar-bg   { width: 60px; height: 4px; background: var(--border2); border-radius: 2px; overflow: hidden; }
+    .rsl-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent2), var(--accent)); transition: width 0.4s ease; }
     .rsl-high { color: var(--accent); }
     .rsl-mid  { color: #aaddcc; }
 
     .price-val { color: var(--text); text-align: right; }
     .sma-val   { color: var(--muted); text-align: right; font-size: 12px; }
+    .prev-rank { font-size: 11px; text-align: center; }
 
-    .prev-rank  { font-size: 11px; text-align: center; }
-
-    .rank-change {
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      padding: 2px 7px;
-      font-size: 11px;
-      font-weight: 500;
-      border-radius: 2px;
-    }
-
+    .rank-change { display: inline-flex; align-items: center; gap: 3px; padding: 2px 7px; font-size: 11px; font-weight: 500; border-radius: 2px; }
     .rank-up   { color: var(--accent); background: rgba(0,229,160,0.08); }
     .rank-down { color: var(--red);    background: rgba(255,68,85,0.08); }
     .rank-same { color: var(--muted);  background: rgba(255,255,255,0.04); }
     .rank-new  { color: var(--gold);   background: rgba(240,192,64,0.08); font-size: 10px; letter-spacing: 0.1em; }
 
-    /* ── F-SCORE CELL ── */
+    /* F-Score cell */
     .td-fscore { display: none; }
     .td-fscore.visible { display: table-cell; }
-
-    .fscore-wrap {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      justify-content: center;
-    }
-
-    .fscore-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      min-width: 20px;
-      text-align: center;
-      transition: color 0.2s;
-    }
-
-    .fscore-num.high   { color: var(--accent); }
-    .fscore-num.mid    { color: var(--gold); }
-    .fscore-num.low    { color: var(--red); }
-    .fscore-num.na     { color: var(--muted); font-size: 12px; font-family: 'IBM Plex Mono', monospace; }
-
-    .fscore-dots {
-      display: flex;
-      gap: 3px;
-    }
-
-    .fscore-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      border: 1px solid var(--border2);
-      background: transparent;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
+    .fscore-wrap { display: flex; align-items: center; gap: 8px; justify-content: center; }
+    .fscore-num { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; min-width: 20px; text-align: center; transition: color 0.2s; }
+    .fscore-num.high { color: var(--accent); }
+    .fscore-num.mid  { color: var(--gold); }
+    .fscore-num.low  { color: var(--red); }
+    .fscore-num.na   { color: var(--muted); font-size: 12px; font-family: 'IBM Plex Mono', monospace; }
+    .fscore-dots { display: flex; gap: 3px; }
+    .fscore-dot { width: 5px; height: 5px; border-radius: 50%; border: 1px solid var(--border2); background: transparent; transition: background 0.2s, border-color 0.2s; }
     .fscore-dot.filled-high { background: var(--accent); border-color: var(--accent); }
     .fscore-dot.filled-mid  { background: var(--gold);   border-color: var(--gold); }
     .fscore-dot.filled-low  { background: var(--red);    border-color: var(--red); }
 
-    /* Row pass/fail indicator when filter is on */
-    .fscore-pass-indicator {
-      width: 3px;
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      background: transparent;
-      transition: background 0.2s;
-    }
+    /* Market Cap cell */
+    .td-mcap { display: none; }
+    .td-mcap.visible { display: table-cell; }
+    .mcap-val { font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-align: right; }
+    .mcap-val.mcap-large { color: var(--accent); }
+    .mcap-val.mcap-mid   { color: var(--muted2); }
+    .mcap-val.mcap-small { color: var(--muted); }
+    .mcap-val.mcap-na    { color: var(--muted); font-size: 11px; }
+    .mcap-loading { color: var(--border2); font-size: 11px; }
 
-    tbody tr { position: relative; }
-
-    tbody tr.fscore-pass .fscore-pass-indicator { background: var(--gold); }
-    tbody tr.fscore-fail .fscore-pass-indicator { background: transparent; }
+    /* Left edge indicator */
+    .row-indicator { width: 3px; position: absolute; left: 0; top: 0; bottom: 0; background: transparent; transition: background 0.2s; }
+    tbody tr.fscore-pass .row-indicator { background: var(--gold); }
+    tbody tr.mcap-fail   .row-indicator { background: var(--red); }
 
     /* ── LOADER / ERROR ── */
-    .loader {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 300px;
-      gap: 12px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      color: var(--muted);
-    }
+    .loader { display: flex; align-items: center; justify-content: center; min-height: 300px; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--muted); }
+    .spinner { width: 18px; height: 18px; border: 2px solid var(--border2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    .error-msg { display: none; padding: 24px; border: 1px solid rgba(255,68,85,0.3); color: var(--red); font-family: 'IBM Plex Mono', monospace; font-size: 13px; background: rgba(255,68,85,0.05); }
 
-    .spinner {
-      width: 18px; height: 18px;
-      border: 2px solid var(--border2);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-
-    .error-msg {
-      display: none;
-      padding: 24px;
-      border: 1px solid rgba(255,68,85,0.3);
-      color: var(--red);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      background: rgba(255,68,85,0.05);
-    }
-
-    /* ── STRATEGY / INFO SECTIONS ── */
-    .info-section {
-      margin-top: 60px;
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-left: 3px solid var(--accent);
-      padding: 32px 40px;
-      margin-bottom: 28px;
-    }
-
-    .info-section h2 {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px 40px;
-    }
-
-    @media (max-width: 600px) {
-      .info-grid { grid-template-columns: 1fr; }
-    }
-
-    .info-item .label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-bottom: 5px;
-    }
-
-    .info-item p {
-      font-size: 13px;
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    .formula {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 14px;
-      color: var(--gold);
-      background: rgba(240,192,64,0.06);
-      border: 1px solid rgba(240,192,64,0.15);
-      padding: 10px 16px;
-      margin-top: 20px;
-      display: inline-block;
-    }
-
-    /* ── F-SCORE RESEARCH SECTION ── */
-    .fscore-section {
-      background: var(--surface);
-      border: 1px solid rgba(240,192,64,0.2);
-      border-left: 3px solid var(--gold);
-      padding: 32px 40px;
-      margin-top: 28px;
-    }
-
-    .fscore-section h2 {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .fscore-criteria-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    @media (max-width: 700px) {
-      .fscore-criteria-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    .criterion {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--border);
-      padding: 12px 14px;
-    }
-
-    .criterion-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--border2);
-      margin-bottom: 4px;
-    }
-
-    .criterion-group {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 3px;
-    }
-
-    .criterion-group.profit  { color: var(--accent); }
-    .criterion-group.lever   { color: var(--accent2); }
-    .criterion-group.oper    { color: var(--gold); }
-
-    .criterion-name {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      color: var(--text);
-      line-height: 1.4;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      margin-top: 60px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      color: var(--muted);
-      line-height: 1.8;
-      animation: fadeDown 0.6s 0.3s ease both;
-    }
-
-    footer a { color: var(--muted); }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    @keyframes pulse {
-      0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(0,229,160,0.4); }
-      50%      { opacity:0.7; box-shadow: 0 0 0 5px rgba(0,229,160,0); }
-    }
-
-    tbody tr {
-      animation: rowIn 0.4s ease both;
-    }
-    tbody tr:nth-child(1)  { animation-delay: 0.22s; }
-    tbody tr:nth-child(2)  { animation-delay: 0.25s; }
-    tbody tr:nth-child(3)  { animation-delay: 0.28s; }
-    tbody tr:nth-child(4)  { animation-delay: 0.31s; }
-    tbody tr:nth-child(5)  { animation-delay: 0.34s; }
-    tbody tr:nth-child(6)  { animation-delay: 0.37s; }
-    tbody tr:nth-child(7)  { animation-delay: 0.40s; }
-    tbody tr:nth-child(8)  { animation-delay: 0.43s; }
-    tbody tr:nth-child(9)  { animation-delay: 0.46s; }
-    tbody tr:nth-child(10) { animation-delay: 0.49s; }
-    tbody tr:nth-child(11) { animation-delay: 0.52s; }
-    tbody tr:nth-child(12) { animation-delay: 0.55s; }
-    tbody tr:nth-child(13) { animation-delay: 0.58s; }
-    tbody tr:nth-child(14) { animation-delay: 0.61s; }
-    tbody tr:nth-child(15) { animation-delay: 0.64s; }
-    tbody tr:nth-child(16) { animation-delay: 0.67s; }
-    tbody tr:nth-child(17) { animation-delay: 0.70s; }
-    tbody tr:nth-child(18) { animation-delay: 0.73s; }
-    tbody tr:nth-child(19) { animation-delay: 0.76s; }
-    tbody tr:nth-child(20) { animation-delay: 0.79s; }
-
-    @keyframes rowIn {
-      from { opacity: 0; transform: translateX(-8px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-
-    /* Skip section */
+    /* ── SKIP SECTION ── */
     .skip-section { display:none; margin-top:52px; animation: fadeUp 0.6s 0.4s ease both; }
-
     .skip-toggle-btn {
       font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500;
       letter-spacing:0.12em; text-transform:uppercase; background:transparent;
       border:1px solid var(--border2); color:var(--muted); padding:8px 18px;
       cursor:pointer; transition: border-color 0.2s, color 0.2s;
     }
+    .skip-toggle-btn:hover { border-color: var(--accent2); color: var(--accent2); }
 
-    .skip-toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
+    /* Hypothetical rank badge in skip table */
+    .hyp-rank-badge {
+      font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+      padding: 2px 8px; border: 1px solid rgba(0,153,255,0.3);
+      color: var(--accent2); background: rgba(0,153,255,0.07);
+      display: inline-block;
+    }
+    .hyp-rank-badge.top5 { color: var(--accent); border-color: rgba(0,229,160,0.4); background: rgba(0,229,160,0.07); }
+    .hyp-rank-badge.unranked { color: var(--muted); border-color: var(--border2); background: transparent; font-size: 11px; font-family: 'IBM Plex Mono', monospace; }
+    .hyp-rsl { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted2); }
+
+    /* ── INFO SECTIONS ── */
+    .info-section { margin-top: 60px; background: var(--surface); border: 1px solid var(--border2); border-left: 3px solid var(--accent); padding: 32px 40px; margin-bottom: 28px; }
+    .info-section h2 { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; margin-bottom: 20px; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; }
+    @media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; } }
+    .info-item .label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 5px; }
+    .info-item p { font-size: 13px; color: var(--text); line-height: 1.6; }
+    .formula { font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--gold); background: rgba(240,192,64,0.06); border: 1px solid rgba(240,192,64,0.15); padding: 10px 16px; margin-top: 20px; display: inline-block; }
+
+    .fscore-section { background: var(--surface); border: 1px solid rgba(240,192,64,0.2); border-left: 3px solid var(--gold); padding: 32px 40px; margin-top: 28px; }
+    .fscore-section h2 { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
+
+    .fscore-criteria-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
+    @media (max-width: 700px) { .fscore-criteria-grid { grid-template-columns: 1fr 1fr; } }
+
+    .criterion { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 12px 14px; }
+    .criterion-num { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--border2); margin-bottom: 4px; }
+    .criterion-group { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 3px; }
+    .criterion-group.profit { color: var(--accent); }
+    .criterion-group.lever  { color: var(--accent2); }
+    .criterion-group.oper   { color: var(--gold); }
+    .criterion-name { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text); line-height: 1.4; }
+
+    footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border); font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); line-height: 1.8; animation: fadeDown 0.6s 0.3s ease both; }
+    footer a { color: var(--muted); }
+
+    @keyframes fadeDown  { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeUp    { from { opacity:0; transform:translateY(16px); }  to { opacity:1; transform:translateY(0); } }
+    @keyframes slideDown { from { opacity:0; transform:translateY(-8px); }  to { opacity:1; transform:translateY(0); } }
+    @keyframes spin      { to { transform:rotate(360deg); } }
+    @keyframes pulse     { 0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(0,229,160,0.4); } 50% { opacity:0.7; box-shadow:0 0 0 5px rgba(0,229,160,0); } }
+    @keyframes rowIn     { from { opacity:0; transform:translateX(-8px); } to { opacity:1; transform:translateX(0); } }
+
+    tbody tr { animation: rowIn 0.4s ease both; }
+    tbody tr:nth-child(1)  { animation-delay:0.22s; } tbody tr:nth-child(2)  { animation-delay:0.25s; }
+    tbody tr:nth-child(3)  { animation-delay:0.28s; } tbody tr:nth-child(4)  { animation-delay:0.31s; }
+    tbody tr:nth-child(5)  { animation-delay:0.34s; } tbody tr:nth-child(6)  { animation-delay:0.37s; }
+    tbody tr:nth-child(7)  { animation-delay:0.40s; } tbody tr:nth-child(8)  { animation-delay:0.43s; }
+    tbody tr:nth-child(9)  { animation-delay:0.46s; } tbody tr:nth-child(10) { animation-delay:0.49s; }
+    tbody tr:nth-child(11) { animation-delay:0.52s; } tbody tr:nth-child(12) { animation-delay:0.55s; }
+    tbody tr:nth-child(13) { animation-delay:0.58s; } tbody tr:nth-child(14) { animation-delay:0.61s; }
+    tbody tr:nth-child(15) { animation-delay:0.64s; } tbody tr:nth-child(16) { animation-delay:0.67s; }
+    tbody tr:nth-child(17) { animation-delay:0.70s; } tbody tr:nth-child(18) { animation-delay:0.73s; }
+    tbody tr:nth-child(19) { animation-delay:0.76s; } tbody tr:nth-child(20) { animation-delay:0.79s; }
   </style>
 </head>
 <body>
@@ -830,7 +379,7 @@
         <h1>Swedish <span>RSL</span> Rankings</h1>
         <div class="subtitle">Levy Relative Strength · 130 trading days · Large, Mid &amp; Small Cap</div>
       </div>
-      <div class="meta-box" id="meta-box">
+      <div class="meta-box">
         <div><span class="pulse"></span><span class="updated" id="updated-time">Loading…</span></div>
         <div id="stocks-screened">— stocks screened</div>
         <div>Period: 130 days (26 weeks)</div>
@@ -844,78 +393,88 @@
     <div class="filter-left">
       <span class="filter-label">Filters</span>
 
-      <!-- F-Score Toggle Button -->
-      <button class="fscore-toggle" id="fscore-toggle-btn" onclick="toggleFScore()">
-        <div class="toggle-track">
-          <div class="toggle-thumb"></div>
-        </div>
-        <span class="toggle-icon">⬡</span>
-        Piotroski F-Score
-        <span class="fscore-badge" id="fscore-badge">≥ <span id="badge-threshold">6</span></span>
+      <!-- F-Score Toggle -->
+      <button class="filter-btn fscore-btn" id="fscore-toggle-btn" onclick="toggleFScore()">
+        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+        ⬡ F-Score
+        <span class="filter-badge" id="fscore-badge">≥ <span id="badge-threshold">5</span></span>
+      </button>
+
+      <div class="filter-divider"></div>
+
+      <!-- Market Cap Toggle -->
+      <button class="filter-btn mcap-btn" id="mcap-toggle-btn" onclick="toggleMcap()">
+        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+        ◈ Market Cap
+        <span class="filter-badge" id="mcap-badge">≥ <span id="badge-mcap">300</span>M SEK</span>
       </button>
     </div>
 
     <div class="filter-status">
-      <div class="filter-status-dot" id="filter-dot"></div>
+      <div class="filter-status-dot" id="filter-dot-f"></div>
+      <div class="filter-status-dot" id="filter-dot-m"></div>
       <span class="filter-count" id="filter-count-label">Showing all 20 stocks</span>
     </div>
   </div>
 
-  <!-- F-SCORE INFO BOX (shown when filter is active) -->
-  <div class="fscore-info-box" id="fscore-info-box">
-    <div class="fscore-info-header">
-      <div class="fscore-info-title">⬡ Piotroski F-Score Filter — Active</div>
-      <div class="fscore-threshold-selector">
-        <span class="fscore-threshold-label">Min score:</span>
+  <!-- F-SCORE INFO BOX -->
+  <div class="filter-info-box fscore-info-box" id="fscore-info-box">
+    <div class="info-box-header">
+      <div class="info-box-title">⬡ Piotroski F-Score Filter — Active</div>
+      <div class="threshold-selector">
+        <span class="threshold-label">Min score:</span>
         <div class="threshold-btns">
-          <button class="threshold-btn" data-val="4" onclick="setThreshold(4)">4</button>
-          <button class="threshold-btn" data-val="5" onclick="setThreshold(5)">5</button>
-          <button class="threshold-btn active" data-val="6" onclick="setThreshold(6)">6</button>
-          <button class="threshold-btn" data-val="7" onclick="setThreshold(7)">7</button>
-          <button class="threshold-btn" data-val="8" onclick="setThreshold(8)">8</button>
+          <button class="threshold-btn" data-val="4" onclick="setFThreshold(4)">4</button>
+          <button class="threshold-btn active" data-val="5" onclick="setFThreshold(5)">5</button>
+          <button class="threshold-btn" data-val="6" onclick="setFThreshold(6)">6</button>
+          <button class="threshold-btn" data-val="7" onclick="setFThreshold(7)">7</button>
+          <button class="threshold-btn" data-val="8" onclick="setFThreshold(8)">8</button>
         </div>
       </div>
     </div>
-    <div class="fscore-info-desc">
-      Only stocks with an F-Score <strong>≥ <span id="info-threshold">6</span></strong> are shown.
-      Stocks failing this threshold are <strong>dimmed and moved to the bottom</strong> of the table.
-      The F-Score (0–9) measures financial strength across profitability, leverage, and operating efficiency.
-      Scores of 6+ indicate <strong>financially sound companies</strong>; scores of 8–9 indicate exceptional quality.
-      <em style="color:var(--muted); margin-left:4px;">Note: F-Score is approximated from Yahoo Finance fundamental data and updated weekly.</em>
+    <div class="info-box-desc">
+      Only stocks with F-Score <strong>≥ <span id="info-f-threshold">5</span></strong> pass this filter.
+      Stocks below the threshold are dimmed and sorted to the bottom. Score 5+ means <strong>more criteria are passing than failing</strong> — a sign of adequate financial health. Scores 8–9 indicate exceptional quality.
+      <em style="color:var(--muted);">Approximated from Yahoo Finance fundamentals, updated weekly.</em>
+    </div>
+  </div>
+
+  <!-- MARKET CAP INFO BOX -->
+  <div class="filter-info-box mcap-info-box" id="mcap-info-box">
+    <div class="info-box-header">
+      <div class="info-box-title">◈ Market Cap Filter — Active</div>
+      <div class="mcap-selector">
+        <span class="threshold-label">Min size:</span>
+        <div class="mcap-btns">
+          <button class="mcap-btn-sel active" data-val="300"  onclick="setMcapThreshold(300)">300M</button>
+          <button class="mcap-btn-sel"        data-val="500"  onclick="setMcapThreshold(500)">500M</button>
+          <button class="mcap-btn-sel"        data-val="1000" onclick="setMcapThreshold(1000)">1B</button>
+          <button class="mcap-btn-sel"        data-val="5000" onclick="setMcapThreshold(5000)">5B</button>
+        </div>
+      </div>
+    </div>
+    <div class="info-box-desc">
+      Filtering to stocks with market cap <strong>≥ <span id="info-mcap-threshold">300</span>M SEK</strong>.
+      Stocks below this size are dimmed. <strong>300M SEK</strong> includes small-cap names with meaningful liquidity.
+      Use <strong>500M</strong> for the previous default, or <strong>1B+</strong> for mid/large-cap only.
+      <em style="color:var(--muted);">Market cap is fetched live from Yahoo Finance when filter is enabled.</em>
     </div>
   </div>
 
   <!-- STATS -->
-  <div class="stats-row" id="stats-row">
-    <div class="stat-card">
-      <div class="num" id="stat-total">—</div>
-      <div class="desc">Stocks Screened</div>
-    </div>
-    <div class="stat-card">
-      <div class="num" id="stat-above">—</div>
-      <div class="desc">RSL Above 1.0</div>
-    </div>
-    <div class="stat-card">
-      <div class="num" id="stat-top-rsl">—</div>
-      <div class="desc">Highest RSL</div>
-    </div>
-    <div class="stat-card">
-      <div class="num" id="stat-new">—</div>
-      <div class="desc">New Entries This Week</div>
-    </div>
+  <div class="stats-row">
+    <div class="stat-card"><div class="num" id="stat-total">—</div><div class="desc">Stocks Screened</div></div>
+    <div class="stat-card"><div class="num" id="stat-above">—</div><div class="desc">RSL Above 1.0</div></div>
+    <div class="stat-card"><div class="num" id="stat-top-rsl">—</div><div class="desc">Highest RSL</div></div>
+    <div class="stat-card"><div class="num" id="stat-new">—</div><div class="desc">New Entries This Week</div></div>
   </div>
 
-  <!-- ERROR MSG -->
-  <div class="error-msg" id="error-msg">
-    ⚠ Could not load screener data. Ensure <code>screener_data.json</code> exists and GitHub Pages is enabled.
-  </div>
+  <!-- ERROR -->
+  <div class="error-msg" id="error-msg">⚠ Could not load screener data. Ensure <code>screener_data.json</code> exists and GitHub Pages is enabled.</div>
 
   <!-- TABLE -->
   <div class="table-wrap" id="table-wrap">
-    <div class="loader" id="loader">
-      <div class="spinner"></div>
-      Fetching latest data…
-    </div>
+    <div class="loader" id="loader"><div class="spinner"></div>Fetching latest data…</div>
     <table id="rsl-table" style="display:none">
       <thead>
         <tr>
@@ -926,6 +485,7 @@
           <th class="right">SMA-130</th>
           <th class="center">Last Week</th>
           <th class="center th-fscore hidden" id="th-fscore">F-Score</th>
+          <th class="right th-mcap hidden" id="th-mcap">Mkt Cap</th>
         </tr>
       </thead>
       <tbody id="rsl-tbody"></tbody>
@@ -946,7 +506,13 @@
           Skipped: <span id="skip-count-2" style="color:var(--gold)">—</span>
         </div>
       </div>
-      <button class="skip-toggle-btn" id="skip-toggle" onclick="toggleSkipTable()">Show List ▾</button>
+      <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+        <button class="filter-btn mcap-btn" id="skip-rank-btn" onclick="toggleSkipRanking()" style="font-size:10px; padding:6px 12px;">
+          <div class="toggle-track"><div class="toggle-thumb"></div></div>
+          Show Hypothetical RSL Ranks
+        </button>
+        <button class="skip-toggle-btn" id="skip-toggle" onclick="toggleSkipTable()">Show List ▾</button>
+      </div>
     </div>
 
     <div id="skip-pills" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;"></div>
@@ -960,33 +526,25 @@
             <th style="padding:9px 14px; text-align:left; font-size:10px; font-weight:500; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase;">Ticker</th>
             <th style="padding:9px 14px; text-align:center; font-size:10px; font-weight:500; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase;">Days</th>
             <th style="padding:9px 14px; text-align:left; font-size:10px; font-weight:500; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase;">Reason</th>
+            <th class="skip-rank-col" style="display:none; padding:9px 14px; text-align:center; font-size:10px; font-weight:500; letter-spacing:0.15em; color:var(--accent2); text-transform:uppercase;">Hyp. Rank (if listed)</th>
           </tr>
         </thead>
         <tbody id="skip-tbody"></tbody>
       </table>
     </div>
+    <p style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); margin-top:16px; line-height:1.7; max-width:700px;">
+      ℹ Most skipped stocks lack 130 trading days of history (recent IPOs). The <strong style="color:var(--accent2)">Hypothetical Rank</strong> column shows where each skipped stock <em>would</em> rank in the current RSL list if it had enough history — computed from current price ÷ available SMA.
+    </p>
   </div>
 
   <!-- STRATEGY OVERVIEW -->
   <div class="info-section" style="margin-top:60px;">
     <h2>Strategy Overview</h2>
     <div class="info-grid">
-      <div class="info-item">
-        <div class="label">What is RSL?</div>
-        <p>The Levy Relative Strength (RSL) measures a stock's current price relative to its own 130-day moving average. A value above 1.0 means the stock trades above its 6-month average — a sign of sustained momentum.</p>
-      </div>
-      <div class="info-item">
-        <div class="label">How to use it</div>
-        <p>Buy the top-ranked stocks (highest RSL). Review and rebalance weekly. Sell any holding that drops out of the top tier or falls below its 130-day average (RSL &lt; 1.0). Always combine with position sizing and risk management.</p>
-      </div>
-      <div class="info-item">
-        <div class="label">Why it works</div>
-        <p>Academic research confirms price momentum persists across 3–12 months. Stocks that have recently outperformed tend to continue outperforming — the RSL systematically identifies these leaders.</p>
-      </div>
-      <div class="info-item">
-        <div class="label">Updated</div>
-        <p>Every Friday evening after Nasdaq Stockholm closes (~18:30 CET). Data sourced automatically from Yahoo Finance via GitHub Actions.</p>
-      </div>
+      <div class="info-item"><div class="label">What is RSL?</div><p>The Levy Relative Strength (RSL) measures a stock's current price relative to its own 130-day moving average. A value above 1.0 means the stock trades above its 6-month average — a sign of sustained momentum.</p></div>
+      <div class="info-item"><div class="label">How to use it</div><p>Buy the top-ranked stocks (highest RSL). Review and rebalance weekly. Sell any holding that drops out of the top tier or falls below its 130-day average (RSL &lt; 1.0). Always combine with position sizing and risk management.</p></div>
+      <div class="info-item"><div class="label">Why it works</div><p>Academic research confirms price momentum persists across 3–12 months. Stocks that have recently outperformed tend to continue outperforming — the RSL systematically identifies these leaders.</p></div>
+      <div class="info-item"><div class="label">Updated</div><p>Every Friday evening after Nasdaq Stockholm closes (~18:30 CET). Data sourced automatically from Yahoo Finance via GitHub Actions.</p></div>
     </div>
     <div class="formula">RSL = Current Price ÷ 130-day Simple Moving Average</div>
   </div>
@@ -998,184 +556,470 @@
       J.D. Piotroski — "Value Investing: The Use of Historical Financial Statement Information to Separate Winners from Losers", <em>Journal of Accounting Research</em> (2000)
     </p>
     <p style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted2); line-height:1.7; max-width:780px; margin-bottom:24px;">
-      The F-Score assigns one point for each of 9 financial criteria across three dimensions. Combined with RSL momentum ranking, a high F-Score confirms the fundamental health behind the momentum signal — filtering out stocks that may be rising on speculative flows rather than genuine financial improvement.
+      The F-Score assigns one point for each of 9 financial criteria across three dimensions. Combined with RSL momentum ranking, a high F-Score confirms fundamental health behind the momentum signal.
     </p>
-
     <div class="fscore-criteria-grid">
-      <!-- Profitability -->
-      <div class="criterion">
-        <div class="criterion-num">F1</div>
-        <div class="criterion-group profit">Profitability</div>
-        <div class="criterion-name">Positive ROA (net income / total assets > 0)</div>
-      </div>
-      <div class="criterion">
-        <div class="criterion-num">F2</div>
-        <div class="criterion-group profit">Profitability</div>
-        <div class="criterion-name">Positive Operating Cash Flow</div>
-      </div>
-      <div class="criterion">
-        <div class="criterion-num">F3</div>
-        <div class="criterion-group profit">Profitability</div>
-        <div class="criterion-name">Increasing ROA (vs. prior year)</div>
-      </div>
-      <div class="criterion">
-        <div class="criterion-num">F4</div>
-        <div class="criterion-group profit">Profitability</div>
-        <div class="criterion-name">Cash Flow > Net Income (accrual quality)</div>
-      </div>
-      <!-- Leverage -->
-      <div class="criterion">
-        <div class="criterion-num">F5</div>
-        <div class="criterion-group lever">Leverage</div>
-        <div class="criterion-name">Decreasing Long-Term Debt Ratio</div>
-      </div>
-      <div class="criterion">
-        <div class="criterion-num">F6</div>
-        <div class="criterion-group lever">Leverage</div>
-        <div class="criterion-name">Increasing Current Ratio (liquidity)</div>
-      </div>
-      <div class="criterion">
-        <div class="criterion-num">F7</div>
-        <div class="criterion-group lever">Leverage</div>
-        <div class="criterion-name">No New Shares Issued (dilution check)</div>
-      </div>
-      <!-- Operating Efficiency -->
-      <div class="criterion">
-        <div class="criterion-num">F8</div>
-        <div class="criterion-group oper">Efficiency</div>
-        <div class="criterion-name">Increasing Gross Margin</div>
-      </div>
-      <div class="criterion">
-        <div class="criterion-num">F9</div>
-        <div class="criterion-group oper">Efficiency</div>
-        <div class="criterion-name">Increasing Asset Turnover</div>
-      </div>
+      <div class="criterion"><div class="criterion-num">F1</div><div class="criterion-group profit">Profitability</div><div class="criterion-name">Positive ROA</div></div>
+      <div class="criterion"><div class="criterion-num">F2</div><div class="criterion-group profit">Profitability</div><div class="criterion-name">Positive Operating Cash Flow</div></div>
+      <div class="criterion"><div class="criterion-num">F3</div><div class="criterion-group profit">Profitability</div><div class="criterion-name">Increasing ROA (vs. prior year)</div></div>
+      <div class="criterion"><div class="criterion-num">F4</div><div class="criterion-group profit">Profitability</div><div class="criterion-name">Cash Flow > Net Income</div></div>
+      <div class="criterion"><div class="criterion-num">F5</div><div class="criterion-group lever">Leverage</div><div class="criterion-name">Decreasing Long-Term Debt Ratio</div></div>
+      <div class="criterion"><div class="criterion-num">F6</div><div class="criterion-group lever">Leverage</div><div class="criterion-name">Increasing Current Ratio</div></div>
+      <div class="criterion"><div class="criterion-num">F7</div><div class="criterion-group lever">Leverage</div><div class="criterion-name">No New Shares Issued</div></div>
+      <div class="criterion"><div class="criterion-num">F8</div><div class="criterion-group oper">Efficiency</div><div class="criterion-name">Increasing Gross Margin</div></div>
+      <div class="criterion"><div class="criterion-num">F9</div><div class="criterion-group oper">Efficiency</div><div class="criterion-name">Increasing Asset Turnover</div></div>
     </div>
-
     <div style="margin-top:24px; padding-top:20px; border-top:1px solid var(--border); display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
       <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted);">Score Scale</div>
       <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; padding:5px 14px; border:1px solid rgba(255,68,85,0.3); color:var(--red); background:rgba(255,68,85,0.06);">0–2 Weak</span>
-      <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; padding:5px 14px; border:1px solid rgba(240,192,64,0.3); color:var(--gold); background:rgba(240,192,64,0.06);">3–5 Neutral</span>
-      <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; padding:5px 14px; border:1px solid rgba(0,229,160,0.3); color:var(--accent); background:rgba(0,229,160,0.06);">6–7 Strong</span>
-      <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; padding:5px 14px; border:1px solid rgba(0,229,160,0.5); color: #40ffcc; background:rgba(0,229,160,0.1); font-weight:600;">8–9 Exceptional</span>
+      <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; padding:5px 14px; border:1px solid rgba(240,192,64,0.3); color:var(--gold); background:rgba(240,192,64,0.06);">3–4 Neutral</span>
+      <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; padding:5px 14px; border:1px solid rgba(0,229,160,0.3); color:var(--accent); background:rgba(0,229,160,0.06);">5–7 Strong</span>
+      <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; padding:5px 14px; border:1px solid rgba(0,229,160,0.5); color:#40ffcc; background:rgba(0,229,160,0.1); font-weight:600;">8–9 Exceptional</span>
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <p>Data from Yahoo Finance via <a href="https://pypi.org/project/yfinance/" target="_blank">yfinance</a>. Updated every Friday via GitHub Actions.</p>
     <p style="margin-top:6px">⚠ For informational purposes only. Not financial advice.</p>
-    <p style="margin-top:6px">RSL based on: R.A. Levy (1967) · F-Score based on: J.D. Piotroski (2000)</p>
+    <p style="margin-top:6px">RSL: R.A. Levy (1967) · F-Score: J.D. Piotroski (2000)</p>
   </footer>
 
 </div>
 
 <script>
   // ── State ──────────────────────────────────────────────────────────────────
-  let fscoreEnabled  = false;
-  let fscoreThreshold = 6;
-  let renderedData   = null;
+  let fscoreEnabled    = false;
+  let mcapEnabled      = false;
+  let skipRankEnabled  = false;
+  let fscoreThreshold  = 5;
+  let mcapThreshold    = 300;   // Million SEK
+  let renderedData     = null;
 
-  // ── Toggle F-Score filter ──────────────────────────────────────────────────
+  const fscoreCache = {};
+  const mcapCache   = {};
+
+  // ── Toggle F-Score ─────────────────────────────────────────────────────────
   function toggleFScore() {
     fscoreEnabled = !fscoreEnabled;
-    const btn      = document.getElementById('fscore-toggle-btn');
-    const infoBox  = document.getElementById('fscore-info-box');
-    const thFscore = document.getElementById('th-fscore');
-    const filterDot = document.getElementById('filter-dot');
+    document.getElementById('fscore-toggle-btn').classList.toggle('active', fscoreEnabled);
+    document.getElementById('fscore-info-box').classList.toggle('visible', fscoreEnabled);
+    document.getElementById('th-fscore').classList.toggle('hidden', !fscoreEnabled);
+    document.getElementById('filter-dot-f').className = 'filter-status-dot' + (fscoreEnabled ? ' active-gold' : '');
+    if (renderedData) applyFilters();
+  }
 
-    if (fscoreEnabled) {
-      btn.classList.add('active');
-      infoBox.classList.add('visible');
-      thFscore.classList.remove('hidden');
-      filterDot.classList.add('active');
-    } else {
-      btn.classList.remove('active');
-      infoBox.classList.remove('visible');
-      thFscore.classList.add('hidden');
-      filterDot.classList.remove('active');
+  // ── Toggle Market Cap ──────────────────────────────────────────────────────
+  function toggleMcap() {
+    mcapEnabled = !mcapEnabled;
+    document.getElementById('mcap-toggle-btn').classList.toggle('active', mcapEnabled);
+    document.getElementById('mcap-info-box').classList.toggle('visible', mcapEnabled);
+    document.getElementById('th-mcap').classList.toggle('hidden', !mcapEnabled);
+    document.getElementById('filter-dot-m').className = 'filter-status-dot' + (mcapEnabled ? ' active-purple' : '');
+
+    // Show mcap cells in table
+    document.querySelectorAll('.td-mcap').forEach(td => td.classList.toggle('visible', mcapEnabled));
+
+    if (mcapEnabled && renderedData) {
+      // Trigger mcap fetch for all rows that don't have data yet
+      renderedData.top20.forEach((s, i) => {
+        if (mcapCache[s.ticker] === undefined) {
+          fetchMcap(s.ticker).then(() => {
+            renderMcapCell(i, mcapCache[s.ticker]);
+            applyFilters();
+          });
+        }
+      });
     }
-
-    if (renderedData) applyFScoreFilter();
+    if (renderedData) applyFilters();
   }
 
-  // ── Set threshold ──────────────────────────────────────────────────────────
-  function setThreshold(val) {
-    fscoreThreshold = val;
-    document.getElementById('badge-threshold').textContent  = val;
-    document.getElementById('info-threshold').textContent   = val;
-
-    // Update button active states
-    document.querySelectorAll('.threshold-btn').forEach(btn => {
-      btn.classList.toggle('active', parseInt(btn.dataset.val) === val);
+  // ── Toggle Hypothetical Skip Ranking ──────────────────────────────────────
+  function toggleSkipRanking() {
+    skipRankEnabled = !skipRankEnabled;
+    document.getElementById('skip-rank-btn').classList.toggle('active', skipRankEnabled);
+    document.querySelectorAll('.skip-rank-col').forEach(el => {
+      el.style.display = skipRankEnabled ? 'table-cell' : 'none';
     });
-
-    if (renderedData) applyFScoreFilter();
+    if (skipRankEnabled && renderedData) computeSkipRanks();
   }
 
-  // ── Apply / remove filter visually ────────────────────────────────────────
-  function applyFScoreFilter() {
-    const rows  = document.querySelectorAll('#rsl-tbody tr');
-    const cells = document.querySelectorAll('.td-fscore');
+  // ── Set F-Score threshold ──────────────────────────────────────────────────
+  function setFThreshold(val) {
+    fscoreThreshold = val;
+    document.getElementById('badge-threshold').textContent    = val;
+    document.getElementById('info-f-threshold').textContent   = val;
+    document.querySelectorAll('.threshold-btn').forEach(b => b.classList.toggle('active', parseInt(b.dataset.val) === val));
+    if (renderedData) applyFilters();
+  }
 
-    // Show/hide F-Score cells
-    cells.forEach(td => td.classList.toggle('visible', fscoreEnabled));
+  // ── Set Market Cap threshold ───────────────────────────────────────────────
+  function setMcapThreshold(val) {
+    mcapThreshold = val;
+    document.getElementById('badge-mcap').textContent         = val >= 1000 ? (val/1000)+'B' : val+'M';
+    document.getElementById('info-mcap-threshold').textContent = val >= 1000 ? (val/1000)+'B' : val+'M';
+    document.querySelectorAll('.mcap-btn-sel').forEach(b => b.classList.toggle('active', parseInt(b.dataset.val) === val));
+    if (renderedData) applyFilters();
+  }
 
-    let passing = 0;
-    let total   = rows.length;
+  // ── Apply all active filters ───────────────────────────────────────────────
+  function applyFilters() {
+    const rows   = Array.from(document.querySelectorAll('#rsl-tbody tr'));
+    const tbody  = document.getElementById('rsl-tbody');
+    const passRows = [], failRows = [];
+    let passing = rows.length;
 
-    // Re-sort: passing rows on top, failing rows on bottom
-    const tbody = document.getElementById('rsl-tbody');
-    const passRows = [];
-    const failRows = [];
+    // F-Score cells visibility
+    document.querySelectorAll('.td-fscore').forEach(td => td.classList.toggle('visible', fscoreEnabled));
 
     rows.forEach(row => {
-      const score = parseInt(row.dataset.fscore);
-      const hasScore = !isNaN(score);
-      const passes = !fscoreEnabled || !hasScore || score >= fscoreThreshold;
+      row.classList.remove('filtered-out', 'fscore-pass', 'fscore-fail', 'mcap-fail');
 
-      row.classList.remove('filtered-out', 'fscore-pass', 'fscore-fail');
+      const fscore = parseInt(row.dataset.fscore);
+      const mcap   = parseFloat(row.dataset.mcap);
 
-      if (fscoreEnabled) {
-        if (hasScore && score >= fscoreThreshold) {
-          row.classList.add('fscore-pass');
-          passRows.push(row);
-          passing++;
-        } else if (hasScore) {
-          row.classList.add('fscore-fail', 'filtered-out');
-          failRows.push(row);
-        } else {
-          // N/A — keep but don't highlight
-          passRows.push(row);
-          passing++;
-        }
-      } else {
+      const fPass = !fscoreEnabled || isNaN(fscore) || fscore >= fscoreThreshold;
+      const mPass = !mcapEnabled   || isNaN(mcap)   || mcap >= mcapThreshold;
+
+      if (fPass && mPass) {
+        if (fscoreEnabled && !isNaN(fscore) && fscore >= fscoreThreshold) row.classList.add('fscore-pass');
         passRows.push(row);
+      } else {
+        row.classList.add('filtered-out');
+        if (!fPass) row.classList.add('fscore-fail');
+        if (!mPass) row.classList.add('mcap-fail');
+        failRows.push(row);
       }
     });
 
-    if (fscoreEnabled) {
-      // Re-order DOM
-      [...passRows, ...failRows].forEach(r => tbody.appendChild(r));
-    } else {
-      // Restore original RSL order
-      const allRows = [...passRows, ...failRows];
-      allRows.sort((a, b) => parseInt(a.dataset.rank) - parseInt(b.dataset.rank));
-      allRows.forEach(r => tbody.appendChild(r));
-      passing = total;
+    passing = passRows.length;
+
+    // Re-order: pass rows first (keep original RSL order within each group)
+    passRows.sort((a, b) => parseInt(a.dataset.rank) - parseInt(b.dataset.rank));
+    failRows.sort((a, b) => parseInt(a.dataset.rank) - parseInt(b.dataset.rank));
+    [...passRows, ...failRows].forEach(r => tbody.appendChild(r));
+
+    // If no filters, restore original order
+    if (!fscoreEnabled && !mcapEnabled) {
+      rows.sort((a, b) => parseInt(a.dataset.rank) - parseInt(b.dataset.rank));
+      rows.forEach(r => tbody.appendChild(r));
+      passing = rows.length;
     }
 
-    // Update label
-    const label = document.getElementById('filter-count-label');
-    label.classList.toggle('filtered', fscoreEnabled);
-    if (fscoreEnabled) {
-      label.textContent = `Showing ${passing} of ${total} stocks (F ≥ ${fscoreThreshold})`;
+    // Update status label
+    const label     = document.getElementById('filter-count-label');
+    const bothActive = fscoreEnabled && mcapEnabled;
+    label.className = 'filter-count' + (bothActive ? ' filtered-both' : fscoreEnabled ? ' filtered-gold' : mcapEnabled ? ' filtered-purple' : '');
+
+    if (!fscoreEnabled && !mcapEnabled) {
+      label.textContent = `Showing all ${rows.length} stocks`;
     } else {
-      label.textContent = `Showing all ${total} stocks`;
+      const parts = [];
+      if (fscoreEnabled) parts.push(`F ≥ ${fscoreThreshold}`);
+      if (mcapEnabled)   parts.push(`MCap ≥ ${mcapThreshold >= 1000 ? (mcapThreshold/1000)+'B' : mcapThreshold+'M'} SEK`);
+      label.textContent = `Showing ${passing} of ${rows.length} stocks (${parts.join(', ')})`;
     }
   }
 
-  // ── Load data ──────────────────────────────────────────────────────────────
+  // ── Fetch F-Score ──────────────────────────────────────────────────────────
+  async function fetchFScore(ticker) {
+    if (fscoreCache[ticker] !== undefined) return fscoreCache[ticker];
+    try {
+      const url = `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${encodeURIComponent(ticker)}?modules=defaultKeyStatistics,financialData,incomeStatementHistory,cashflowStatementHistory,balanceSheetHistory`;
+      const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+      if (!res.ok) { fscoreCache[ticker] = null; return null; }
+      const json = await res.json();
+      const result = json?.quoteSummary?.result?.[0];
+      if (!result) { fscoreCache[ticker] = null; return null; }
+
+      const fd  = result.financialData || {};
+      const ks  = result.defaultKeyStatistics || {};
+      const is0 = result.incomeStatementHistory?.incomeStatementHistory?.[0] || {};
+      const is1 = result.incomeStatementHistory?.incomeStatementHistory?.[1] || {};
+      const cf0 = result.cashflowStatementHistory?.cashflowStatementHistory?.[0] || {};
+      const bs0 = result.balanceSheetHistory?.balanceSheetHistory?.[0] || {};
+      const bs1 = result.balanceSheetHistory?.balanceSheetHistory?.[1] || {};
+
+      const v = x => (x && x.raw !== undefined) ? x.raw : (typeof x === 'number' ? x : null);
+
+      let score = 0, scored = 0;
+
+      const netIncome0 = v(is0.netIncome), netIncome1 = v(is1.netIncome);
+      const ta0 = v(bs0.totalAssets),     ta1 = v(bs1.totalAssets);
+      const ocf0 = v(cf0.totalCashFromOperatingActivities);
+      const rev0 = v(is0.totalRevenue),   rev1 = v(is1.totalRevenue);
+      const gp0  = v(is0.grossProfit),    gp1  = v(is1.grossProfit);
+      const ca0  = v(bs0.totalCurrentAssets), cl0 = v(bs0.totalCurrentLiabilities);
+      const ca1  = v(bs1.totalCurrentAssets), cl1 = v(bs1.totalCurrentLiabilities);
+      const ltd0 = v(bs0.longTermDebt) || 0, ltd1 = v(bs1.longTermDebt) || 0;
+      const eps0 = v(is0.dilutedEps), eps1 = v(is1.dilutedEps);
+
+      if (ta0 && netIncome0 !== null) { scored++; if (netIncome0 / ta0 > 0) score++; }
+      if (ocf0 !== null)              { scored++; if (ocf0 > 0) score++; }
+      if (ta0 && ta1 && netIncome0 !== null && netIncome1 !== null) { scored++; if (netIncome0/ta0 > netIncome1/ta1) score++; }
+      if (ocf0 !== null && netIncome0 !== null) { scored++; if (ocf0 > netIncome0) score++; }
+      if (ta0 && ta1) { scored++; if ((ltd0/ta0) <= (ltd1/ta1)) score++; }
+      if (ca0 && cl0 && ca1 && cl1) { scored++; if ((ca0/cl0) > (ca1/cl1)) score++; }
+      if (eps0 !== null && eps1 !== null && netIncome0 !== null && netIncome1 !== null && netIncome0 !== 0 && netIncome1 !== 0) {
+        scored++; if (eps0/eps1 >= netIncome0/netIncome1 * 0.97) score++;
+      }
+      if (gp0 && rev0 && gp1 && rev1) { scored++; if ((gp0/rev0) > (gp1/rev1)) score++; }
+      if (rev0 && rev1 && ta0 && ta1) { scored++; if ((rev0/ta0) > (rev1/ta1)) score++; }
+
+      if (scored < 5) { fscoreCache[ticker] = null; return null; }
+      fscoreCache[ticker] = score;
+      return score;
+    } catch (e) { fscoreCache[ticker] = null; return null; }
+  }
+
+  // ── Fetch Market Cap ───────────────────────────────────────────────────────
+  async function fetchMcap(ticker) {
+    if (mcapCache[ticker] !== undefined) return mcapCache[ticker];
+    try {
+      const url = `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${encodeURIComponent(ticker)}?modules=summaryDetail,price`;
+      const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+      if (!res.ok) { mcapCache[ticker] = null; return null; }
+      const json = await res.json();
+      const result = json?.quoteSummary?.result?.[0];
+      if (!result) { mcapCache[ticker] = null; return null; }
+
+      // marketCap is in the currency of the stock (SEK for .ST)
+      const raw = result.price?.marketCap?.raw || result.summaryDetail?.marketCap?.raw;
+      if (!raw) { mcapCache[ticker] = null; return null; }
+
+      // Convert to millions SEK
+      const mcapM = raw / 1_000_000;
+      mcapCache[ticker] = mcapM;
+      return mcapM;
+    } catch (e) { mcapCache[ticker] = null; return null; }
+  }
+
+  // ── Render F-Score cell ────────────────────────────────────────────────────
+  function renderFScoreCell(i, score) {
+    const numEl  = document.getElementById(`fscore-num-${i}`);
+    const dotsEl = document.getElementById(`fscore-dots-${i}`);
+    if (!numEl || !dotsEl) return;
+    if (score === null) { numEl.className = 'fscore-num na'; numEl.textContent = 'N/A'; dotsEl.innerHTML = ''; return; }
+    const cls    = score >= 5 ? 'high' : score >= 3 ? 'mid' : 'low';
+    const dotCls = score >= 5 ? 'filled-high' : score >= 3 ? 'filled-mid' : 'filled-low';
+    numEl.className = `fscore-num ${cls}`;
+    numEl.textContent = score;
+    dotsEl.innerHTML = Array.from({length:9}, (_,d) => `<div class="fscore-dot ${d < score ? dotCls : ''}"></div>`).join('');
+  }
+
+  // ── Render Market Cap cell ─────────────────────────────────────────────────
+  function renderMcapCell(i, mcapM) {
+    const el = document.getElementById(`mcap-val-${i}`);
+    if (!el) return;
+    if (mcapM === null) { el.innerHTML = '<span class="mcap-val mcap-na">N/A</span>'; return; }
+    const fmt = mcapM >= 1000 ? (mcapM/1000).toFixed(1) + 'B' : Math.round(mcapM) + 'M';
+    const cls = mcapM >= 5000 ? 'mcap-large' : mcapM >= 500 ? 'mcap-mid' : 'mcap-small';
+    el.innerHTML = `<span class="mcap-val ${cls}">${fmt}</span>`;
+  }
+
+  // ── Compute hypothetical ranks for skipped stocks ─────────────────────────
+  async function computeSkipRanks() {
+    if (!renderedData) return;
+    const top20    = renderedData.top20 || [];
+    const skipped  = renderedData.skipped || [];
+    const minTopRSL = Math.min(...top20.map(s => s.rsl));
+
+    const skipRows = document.querySelectorAll('#skip-tbody tr');
+
+    skipped.forEach((s, i) => {
+      const cell = document.getElementById(`skip-rank-cell-${i}`);
+      if (!cell) return;
+
+      // If we have RSL data from screener_data (days_available > 0 means partial data)
+      // For stocks with partial history, compute approximate RSL
+      if (s.rsl !== undefined && s.rsl !== null) {
+        // Stock has RSL data stored — rank it
+        renderHypRank(cell, s.rsl, top20);
+      } else if (s.days_available > 0) {
+        cell.innerHTML = `<span style="color:var(--muted); font-size:10px;">Partial data</span>`;
+      } else {
+        // Try fetching live
+        cell.innerHTML = `<span class="mcap-loading">fetching…</span>`;
+        fetchLiveRSL(s.ticker).then(rsl => {
+          if (rsl !== null) {
+            renderHypRank(cell, rsl, top20);
+          } else {
+            cell.innerHTML = `<span class="hyp-rank-badge unranked">N/A</span>`;
+          }
+        });
+      }
+    });
+  }
+
+  function renderHypRank(cell, rsl, top20) {
+    // Find where this RSL would rank among current top20 + itself
+    const allRSLs = [...top20.map(s => s.rsl), rsl].sort((a,b) => b-a);
+    const rank = allRSLs.indexOf(rsl) + 1;
+    const inTop20 = rank <= 20;
+    const cls = rank <= 5 ? 'top5' : inTop20 ? '' : 'unranked';
+    const label = inTop20 ? `#${rank}` : `#${rank} (outside top 20)`;
+    cell.innerHTML = `<div style="display:flex;align-items:center;gap:6px;justify-content:center;">
+      <span class="hyp-rank-badge ${cls}">${inTop20 ? '#'+rank : '—'}</span>
+      <span class="hyp-rsl">${rsl.toFixed(3)}</span>
+    </div>`;
+  }
+
+  async function fetchLiveRSL(ticker) {
+    try {
+      const end   = new Date();
+      const start = new Date(end - 400 * 86400000);
+      const url   = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?interval=1d&period1=${Math.floor(start/1000)}&period2=${Math.floor(end/1000)}`;
+      const res   = await fetch(url, { headers: { 'Accept': 'application/json' } });
+      if (!res.ok) return null;
+      const json  = await res.json();
+      const closes = json?.chart?.result?.[0]?.indicators?.quote?.[0]?.close;
+      if (!closes || closes.length < 130) return null;
+      const valid  = closes.filter(c => c !== null && !isNaN(c));
+      if (valid.length < 130) return null;
+      const price  = valid[valid.length - 1];
+      const sma130 = valid.slice(-130).reduce((a,b) => a+b, 0) / 130;
+      return price / sma130;
+    } catch (e) { return null; }
+  }
+
+  // ── Main render ────────────────────────────────────────────────────────────
+  function render(data) {
+    document.getElementById('loader').style.display = 'none';
+    renderedData = data;
+
+    document.getElementById('updated-time').textContent   = 'Updated: ' + data.updated;
+    document.getElementById('stocks-screened').textContent = data.stocks_screened + ' of ' + (data.total_attempted || '?') + ' stocks screened';
+
+    const top20   = data.top20   || [];
+    const skipped = data.skipped || [];
+
+    document.getElementById('stat-total').textContent   = data.stocks_screened;
+    document.getElementById('stat-new').textContent     = top20.filter(s => s.prev_rank == null).length;
+    document.getElementById('stat-top-rsl').textContent = top20.length ? top20[0].rsl.toFixed(3) : '—';
+    document.getElementById('stat-above').textContent   = top20.filter(s => s.rsl >= 1).length + '/20';
+
+    const maxRSL = Math.max(...top20.map(s => s.rsl));
+    const minRSL = Math.min(...top20.map(s => s.rsl));
+    const tbody  = document.getElementById('rsl-tbody');
+    tbody.innerHTML = '';
+
+    top20.forEach((s, i) => {
+      const rank   = i + 1;
+      const barPct = ((s.rsl - minRSL) / (maxRSL - minRSL + 0.0001)) * 100;
+      const rslCls = s.rsl >= 1.15 ? 'rsl-high' : 'rsl-mid';
+
+      let prevHTML = '';
+      if (s.prev_rank == null) prevHTML = '<span class="rank-change rank-new">NEW</span>';
+      else {
+        const d = s.prev_rank - rank;
+        if      (d > 0) prevHTML = `<span class="rank-change rank-up">▲ ${d} &nbsp;#${s.prev_rank}</span>`;
+        else if (d < 0) prevHTML = `<span class="rank-change rank-down">▼ ${Math.abs(d)} &nbsp;#${s.prev_rank}</span>`;
+        else            prevHTML = `<span class="rank-change rank-same">— &nbsp;#${s.prev_rank}</span>`;
+      }
+
+      const ticker = s.ticker.replace('.ST', '');
+      const tr = document.createElement('tr');
+      tr.dataset.rank   = rank;
+      tr.dataset.fscore = '';
+      tr.dataset.mcap   = '';
+
+      tr.innerHTML = `
+        <td><div class="row-indicator"></div><span class="rank-num">${String(rank).padStart(2,'0')}</span></td>
+        <td>
+          <span class="ticker-main">${escHtml(ticker)}</span>
+          <span class="company-name">${escHtml(s.name)}</span>
+        </td>
+        <td class="right">
+          <div class="rsl-bar-wrap">
+            <span class="rsl-value ${rslCls}">${s.rsl.toFixed(3)}</span>
+            <div class="rsl-bar-bg"><div class="rsl-bar-fill" style="width:${barPct.toFixed(1)}%"></div></div>
+          </div>
+        </td>
+        <td class="right price-val">${fmt(s.price)}</td>
+        <td class="right sma-val">${fmt(s.sma130)}</td>
+        <td class="center prev-rank">${prevHTML}</td>
+        <td class="center td-fscore" id="fscore-cell-${i}">
+          <div class="fscore-wrap">
+            <span class="fscore-num na" id="fscore-num-${i}">—</span>
+            <div class="fscore-dots" id="fscore-dots-${i}"></div>
+          </div>
+        </td>
+        <td class="right td-mcap" id="mcap-cell-${i}">
+          <span class="mcap-loading" id="mcap-val-${i}">—</span>
+        </td>
+      `;
+      tbody.appendChild(tr);
+
+      // Async: F-Score
+      fetchFScore(s.ticker).then(score => {
+        tr.dataset.fscore = score !== null ? score : '';
+        renderFScoreCell(i, score);
+        if (fscoreEnabled) applyFilters();
+      });
+
+      // Async: Market Cap (only fetch if filter is active)
+      if (mcapEnabled) {
+        fetchMcap(s.ticker).then(mcapM => {
+          tr.dataset.mcap = mcapM !== null ? mcapM : '';
+          renderMcapCell(i, mcapM);
+          applyFilters();
+        });
+      }
+    });
+
+    document.getElementById('rsl-table').style.display = 'table';
+
+    // ── Skipped stocks ────────────────────────────────────────────────────
+    if (skipped.length > 0) {
+      document.getElementById('skip-section').style.display = 'block';
+      document.getElementById('skip-count').textContent    = skipped.length;
+      document.getElementById('skip-count-2').textContent  = skipped.length;
+      document.getElementById('stat-attempted').textContent = data.total_attempted || '?';
+      document.getElementById('stat-loaded').textContent    = data.stocks_screened;
+
+      // Pills
+      const pillsEl = document.getElementById('skip-pills');
+      pillsEl.innerHTML = '';
+      [
+        { label:'Insufficient History', count: skipped.filter(s => s.days_available > 0).length,           color:'rgba(240,192,64,0.12)',  border:'rgba(240,192,64,0.3)',  text:'#f0c040' },
+        { label:'Not Found on Yahoo',   count: skipped.filter(s => s.reason.includes('Not found')).length,  color:'rgba(255,68,85,0.08)',   border:'rgba(255,68,85,0.25)',  text:'#ff4455' },
+        { label:'No Price Data',        count: skipped.filter(s => s.reason.includes('No price')).length,   color:'rgba(100,130,160,0.1)',  border:'rgba(100,130,160,0.25)',text:'#7a9bb0' },
+        { label:'Other Errors',         count: skipped.filter(s => s.reason.startsWith('Error:')).length,   color:'rgba(100,130,160,0.1)',  border:'rgba(100,130,160,0.25)',text:'#7a9bb0' },
+      ].forEach(p => {
+        if (!p.count) return;
+        const span = document.createElement('span');
+        span.style.cssText = `font-family:'IBM Plex Mono',monospace;font-size:11px;padding:5px 12px;background:${p.color};border:1px solid ${p.border};color:${p.text};white-space:nowrap;`;
+        span.textContent = `${p.label}: ${p.count}`;
+        pillsEl.appendChild(span);
+      });
+
+      // Skip table rows
+      const skipTbody = document.getElementById('skip-tbody');
+      skipTbody.innerHTML = '';
+      skipped.forEach((s, i) => {
+        const isShort = s.days_available > 0;
+        const reasonColor = isShort ? '#f0c040' : (s.reason.startsWith('Error:') ? '#7a9bb0' : '#ff4455');
+        const pct = isShort ? Math.round((s.days_available / 130) * 100) : 0;
+        const daysCell = isShort
+          ? `<div style="display:flex;align-items:center;gap:8px;justify-content:center;"><span style="color:#aabbcc;">${s.days_available}</span><div style="width:50px;height:3px;background:var(--border2);border-radius:2px;overflow:hidden;"><div style="width:${pct}%;height:100%;background:var(--gold);border-radius:2px;"></div></div></div>`
+          : `<span style="color:var(--muted);">—</span>`;
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid var(--border)';
+        tr.innerHTML = `
+          <td style="padding:10px 14px; color:var(--muted); font-size:11px;">${i+1}</td>
+          <td style="padding:10px 14px; color:#ddeeff;">${escHtml(s.name)}</td>
+          <td style="padding:10px 14px; color:var(--muted);">${escHtml(s.ticker)}</td>
+          <td style="padding:10px 14px; text-align:center;">${daysCell}</td>
+          <td style="padding:10px 14px; color:${reasonColor}; font-size:12px;">${escHtml(s.reason)}</td>
+          <td id="skip-rank-cell-${i}" class="skip-rank-col" style="display:none; padding:10px 14px; text-align:center;">
+            <span class="mcap-loading">—</span>
+          </td>
+        `;
+        skipTbody.appendChild(tr);
+      });
+    }
+  }
+
+  // ── Utility ────────────────────────────────────────────────────────────────
   async function loadData() {
     try {
       const res = await fetch('screener_data.json?_=' + Date.now());
@@ -1189,290 +1033,18 @@
     }
   }
 
-  // ── Approximate Piotroski F-Score from Yahoo Finance fields ───────────────
-  // screener_data.json doesn't include fundamentals — we fetch them on demand
-  // using a lightweight approach: store a per-ticker cache in memory
-  const fscoreCache = {};
-
-  async function fetchFScore(ticker) {
-    if (fscoreCache[ticker] !== undefined) return fscoreCache[ticker];
-
-    try {
-      // yfinance exposes fundamentals via the modules endpoint (CORS-friendly via a proxy)
-      // Since we're on GitHub Pages we can only call Yahoo Finance directly.
-      // We use the v10/finance/quoteSummary endpoint which is publicly accessible.
-      const url = `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${encodeURIComponent(ticker)}?modules=defaultKeyStatistics,financialData,incomeStatementHistory,cashflowStatementHistory,balanceSheetHistory`;
-      const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
-      if (!res.ok) { fscoreCache[ticker] = null; return null; }
-      const json = await res.json();
-      const result = json?.quoteSummary?.result?.[0];
-      if (!result) { fscoreCache[ticker] = null; return null; }
-
-      const fd  = result.financialData    || {};
-      const ks  = result.defaultKeyStatistics || {};
-      const is0 = result.incomeStatementHistory?.incomeStatementHistory?.[0] || {};
-      const is1 = result.incomeStatementHistory?.incomeStatementHistory?.[1] || {};
-      const cf0 = result.cashflowStatementHistory?.cashflowStatementHistory?.[0] || {};
-      const bs0 = result.balanceSheetHistory?.balanceSheetHistory?.[0] || {};
-      const bs1 = result.balanceSheetHistory?.balanceSheetHistory?.[1] || {};
-
-      const v = x => (x && x.raw !== undefined) ? x.raw : (typeof x === 'number' ? x : null);
-
-      // ── 9 Criteria ──────────────────────────────────────────────────────
-      let score = 0;
-      let scored = 0;
-
-      // F1: ROA > 0
-      const totalAssets0 = v(bs0.totalAssets);
-      const netIncome0   = v(is0.netIncome);
-      if (totalAssets0 && netIncome0 !== null) {
-        scored++;
-        if (netIncome0 / totalAssets0 > 0) score++;
-      }
-
-      // F2: Operating Cash Flow > 0
-      const ocf0 = v(cf0.totalCashFromOperatingActivities);
-      if (ocf0 !== null) { scored++; if (ocf0 > 0) score++; }
-
-      // F3: Increasing ROA (ROA this year > last year)
-      const totalAssets1 = v(bs1.totalAssets);
-      const netIncome1   = v(is1.netIncome);
-      if (totalAssets0 && totalAssets1 && netIncome0 !== null && netIncome1 !== null) {
-        scored++;
-        const roa0 = netIncome0 / totalAssets0;
-        const roa1 = netIncome1 / totalAssets1;
-        if (roa0 > roa1) score++;
-      }
-
-      // F4: Cash Flow > Net Income (accrual)
-      if (ocf0 !== null && netIncome0 !== null) {
-        scored++; if (ocf0 > netIncome0) score++;
-      }
-
-      // F5: Decreasing long-term debt ratio
-      const ltd0 = v(bs0.longTermDebt) || 0;
-      const ltd1 = v(bs1.longTermDebt) || 0;
-      const ta0  = v(bs0.totalAssets);
-      const ta1  = v(bs1.totalAssets);
-      if (ta0 && ta1) {
-        scored++;
-        if ((ltd0 / ta0) <= (ltd1 / ta1)) score++;
-      }
-
-      // F6: Increasing current ratio
-      const cr0 = v(fd.currentRatio);
-      // Yahoo doesn't give prior-year current ratio easily; use balance sheet
-      const ca0 = v(bs0.totalCurrentAssets);
-      const cl0 = v(bs0.totalCurrentLiabilities);
-      const ca1 = v(bs1.totalCurrentAssets);
-      const cl1 = v(bs1.totalCurrentLiabilities);
-      if (ca0 && cl0 && ca1 && cl1) {
-        scored++;
-        if ((ca0 / cl0) > (ca1 / cl1)) score++;
-      }
-
-      // F7: No new shares issued
-      const shares0 = v(ks.sharesOutstanding);
-      const shares1 = v(ks.floatShares); // approximation
-      // Use Yahoo dilutedEps trend as proxy if shares not available
-      const eps0 = v(is0.dilutedEps);
-      const eps1 = v(is1.dilutedEps);
-      if (shares0 && shares1) {
-        scored++; if (shares0 <= shares1 * 1.01) score++; // allow 1% tolerance
-      } else if (eps0 !== null && eps1 !== null && netIncome0 !== null && netIncome1 !== null && netIncome0 !== 0 && netIncome1 !== 0) {
-        // Proxy: if EPS grew faster than net income, fewer shares outstanding
-        scored++;
-        if (eps0 / eps1 >= netIncome0 / netIncome1 * 0.97) score++;
-      }
-
-      // F8: Increasing gross margin
-      const gp0 = v(is0.grossProfit);
-      const rev0 = v(is0.totalRevenue);
-      const gp1  = v(is1.grossProfit);
-      const rev1 = v(is1.totalRevenue);
-      if (gp0 && rev0 && gp1 && rev1) {
-        scored++;
-        if ((gp0 / rev0) > (gp1 / rev1)) score++;
-      }
-
-      // F9: Increasing asset turnover
-      if (rev0 && rev1 && ta0 && ta1) {
-        scored++;
-        if ((rev0 / ta0) > (rev1 / ta1)) score++;
-      }
-
-      // Require at least 5 criteria to be scoreable
-      if (scored < 5) { fscoreCache[ticker] = null; return null; }
-
-      fscoreCache[ticker] = score;
-      return score;
-
-    } catch (e) {
-      fscoreCache[ticker] = null;
-      return null;
-    }
-  }
-
-  // ── Render ─────────────────────────────────────────────────────────────────
-  function render(data) {
-    document.getElementById('loader').style.display = 'none';
-    renderedData = data;
-
-    document.getElementById('updated-time').textContent = 'Updated: ' + data.updated;
-    document.getElementById('stocks-screened').textContent =
-      data.stocks_screened + ' of ' + (data.total_attempted || '?') + ' stocks screened';
-
-    const top20   = data.top20 || [];
-    const skipped = data.skipped || [];
-
-    // Stats
-    document.getElementById('stat-total').textContent    = data.stocks_screened;
-    document.getElementById('stat-new').textContent      = top20.filter(s => s.prev_rank == null).length;
-    document.getElementById('stat-top-rsl').textContent  = top20.length ? top20[0].rsl.toFixed(3) : '—';
-    document.getElementById('stat-above').textContent    = top20.filter(s => s.rsl >= 1).length + '/20';
-
-    const maxRSL = Math.max(...top20.map(s => s.rsl));
-    const minRSL = Math.min(...top20.map(s => s.rsl));
-    const tbody  = document.getElementById('rsl-tbody');
-    tbody.innerHTML = '';
-
-    top20.forEach((s, i) => {
-      const rank     = i + 1;
-      const barPct   = ((s.rsl - minRSL) / (maxRSL - minRSL + 0.0001)) * 100;
-      const rslClass = s.rsl >= 1.15 ? 'rsl-high' : 'rsl-mid';
-
-      let prevHTML = '';
-      if (s.prev_rank == null) {
-        prevHTML = '<span class="rank-change rank-new">NEW</span>';
-      } else {
-        const diff = s.prev_rank - rank;
-        if (diff > 0)       prevHTML = `<span class="rank-change rank-up">▲ ${diff} &nbsp;#${s.prev_rank}</span>`;
-        else if (diff < 0)  prevHTML = `<span class="rank-change rank-down">▼ ${Math.abs(diff)} &nbsp;#${s.prev_rank}</span>`;
-        else                prevHTML = `<span class="rank-change rank-same">— &nbsp;#${s.prev_rank}</span>`;
-      }
-
-      const ticker = s.ticker.replace('.ST', '');
-      const tr     = document.createElement('tr');
-      tr.dataset.rank   = rank;
-      tr.dataset.fscore = ''; // will be filled async
-
-      tr.innerHTML = `
-        <td><div class="fscore-pass-indicator"></div><span class="rank-num">${String(rank).padStart(2,'0')}</span></td>
-        <td>
-          <span class="ticker-main">${escHtml(ticker)}</span>
-          <span class="company-name">${escHtml(s.name)}</span>
-        </td>
-        <td class="right">
-          <div class="rsl-bar-wrap">
-            <span class="rsl-value ${rslClass}">${s.rsl.toFixed(3)}</span>
-            <div class="rsl-bar-bg"><div class="rsl-bar-fill" style="width:${barPct.toFixed(1)}%"></div></div>
-          </div>
-        </td>
-        <td class="right price-val">${fmt(s.price)}</td>
-        <td class="right sma-val">${fmt(s.sma130)}</td>
-        <td class="center prev-rank">${prevHTML}</td>
-        <td class="center td-fscore" id="fscore-cell-${i}">
-          <div class="fscore-wrap">
-            <span class="fscore-num na" id="fscore-num-${i}">—</span>
-            <div class="fscore-dots" id="fscore-dots-${i}"></div>
-          </div>
-        </td>
-      `;
-      tbody.appendChild(tr);
-
-      // Fetch F-Score asynchronously
-      fetchFScore(s.ticker).then(score => {
-        tr.dataset.fscore = score !== null ? score : '';
-        renderFScoreCell(i, score);
-        if (fscoreEnabled) applyFScoreFilter();
-      });
-    });
-
-    document.getElementById('rsl-table').style.display = 'table';
-
-    // Skip log
-    if (skipped.length > 0) {
-      const sec = document.getElementById('skip-section');
-      sec.style.display = 'block';
-      document.getElementById('skip-count').textContent   = skipped.length;
-      document.getElementById('skip-count-2').textContent = skipped.length;
-      document.getElementById('stat-attempted').textContent = data.total_attempted || '?';
-      document.getElementById('stat-loaded').textContent    = data.stocks_screened;
-
-      const pillsEl = document.getElementById('skip-pills');
-      pillsEl.innerHTML = '';
-      const cats = [
-        { label: 'Insufficient History', count: skipped.filter(s => s.days_available > 0).length,          color: 'rgba(240,192,64,0.12)',   border: 'rgba(240,192,64,0.3)',   text: '#f0c040' },
-        { label: 'Not Found on Yahoo',   count: skipped.filter(s => s.reason.includes('Not found')).length, color: 'rgba(255,68,85,0.08)',    border: 'rgba(255,68,85,0.25)',   text: '#ff4455' },
-        { label: 'No Price Data',        count: skipped.filter(s => s.reason.includes('No price')).length,  color: 'rgba(100,130,160,0.1)',   border: 'rgba(100,130,160,0.25)', text: '#7a9bb0' },
-        { label: 'Other Errors',         count: skipped.filter(s => s.reason.startsWith('Error:')).length,  color: 'rgba(100,130,160,0.1)',   border: 'rgba(100,130,160,0.25)', text: '#7a9bb0' },
-      ];
-      cats.forEach(p => {
-        if (!p.count) return;
-        const span = document.createElement('span');
-        span.style.cssText = `font-family:'IBM Plex Mono',monospace; font-size:11px; padding:5px 12px; background:${p.color}; border:1px solid ${p.border}; color:${p.text}; white-space:nowrap;`;
-        span.textContent = `${p.label}: ${p.count}`;
-        pillsEl.appendChild(span);
-      });
-
-      const skipTbody = document.getElementById('skip-tbody');
-      skipTbody.innerHTML = '';
-      skipped.forEach((s, i) => {
-        const isShort = s.days_available > 0;
-        const reasonColor = isShort ? '#f0c040' : (s.reason.startsWith('Error:') ? '#7a9bb0' : '#ff4455');
-        const pct = isShort ? Math.round((s.days_available / 130) * 100) : 0;
-        const daysCell = isShort
-          ? `<div style="display:flex;align-items:center;gap:8px;justify-content:center;"><span style="color:#aabbcc;">${s.days_available}</span><div style="width:50px;height:3px;background:var(--border2);border-radius:2px;overflow:hidden;"><div style="width:${pct}%;height:100%;background:var(--gold);border-radius:2px;"></div></div></div>`
-          : `<span style="color:var(--muted);">—</span>`;
-        const tr = document.createElement('tr');
-        tr.style.borderBottom = '1px solid var(--border)';
-        tr.innerHTML = `
-          <td style="padding:10px 14px; color:var(--muted); font-size:11px;">${i + 1}</td>
-          <td style="padding:10px 14px; color:#ddeeff;">${escHtml(s.name)}</td>
-          <td style="padding:10px 14px; color:var(--muted);">${escHtml(s.ticker)}</td>
-          <td style="padding:10px 14px; text-align:center;">${daysCell}</td>
-          <td style="padding:10px 14px; color:${reasonColor}; font-size:12px;">${escHtml(s.reason)}</td>
-        `;
-        skipTbody.appendChild(tr);
-      });
-    }
-  }
-
-  // ── Render a single F-Score cell ──────────────────────────────────────────
-  function renderFScoreCell(i, score) {
-    const numEl  = document.getElementById(`fscore-num-${i}`);
-    const dotsEl = document.getElementById(`fscore-dots-${i}`);
-    if (!numEl || !dotsEl) return;
-
-    if (score === null) {
-      numEl.className = 'fscore-num na';
-      numEl.textContent = 'N/A';
-      dotsEl.innerHTML = '';
-      return;
-    }
-
-    const cls = score >= 8 ? 'high' : score >= 6 ? 'high' : score >= 3 ? 'mid' : 'low';
-    const dotCls = score >= 6 ? 'filled-high' : score >= 3 ? 'filled-mid' : 'filled-low';
-
-    numEl.className = `fscore-num ${cls}`;
-    numEl.textContent = score;
-
-    dotsEl.innerHTML = Array.from({ length: 9 }, (_, d) =>
-      `<div class="fscore-dot ${d < score ? dotCls : ''}"></div>`
-    ).join('');
-  }
-
   function toggleSkipTable() {
     const wrap = document.getElementById('skip-table-wrap');
     const btn  = document.getElementById('skip-toggle');
     const open = wrap.style.display === 'none';
     wrap.style.display = open ? 'block' : 'none';
     btn.textContent    = open ? 'Hide List ▴' : 'Show List ▾';
+    if (open && skipRankEnabled) computeSkipRanks();
   }
 
   function fmt(n) {
     if (n == null) return '—';
-    return n.toLocaleString('sv-SE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return n.toLocaleString('sv-SE', { minimumFractionDigits:2, maximumFractionDigits:2 });
   }
 
   function escHtml(s) {
