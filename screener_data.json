@@ -1,232 +1,232 @@
 {
-  "updated": "2026-03-04 13:16 UTC",
+  "updated": "2026-03-06 18:00 UTC",
   "period_days": 130,
   "total_attempted": 276,
   "stocks_screened": 275,
   "skipped_count": 1,
   "top25": [
     {
-      "name": "Lundin Mining",
-      "ticker": "LUMI.ST",
-      "price": 269.0,
-      "sma130": 177.16,
-      "rsl": 1.5184,
-      "rank": 1,
-      "prev_rank": 1
-    },
-    {
       "name": "Medivir",
       "ticker": "MVIR.ST",
-      "price": 1.32,
-      "sma130": 0.88,
-      "rsl": 1.5012,
+      "price": 1.5,
+      "sma130": 0.87,
+      "rsl": 1.7191,
+      "rank": 1,
+      "prev_rank": 2
+    },
+    {
+      "name": "Orrön Energy",
+      "ticker": "ORRON.ST",
+      "price": 7.66,
+      "sma130": 5.09,
+      "rsl": 1.5053,
       "rank": 2,
-      "prev_rank": null
+      "prev_rank": 5
     },
     {
       "name": "Ovzon",
       "ticker": "OVZON.ST",
-      "price": 57.6,
-      "sma130": 40.67,
-      "rsl": 1.4163,
+      "price": 61.3,
+      "sma130": 41.02,
+      "rsl": 1.4943,
       "rank": 3,
-      "prev_rank": 2
+      "prev_rank": 3
+    },
+    {
+      "name": "FM Mattsson",
+      "ticker": "FMM-B.ST",
+      "price": 88.6,
+      "sma130": 62.79,
+      "rsl": 1.4111,
+      "rank": 4,
+      "prev_rank": 6
+    },
+    {
+      "name": "Lundin Mining",
+      "ticker": "LUMI.ST",
+      "price": 248.8,
+      "sma130": 179.43,
+      "rsl": 1.3866,
+      "rank": 5,
+      "prev_rank": 1
+    },
+    {
+      "name": "Hexatronic",
+      "ticker": "HTRO.ST",
+      "price": 30.13,
+      "sma130": 21.86,
+      "rsl": 1.3784,
+      "rank": 6,
+      "prev_rank": 9
+    },
+    {
+      "name": "Cloetta",
+      "ticker": "CLA-B.ST",
+      "price": 53.1,
+      "sma130": 39.49,
+      "rsl": 1.3445,
+      "rank": 7,
+      "prev_rank": 10
+    },
+    {
+      "name": "Wise Group",
+      "ticker": "WISE.ST",
+      "price": 18.6,
+      "sma130": 13.87,
+      "rsl": 1.3414,
+      "rank": 8,
+      "prev_rank": 23
+    },
+    {
+      "name": "Boliden",
+      "ticker": "BOL.ST",
+      "price": 648.2,
+      "sma130": 484.69,
+      "rsl": 1.3374,
+      "rank": 9,
+      "prev_rank": 7
+    },
+    {
+      "name": "Catena Media",
+      "ticker": "CTM.ST",
+      "price": 2.62,
+      "sma130": 1.97,
+      "rsl": 1.33,
+      "rank": 10,
+      "prev_rank": null
+    },
+    {
+      "name": "Hanza",
+      "ticker": "HANZA.ST",
+      "price": 166.2,
+      "sma130": 125.52,
+      "rsl": 1.3241,
+      "rank": 11,
+      "prev_rank": 11
+    },
+    {
+      "name": "Inission",
+      "ticker": "INISS-B.ST",
+      "price": 58.8,
+      "sma130": 45.13,
+      "rsl": 1.303,
+      "rank": 12,
+      "prev_rank": 18
     },
     {
       "name": "Episurf Medical",
       "ticker": "EPIS-B.ST",
       "price": 0.05,
       "sma130": 0.04,
-      "rsl": 1.4022,
-      "rank": 4,
-      "prev_rank": null
-    },
-    {
-      "name": "Orrön Energy",
-      "ticker": "ORRON.ST",
-      "price": 6.95,
-      "sma130": 5.04,
-      "rsl": 1.379,
-      "rank": 5,
-      "prev_rank": null
-    },
-    {
-      "name": "FM Mattsson",
-      "ticker": "FMM-B.ST",
-      "price": 84.6,
-      "sma130": 62.34,
-      "rsl": 1.3571,
-      "rank": 6,
-      "prev_rank": 5
-    },
-    {
-      "name": "Boliden",
-      "ticker": "BOL.ST",
-      "price": 650.6,
-      "sma130": 479.58,
-      "rsl": 1.3566,
-      "rank": 7,
-      "prev_rank": 6
+      "rsl": 1.2963,
+      "rank": 13,
+      "prev_rank": 4
     },
     {
       "name": "International Petroleum",
       "ticker": "IPCO.ST",
-      "price": 227.0,
-      "sma130": 171.63,
-      "rsl": 1.3226,
-      "rank": 8,
-      "prev_rank": null
-    },
-    {
-      "name": "Hexatronic",
-      "ticker": "HTRO.ST",
-      "price": 28.4,
-      "sma130": 21.76,
-      "rsl": 1.305,
-      "rank": 9,
-      "prev_rank": null
-    },
-    {
-      "name": "Cloetta",
-      "ticker": "CLA-B.ST",
-      "price": 51.0,
-      "sma130": 39.19,
-      "rsl": 1.3015,
-      "rank": 10,
+      "price": 223.2,
+      "sma130": 172.31,
+      "rsl": 1.2953,
+      "rank": 14,
       "prev_rank": 8
     },
     {
-      "name": "Hanza",
-      "ticker": "HANZA.ST",
-      "price": 162.0,
-      "sma130": 124.65,
-      "rsl": 1.2997,
-      "rank": 11,
-      "prev_rank": null
+      "name": "Instalco",
+      "ticker": "INSTAL.ST",
+      "price": 33.54,
+      "sma130": 26.36,
+      "rsl": 1.2724,
+      "rank": 15,
+      "prev_rank": 17
     },
     {
-      "name": "Nokia",
-      "ticker": "NOKIA-SEK.ST",
-      "price": 72.42,
-      "sma130": 56.4,
-      "rsl": 1.284,
-      "rank": 12,
-      "prev_rank": null
+      "name": "Attendo",
+      "ticker": "ATT.ST",
+      "price": 102.8,
+      "sma130": 81.19,
+      "rsl": 1.2661,
+      "rank": 16,
+      "prev_rank": 15
     },
     {
       "name": "Midsona B",
       "ticker": "MSON-B.ST",
       "price": 11.15,
-      "sma130": 8.83,
-      "rsl": 1.2634,
-      "rank": 13,
-      "prev_rank": 10
-    },
-    {
-      "name": "Sandvik",
-      "ticker": "SAND.ST",
-      "price": 378.7,
-      "sma130": 299.97,
-      "rsl": 1.2625,
-      "rank": 14,
-      "prev_rank": 11
-    },
-    {
-      "name": "Attendo",
-      "ticker": "ATT.ST",
-      "price": 101.2,
-      "sma130": 80.65,
-      "rsl": 1.2548,
-      "rank": 15,
+      "sma130": 8.88,
+      "rsl": 1.2563,
+      "rank": 17,
       "prev_rank": 13
     },
     {
-      "name": "Berner Industrier",
-      "ticker": "BERNER-B.ST",
-      "price": 107.0,
-      "sma130": 85.68,
-      "rsl": 1.2489,
-      "rank": 16,
-      "prev_rank": 14
-    },
-    {
-      "name": "Instalco",
-      "ticker": "INSTAL.ST",
-      "price": 32.68,
-      "sma130": 26.23,
-      "rsl": 1.246,
-      "rank": 17,
-      "prev_rank": 15
-    },
-    {
-      "name": "Inission",
-      "ticker": "INISS-B.ST",
-      "price": 55.8,
-      "sma130": 44.82,
-      "rsl": 1.2449,
+      "name": "Nokia",
+      "ticker": "NOKIA-SEK.ST",
+      "price": 71.36,
+      "sma130": 56.9,
+      "rsl": 1.2542,
       "rank": 18,
-      "prev_rank": 16
+      "prev_rank": 12
     },
     {
-      "name": "Peab",
-      "ticker": "PEAB-B.ST",
-      "price": 102.5,
-      "sma130": 82.57,
-      "rsl": 1.2414,
+      "name": "Scandi Standard",
+      "ticker": "SCST.ST",
+      "price": 127.2,
+      "sma130": 101.45,
+      "rsl": 1.2539,
       "rank": 19,
-      "prev_rank": 17
+      "prev_rank": 21
     },
     {
       "name": "Eniro",
       "ticker": "ENRO.ST",
       "price": 0.5,
       "sma130": 0.4,
-      "rsl": 1.2299,
+      "rsl": 1.2473,
       "rank": 20,
-      "prev_rank": null
+      "prev_rank": 20
     },
     {
-      "name": "Scandi Standard",
-      "ticker": "SCST.ST",
-      "price": 124.0,
-      "sma130": 100.96,
-      "rsl": 1.2283,
+      "name": "Sandvik",
+      "ticker": "SAND.ST",
+      "price": 374.6,
+      "sma130": 302.07,
+      "rsl": 1.2401,
       "rank": 21,
+      "prev_rank": 14
+    },
+    {
+      "name": "Peab",
+      "ticker": "PEAB-B.ST",
+      "price": 102.6,
+      "sma130": 83.03,
+      "rsl": 1.2357,
+      "rank": 22,
       "prev_rank": 19
     },
     {
-      "name": "Meren Energy",
-      "ticker": "MER.ST",
-      "price": 15.0,
-      "sma130": 12.46,
-      "rsl": 1.2031,
-      "rank": 22,
-      "prev_rank": null
-    },
-    {
-      "name": "Wise Group",
-      "ticker": "WISE.ST",
-      "price": 16.5,
-      "sma130": 13.81,
-      "rsl": 1.1951,
+      "name": "Better Collective",
+      "ticker": "BETCO.ST",
+      "price": 143.2,
+      "sma130": 116.18,
+      "rsl": 1.2326,
       "rank": 23,
       "prev_rank": null
     },
     {
       "name": "Telia Company",
       "ticker": "TELIA.ST",
-      "price": 45.31,
-      "sma130": 37.97,
-      "rsl": 1.1934,
+      "price": 46.27,
+      "sma130": 38.14,
+      "rsl": 1.213,
       "rank": 24,
-      "prev_rank": null
+      "prev_rank": 24
     },
     {
-      "name": "Infrea",
-      "ticker": "INFREA.ST",
-      "price": 16.5,
-      "sma130": 13.85,
-      "rsl": 1.1909,
+      "name": "Coor Service Management",
+      "ticker": "COOR.ST",
+      "price": 59.25,
+      "sma130": 49.6,
+      "rsl": 1.1945,
       "rank": 25,
       "prev_rank": null
     }
