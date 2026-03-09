@@ -584,11 +584,27 @@ let klimaChart    = null;
 async function fetchHistory(ticker) {
   const end   = Math.floor(Date.now() / 1000);
   const start = end - (10 * 365 + 30) * 86400; // 10 years back for full history
-  const url   = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}` +
-                `?interval=1d&period1=${start}&period2=${end}&includePrePost=false`;
-  const res   = await fetch(url, { headers:{ Accept:'application/json' } });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const json  = await res.json();
+  const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}` +
+                   `?interval=1d&period1=${start}&period2=${end}&includePrePost=false`;
+
+  // Try multiple CORS proxies in sequence
+  const proxies = [
+    u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+    u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+    u => `https://thingproxy.freeboard.io/fetch/${u}`,
+  ];
+
+  let json = null;
+  for (const proxy of proxies) {
+    try {
+      const res = await fetch(proxy(yahooUrl), { headers:{ Accept:'application/json' } });
+      if (!res.ok) continue;
+      const text = await res.text();
+      json = JSON.parse(text);
+      if (json?.chart?.result?.[0]) break;
+    } catch(e) { continue; }
+  }
+  if (!json) throw new Error('All proxies failed');
   const result = json?.chart?.result?.[0];
   if (!result) throw new Error('No result');
 
