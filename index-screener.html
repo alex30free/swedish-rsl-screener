@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Global Index RSL Screener — Levy Momentum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg:      #080c10;
+      --surface: #0d1318;
+      --surface2:#101820;
+      --border:  #1c2830;
+      --border2: #253340;
+      --text:    #c8d8e8;
+      --muted:   #4a6070;
+      --muted2:  #6a8090;
+      --accent:  #00e5a0;
+      --accent2: #0099ff;
+      --gold:    #f0c040;
+      --red:     #ff4455;
+      --orange:  #ff8844;
+      --white:   #f0f4f8;
+      --sweden:  #00e5a0;
+      --nordic:  #60cfff;
+      --europe:  #a78bfa;
+      --us:      #f0c040;
+      --asia:    #ff9966;
+
+      /* Phase colors */
+      --phase-bull:    rgba(0,229,160,0.07);
+      --phase-recover: rgba(0,229,160,0.04);
+      --phase-consol:  rgba(255,136,68,0.06);
+      --phase-bear:    rgba(255,68,85,0.07);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'IBM Plex Sans', sans-serif; font-weight: 300;
+      min-height: 100vh; overflow-x: hidden;
+    }
+    body::before {
+      content:''; position:fixed; inset:0;
+      background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.05) 2px,rgba(0,0,0,0.05) 4px);
+      pointer-events:none; z-index:9999;
+    }
+    body::after {
+      content:''; position:fixed; inset:0;
+      background-image:
+        linear-gradient(rgba(0,229,160,0.012) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,229,160,0.012) 1px,transparent 1px);
+      background-size:48px 48px; pointer-events:none; z-index:0;
+    }
+    .glow { position:fixed; pointer-events:none; z-index:0; border-radius:50%; }
+    .glow-1 { top:-160px;left:-160px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,153,255,0.05)0%,transparent 70%); }
+    .glow-2 { bottom:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,229,160,0.04)0%,transparent 70%); }
+
+    .container { max-width:1100px; margin:0 auto; padding:0 24px 100px; position:relative; z-index:1; }
+
+    /* ── HEADER ── */
+    header { padding:48px 0 32px; border-bottom:1px solid var(--border); margin-bottom:36px; animation:fadeDown .6s ease both; }
+    .header-top { display:flex; align-items:flex-start; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+    .logo-area { display:flex; flex-direction:column; gap:8px; }
+    .label-tag {
+      font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:500;
+      letter-spacing:.25em; color:var(--accent2); text-transform:uppercase;
+      background:rgba(0,153,255,.08); border:1px solid rgba(0,153,255,.2);
+      padding:4px 10px; display:inline-block;
+    }
+    h1 { font-family:'IBM Plex Mono',monospace; font-size:clamp(22px,4vw,36px); font-weight:600; color:var(--white); line-height:1.1; letter-spacing:-.02em; }
+    h1 span { color:var(--accent2); }
+    .subtitle { font-size:13px; color:var(--muted); font-family:'IBM Plex Mono',monospace; margin-top:6px; }
+    .meta-box { text-align:right; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); line-height:1.9; }
+    .meta-updated { color:var(--accent2); font-size:12px; }
+    .pulse { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--accent2); margin-right:6px; animation:pulse 2s ease infinite; }
+
+    /* ── NAV ── */
+    .nav-bar { display:flex; gap:8px; margin-bottom:28px; flex-wrap:wrap; animation:fadeDown .6s .05s ease both; }
+    .nav-btn {
+      font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500;
+      letter-spacing:.12em; text-transform:uppercase;
+      border:1px solid var(--border2); background:transparent;
+      color:var(--muted2); padding:9px 18px; cursor:pointer; text-decoration:none;
+      display:inline-flex; align-items:center; gap:8px;
+      transition:border-color .2s, color .2s, background .2s;
+    }
+    .nav-btn:hover  { border-color:var(--accent2); color:var(--accent2); }
+    .nav-btn.active { border-color:var(--accent2); color:var(--bg); background:var(--accent2); }
+    .nav-btn .dot   { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+
+    /* ── REGION FILTER ── */
+    .region-bar { display:flex; gap:6px; margin-bottom:28px; flex-wrap:wrap; animation:fadeDown .6s .1s ease both; }
+    .region-btn {
+      font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:500;
+      letter-spacing:.15em; text-transform:uppercase; padding:6px 14px;
+      border:1px solid var(--border2); background:transparent; color:var(--muted);
+      cursor:pointer; transition:border-color .2s, color .2s, background .2s;
+    }
+    .region-btn:hover { border-color:var(--muted2); color:var(--text); }
+    .active-all    { border-color:var(--accent)  !important; color:var(--bg) !important; background:var(--accent)  !important; }
+    .active-se     { border-color:var(--sweden)  !important; color:var(--bg) !important; background:var(--sweden)  !important; }
+    .active-nordic { border-color:var(--nordic)  !important; color:var(--bg) !important; background:var(--nordic)  !important; }
+    .active-europe { border-color:var(--europe)  !important; color:var(--bg) !important; background:var(--europe)  !important; }
+    .active-us     { border-color:var(--us)      !important; color:var(--bg) !important; background:var(--us)      !important; }
+    .active-asia   { border-color:var(--asia)    !important; color:var(--bg) !important; background:var(--asia)    !important; }
+
+    /* ── STATS ── */
+    .stats-row { display:flex; gap:16px; margin-bottom:32px; flex-wrap:wrap; animation:fadeDown .6s .15s ease both; }
+    .stat-card { background:var(--surface); border:1px solid var(--border); padding:14px 22px; flex:1; min-width:120px; }
+    .stat-num  { font-family:'IBM Plex Mono',monospace; font-size:24px; font-weight:600; color:var(--white); }
+    .stat-num.blue  { color:var(--accent2); }
+    .stat-num.green { color:var(--accent); }
+    .stat-desc { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.15em; margin-top:3px; }
+
+    /* ── AKTIENKLIMA CHART SECTION ── */
+    .klima-section { margin-bottom:44px; animation:fadeUp .6s .18s ease both; }
+    .section-head  { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:12px; }
+    .section-title { font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--muted2); }
+
+    .klima-controls {
+      background:var(--surface); border:1px solid var(--border2);
+      padding:16px 20px; margin-bottom:12px;
+      display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    }
+    .ctrl-group { display:flex; align-items:center; gap:10px; }
+    .ctrl-label { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.12em; white-space:nowrap; }
+
+    /* Range slider */
+    .slider-wrap { display:flex; align-items:center; gap:10px; }
+    input[type=range] {
+      -webkit-appearance:none; width:120px; height:3px;
+      background:var(--border2); border-radius:2px; outline:none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance:none; width:14px; height:14px;
+      border-radius:50%; background:var(--accent2); cursor:pointer;
+      border:2px solid var(--bg);
+    }
+    .slider-val { font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent2); min-width:44px; }
+
+    /* Period buttons */
+    .period-btns { display:flex; gap:4px; }
+    .period-btn {
+      font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:500;
+      letter-spacing:.1em; padding:5px 10px; border:1px solid var(--border2);
+      background:transparent; color:var(--muted); cursor:pointer;
+      transition:border-color .15s, color .15s, background .15s;
+    }
+    .period-btn:hover  { border-color:var(--muted2); color:var(--text); }
+    .period-btn.active { border-color:var(--accent2); color:var(--bg); background:var(--accent2); }
+
+    /* Index selector */
+    .idx-select-wrap { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .idx-pill {
+      font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:500;
+      letter-spacing:.1em; text-transform:uppercase; padding:3px 9px;
+      border:1px solid var(--border2); background:transparent; color:var(--muted);
+      cursor:pointer; transition:all .15s; white-space:nowrap;
+    }
+    .idx-pill:hover   { border-color:var(--muted2); color:var(--text); }
+    .idx-pill.on      { color:var(--bg); }
+    .idx-pill.region-se     { border-color:var(--sweden);  }
+    .idx-pill.region-se.on  { background:var(--sweden);  border-color:var(--sweden);  }
+    .idx-pill.region-nordic { border-color:var(--nordic);  }
+    .idx-pill.region-nordic.on { background:var(--nordic); border-color:var(--nordic); }
+    .idx-pill.region-europe { border-color:var(--europe);  }
+    .idx-pill.region-europe.on { background:var(--europe); border-color:var(--europe); }
+    .idx-pill.region-us     { border-color:var(--us);      }
+    .idx-pill.region-us.on  { background:var(--us);     border-color:var(--us);     }
+    .idx-pill.region-asia   { border-color:var(--asia);    }
+    .idx-pill.region-asia.on{ background:var(--asia);   border-color:var(--asia);   }
+
+    .chart-wrap { background:var(--surface); border:1px solid var(--border2); padding:24px 20px 16px; position:relative; }
+
+    /* Phase legend */
+    .phase-legend {
+      display:flex; gap:16px; flex-wrap:wrap; margin-top:12px;
+      font-family:'IBM Plex Mono',monospace; font-size:10px;
+    }
+    .phase-item { display:flex; align-items:center; gap:6px; color:var(--muted); }
+    .phase-dot  { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+
+    /* Average line toggle */
+    .avg-toggle {
+      display:flex; align-items:center; gap:8px; cursor:pointer;
+      font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted2);
+    }
+    .toggle-box {
+      width:28px; height:14px; border-radius:7px; border:1px solid var(--border2);
+      background:var(--border2); position:relative; transition:background .2s;
+      flex-shrink:0;
+    }
+    .toggle-box.on { background:rgba(0,229,160,.3); border-color:var(--accent); }
+    .toggle-box::after {
+      content:''; position:absolute; top:2px; left:2px;
+      width:8px; height:8px; border-radius:50%; background:var(--muted);
+      transition:transform .2s, background .2s;
+    }
+    .toggle-box.on::after { transform:translateX(14px); background:var(--accent); }
+
+    /* ── TABLE ── */
+    .table-wrap { overflow-x:auto; animation:fadeUp .6s .22s ease both; }
+    table { width:100%; border-collapse:collapse; font-family:'IBM Plex Mono',monospace; font-size:13px; }
+    thead tr { border-bottom:1px solid var(--border2); }
+    thead th { padding:10px 14px; text-align:left; font-size:10px; font-weight:500; letter-spacing:.15em; color:var(--muted); text-transform:uppercase; white-space:nowrap; }
+    thead th.right  { text-align:right; }
+    thead th.center { text-align:center; }
+    tbody tr { border-bottom:1px solid var(--border); transition:background .15s; cursor:default; }
+    tbody tr.hidden-row { display:none; }
+    tbody tr:hover { background:rgba(0,153,255,0.03); }
+    tbody td { padding:12px 14px; white-space:nowrap; }
+    tbody td.right  { text-align:right; }
+    tbody td.center { text-align:center; }
+
+    .rank-num { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--border2); min-width:28px; display:inline-flex; align-items:center; justify-content:center; }
+    .rank-1 { color:var(--accent2)              !important; }
+    .rank-2 { color:rgba(0,153,255,.55)          !important; }
+    .rank-3 { color:rgba(0,153,255,.35)          !important; }
+
+    .region-badge {
+      font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:500;
+      letter-spacing:.12em; text-transform:uppercase;
+      padding:2px 7px; border:1px solid; display:inline-block; white-space:nowrap;
+    }
+    .badge-se     { color:var(--sweden); border-color:rgba(0,229,160,.25);   background:rgba(0,229,160,.06); }
+    .badge-nordic { color:var(--nordic); border-color:rgba(96,207,255,.25);  background:rgba(96,207,255,.06); }
+    .badge-europe { color:var(--europe); border-color:rgba(167,139,250,.25); background:rgba(167,139,250,.06); }
+    .badge-us     { color:var(--us);     border-color:rgba(240,192,64,.25);  background:rgba(240,192,64,.06); }
+    .badge-asia   { color:var(--asia);   border-color:rgba(255,153,102,.25); background:rgba(255,153,102,.06); }
+
+    .index-main { font-family:'IBM Plex Mono',monospace; font-weight:500; color:var(--white); font-size:13px; display:block; }
+    .index-sub  { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); margin-top:2px; display:block; }
+
+    .rsl-bar-wrap { display:flex; align-items:center; gap:10px; justify-content:flex-end; }
+    .rsl-value    { font-weight:600; min-width:56px; text-align:right; }
+    .rsl-bar-bg   { width:70px; height:4px; background:var(--border2); border-radius:2px; overflow:hidden; }
+    .rsl-bar-fill { height:100%; border-radius:2px; transition:width .6s ease; }
+    .rsl-fill-pos { background:linear-gradient(90deg,#004499,var(--accent2)); }
+    .rsl-fill-neg { background:linear-gradient(90deg,#880022,var(--red)); }
+    .rsl-high  { color:var(--accent); }
+    .rsl-above { color:var(--accent2); }
+    .rsl-below { color:var(--red); }
+
+    .price-val { color:var(--text); text-align:right; }
+    .sma-val   { color:var(--muted); text-align:right; font-size:12px; }
+    .chg-pos   { color:var(--accent); }
+    .chg-neg   { color:var(--red); }
+    .chg-flat  { color:var(--muted); }
+
+    /* Phase badge in table */
+    .phase-badge {
+      font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:500;
+      letter-spacing:.1em; text-transform:uppercase; padding:2px 7px; border:1px solid;
+    }
+    .phase-hausse   { color:#00e5a0; border-color:rgba(0,229,160,.3);  background:rgba(0,229,160,.07); }
+    .phase-erholung { color:#60cfff; border-color:rgba(96,207,255,.3); background:rgba(96,207,255,.07); }
+    .phase-konsol   { color:#ff8844; border-color:rgba(255,136,68,.3); background:rgba(255,136,68,.07); }
+    .phase-baisse   { color:#ff4455; border-color:rgba(255,68,85,.3);  background:rgba(255,68,85,.07); }
+
+    /* ── LOADER ── */
+    .loader { display:flex; align-items:center; justify-content:center; min-height:300px; gap:14px; font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--muted); flex-direction:column; }
+    .spinner { width:20px; height:20px; border:2px solid var(--border2); border-top-color:var(--accent2); border-radius:50%; animation:spin .8s linear infinite; }
+    .loader-sub { font-size:11px; color:var(--muted); margin-top:4px; font-family:'IBM Plex Mono',monospace; }
+
+    /* ── INFO ── */
+    .info-section { background:var(--surface); border:1px solid var(--border2); border-left:3px solid var(--accent2); padding:32px 40px; margin-top:52px; }
+    .info-section h2 { font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500; letter-spacing:.2em; color:var(--accent2); text-transform:uppercase; margin-bottom:20px; }
+    .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px 40px; }
+    @media(max-width:600px){.info-grid{grid-template-columns:1fr;}}
+    .info-item .lbl { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.15em; margin-bottom:5px; }
+    .info-item p { font-size:13px; color:var(--text); line-height:1.6; }
+    .formula { font-family:'IBM Plex Mono',monospace; font-size:14px; color:var(--gold); background:rgba(240,192,64,.06); border:1px solid rgba(240,192,64,.15); padding:10px 16px; margin-top:20px; display:inline-block; }
+
+    /* ── PHASE BOX ── */
+    .phase-box { background:var(--surface); border:1px solid var(--border2); border-left:3px solid var(--gold); padding:28px 36px; margin-top:28px; }
+    .phase-box h2 { font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500; letter-spacing:.2em; color:var(--gold); text-transform:uppercase; margin-bottom:20px; }
+    .phase-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    @media(max-width:600px){.phase-grid{grid-template-columns:1fr;}}
+    .phase-card { padding:16px 20px; border:1px solid; }
+    .phase-card h3 { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.15em; text-transform:uppercase; margin-bottom:6px; }
+    .phase-card p  { font-size:12px; color:var(--muted); line-height:1.65; }
+    .pc-hausse   { border-color:rgba(0,229,160,.2);  background:rgba(0,229,160,.03); }
+    .pc-hausse h3{ color:#00e5a0; }
+    .pc-erholung { border-color:rgba(96,207,255,.2); background:rgba(96,207,255,.03); }
+    .pc-erholung h3{ color:#60cfff; }
+    .pc-konsol   { border-color:rgba(255,136,68,.2); background:rgba(255,136,68,.03); }
+    .pc-konsol h3{ color:#ff8844; }
+    .pc-baisse   { border-color:rgba(255,68,85,.2);  background:rgba(255,68,85,.03); }
+    .pc-baisse h3{ color:#ff4455; }
+
+    footer { margin-top:60px; padding-top:24px; border-top:1px solid var(--border); font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); line-height:1.9; }
+    footer a { color:var(--muted); }
+
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-12px);}to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(16px);} to{opacity:1;transform:translateY(0);} }
+    @keyframes spin     { to{transform:rotate(360deg);} }
+    @keyframes pulse    { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,153,255,.4);}50%{opacity:.7;box-shadow:0 0 0 5px rgba(0,153,255,0);} }
+    @keyframes rowIn    { from{opacity:0;transform:translateX(-8px);}to{opacity:1;transform:translateX(0);} }
+
+    tbody tr { animation:rowIn .4s ease both; }
+    tbody tr:nth-child(1) {animation-delay:.12s;} tbody tr:nth-child(2) {animation-delay:.15s;}
+    tbody tr:nth-child(3) {animation-delay:.17s;} tbody tr:nth-child(4) {animation-delay:.19s;}
+    tbody tr:nth-child(5) {animation-delay:.21s;} tbody tr:nth-child(6) {animation-delay:.23s;}
+    tbody tr:nth-child(7) {animation-delay:.25s;} tbody tr:nth-child(8) {animation-delay:.27s;}
+    tbody tr:nth-child(9) {animation-delay:.29s;} tbody tr:nth-child(10){animation-delay:.31s;}
+    tbody tr:nth-child(11){animation-delay:.33s;} tbody tr:nth-child(12){animation-delay:.35s;}
+    tbody tr:nth-child(13){animation-delay:.37s;} tbody tr:nth-child(14){animation-delay:.39s;}
+    tbody tr:nth-child(15){animation-delay:.41s;} tbody tr:nth-child(16){animation-delay:.43s;}
+    tbody tr:nth-child(17){animation-delay:.45s;} tbody tr:nth-child(18){animation-delay:.47s;}
+    tbody tr:nth-child(19){animation-delay:.49s;} tbody tr:nth-child(20){animation-delay:.51s;}
+    tbody tr:nth-child(21){animation-delay:.53s;} tbody tr:nth-child(22){animation-delay:.55s;}
+    tbody tr:nth-child(23){animation-delay:.57s;}
+
+    @media(max-width:620px){.stats-row{display:grid;grid-template-columns:1fr 1fr;}}
+  </style>
+</head>
+<body>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-top">
+      <div class="logo-area">
+        <div class="label-tag">Market Climate Screener</div>
+        <h1>Global <span>Index</span> RSL Rankings</h1>
+        <div class="subtitle">Levy RSL · 130-day SMA · 38-day trend · 23 indices · 5 regions · Live</div>
+      </div>
+      <div class="meta-box">
+        <div><span class="pulse"></span><span class="meta-updated" id="updated-time">Fetching live…</span></div>
+        <div>23 indices · SE · Nordic · Europe · US · Asia-Pacific</div>
+        <div>Period: 130 days (26 weeks)</div>
+        <div>Source: Yahoo Finance (live)</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <div class="nav-bar">
+    <a href="index.html" class="nav-btn">
+      <span class="dot" style="background:var(--accent)"></span>
+      ← RSL Stock Screener
+    </a>
+    <a href="index-screener.html" class="nav-btn active">
+      <span class="dot" style="background:var(--accent2)"></span>
+      Global Index RSL
+    </a>
+  </div>
+
+  <!-- REGION FILTER -->
+  <div class="region-bar">
+    <button class="region-btn" id="rbtn-all"    onclick="filterRegion('all')">All Regions (23)</button>
+    <button class="region-btn" id="rbtn-se"     onclick="filterRegion('se')">🇸🇪 Sweden (4)</button>
+    <button class="region-btn" id="rbtn-nordic" onclick="filterRegion('nordic')">🧭 Nordic (3)</button>
+    <button class="region-btn" id="rbtn-europe" onclick="filterRegion('europe')">🇪🇺 Europe (4)</button>
+    <button class="region-btn" id="rbtn-us"     onclick="filterRegion('us')">🇺🇸 US (3)</button>
+    <button class="region-btn" id="rbtn-asia"   onclick="filterRegion('asia')">🌏 Asia-Pacific (9)</button>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num blue"  id="stat-total">23</div><div class="stat-desc">Indices</div></div>
+    <div class="stat-card"><div class="stat-num green" id="stat-above">—</div><div class="stat-desc">RSL Above 1.0</div></div>
+    <div class="stat-card"><div class="stat-num"       id="stat-top">—</div><div class="stat-desc">Top RSL Score</div></div>
+    <div class="stat-card"><div class="stat-num"       id="stat-leader" style="font-size:15px;line-height:1.5;padding-top:4px;">—</div><div class="stat-desc">Strongest Market</div></div>
+    <div class="stat-card"><div class="stat-num"       id="stat-phase" style="font-size:13px;line-height:1.5;padding-top:6px;">—</div><div class="stat-desc">Global Phase</div></div>
+  </div>
+
+  <!-- LOADER -->
+  <div class="loader" id="loader">
+    <div class="spinner"></div>
+    <div>
+      <div>Fetching 5 years of index data…</div>
+      <div class="loader-sub" id="loader-progress">Starting — 0 / 23</div>
+    </div>
+  </div>
+
+  <!-- ── AKTIENKLIMA CHART ── -->
+  <div class="klima-section" id="klima-section" style="display:none">
+    <div class="section-head">
+      <div class="section-title">Market Climate — RSL History (price ÷ SMA-130, rebased to 1.0)</div>
+    </div>
+
+    <!-- Controls -->
+    <div class="klima-controls">
+      <!-- Period -->
+      <div class="ctrl-group">
+        <div class="ctrl-label">Period</div>
+        <div class="period-btns">
+          <button class="period-btn" onclick="setPeriod(1)">1Y</button>
+          <button class="period-btn active" onclick="setPeriod(5)">5Y</button>
+          <button class="period-btn" onclick="setPeriod(10)">10Y</button>
+        </div>
+      </div>
+
+      <!-- SMA Slider -->
+      <div class="ctrl-group">
+        <div class="ctrl-label">SMA Overlay</div>
+        <div class="slider-wrap">
+          <input type="range" id="sma-slider" min="5" max="100" value="38" oninput="onSliderChange(this.value)"/>
+          <span class="slider-val" id="sma-label">SMA-38</span>
+        </div>
+      </div>
+
+      <!-- Average line toggle -->
+      <div class="ctrl-group">
+        <div class="avg-toggle" onclick="toggleAvg()">
+          <div class="toggle-box on" id="avg-toggle-box"></div>
+          <span>Show equal-weight average</span>
+        </div>
+      </div>
+
+      <!-- Individual lines toggle -->
+      <div class="ctrl-group">
+        <div class="avg-toggle" onclick="toggleLines()">
+          <div class="toggle-box" id="lines-toggle-box"></div>
+          <span>Show individual indices</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Index pills selector (only visible when individual lines are on) -->
+    <div id="pill-selector" style="display:none; background:var(--surface); border:1px solid var(--border2); border-top:none; padding:12px 20px; flex-wrap:wrap; gap:6px;">
+      <!-- filled by JS -->
+    </div>
+
+    <div class="chart-wrap">
+      <canvas id="klima-chart" height="340"></canvas>
+    </div>
+
+    <!-- Phase legend -->
+    <div class="phase-legend">
+      <div class="phase-item"><div class="phase-dot" style="background:#00e5a0"></div>Bull Phase — RSL rising above 1.0</div>
+      <div class="phase-item"><div class="phase-dot" style="background:#60cfff"></div>Recovery — RSL rising below 1.0</div>
+      <div class="phase-item"><div class="phase-dot" style="background:#ff8844"></div>Consolidation — RSL falling above 1.0</div>
+      <div class="phase-item"><div class="phase-dot" style="background:#ff4455"></div>Bear Phase — RSL falling below 1.0</div>
+      <div class="phase-item"><div class="phase-dot" style="background:rgba(255,255,255,0.3); border:1px dashed rgba(255,255,255,0.2)"></div>SMA trend line</div>
+    </div>
+  </div>
+
+  <!-- ── RSL TABLE ── -->
+  <div id="table-container" style="display:none">
+    <div class="section-head" style="margin-bottom:16px;">
+      <div class="section-title">RSL Ranking — All 23 Indices · Sorted by momentum</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);">Sorted by RSL score · Live</div>
+    </div>
+    <div class="table-wrap">
+      <table id="index-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Index</th>
+            <th class="center">Region</th>
+            <th class="right">RSL Score</th>
+            <th class="right">Price</th>
+            <th class="right">SMA-130</th>
+            <th class="right">1D Change</th>
+            <th class="center">Phase</th>
+          </tr>
+        </thead>
+        <tbody id="index-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PHASE EXPLANATION -->
+  <div class="phase-box" id="phase-box" style="display:none">
+    <h2>Market Climate Phases</h2>
+    <div class="phase-grid">
+      <div class="phase-card pc-hausse">
+        <h3>🟢 Bull Market</h3>
+        <p>RSL above 1.0 and SMA rising. The strongest phase — global markets in a broad uptrend, momentum is expanding. Ideal for full equity exposure.</p>
+      </div>
+      <div class="phase-card pc-erholung">
+        <h3>🔵 Recovery</h3>
+        <p>RSL below 1.0 but SMA turning upward. Markets recovering from a downturn. Early signal to begin building positions cautiously.</p>
+      </div>
+      <div class="phase-card pc-konsol">
+        <h3>🟠 Consolidation</h3>
+        <p>RSL above 1.0 but SMA flattening or declining. Bull market losing momentum. Consolidation or correction likely. Reduce risk, tighten stops.</p>
+      </div>
+      <div class="phase-card pc-baisse">
+        <h3>🔴 Bear Market</h3>
+        <p>RSL below 1.0 and SMA declining. Broad global downtrend. Defensive positioning, cash, or hedges are appropriate. Avoid new long exposure.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO -->
+  <div class="info-section" style="margin-top:28px;">
+    <h2>Methodology</h2>
+    <div class="info-grid">
+      <div class="info-item">
+        <div class="lbl">RSL Calculation</div>
+        <p>Each index's daily closing price divided by its own 130-day (26-week) simple moving average. Values above 1.0 indicate the market is in an uptrend relative to its own 6-month history.</p>
+      </div>
+      <div class="info-item">
+        <div class="lbl">Trend SMA Overlay</div>
+        <p>A moving average applied to the RSL values themselves — not the price. This smooths out daily noise to reveal the underlying trend direction of global market momentum. Default: SMA-38 (38-day SMA of RSL).</p>
+      </div>
+      <div class="info-item">
+        <div class="lbl">Equal-weight average line</div>
+        <p>All 23 indices are averaged with equal weight to produce a single "global market climate" line. This produces a single number capturing worldwide equity momentum.</p>
+      </div>
+      <div class="info-item">
+        <div class="lbl">Data source</div>
+        <p>All price history fetched live from Yahoo Finance in your browser. 5 years of daily data, no server required. Reload to refresh. Indices may show slight delays depending on exchange hours.</p>
+      </div>
+    </div>
+    <div class="formula">RSL = Current Level ÷ SMA-130 &nbsp;·&nbsp; Trend = SMA(RSL, N days)</div>
+  </div>
+
+  <footer>
+    <p>Index data fetched live from Yahoo Finance on every page load — always current to the last market close.</p>
+    <p style="margin-top:4px">⚠ For informational purposes only — not financial advice. Past performance does not guarantee future results.</p>
+    <p style="margin-top:4px">RSL methodology: R.A. Levy, "Relative Strength as a Criterion for Investment Selection" (1967).</p>
+  </footer>
+
+</div><!-- /container -->
+
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+// UNIVERSE — 23 indices
+// ─────────────────────────────────────────────────────────────────────────────
+const INDICES = [
+  // Sweden (4)
+  { name:'OMXS Large Cap',     short:'Large Cap',   ticker:'^OMXSLCPI', region:'se',     flag:'🇸🇪', label:'Sweden' },
+  { name:'OMXS Mid Cap',       short:'Mid Cap',     ticker:'^OMXSMCPI', region:'se',     flag:'🇸🇪', label:'Sweden' },
+  { name:'OMXS Small Cap',     short:'Small Cap',   ticker:'^OMXSSCPI', region:'se',     flag:'🇸🇪', label:'Sweden' },
+  { name:'OMXSPI (All-Share)', short:'OMXSPI',      ticker:'^OMX',      region:'se',     flag:'🇸🇪', label:'Sweden' },
+  // Nordic (3)
+  { name:'Denmark — OMXC25',   short:'OMXC25',      ticker:'^OMXC25',   region:'nordic', flag:'🇩🇰', label:'Denmark' },
+  { name:'Norway — OBX',       short:'OBX',         ticker:'^OBX',      region:'nordic', flag:'🇳🇴', label:'Norway' },
+  { name:'Finland — OMXH25',   short:'OMXH25',      ticker:'^OMXH25',   region:'nordic', flag:'🇫🇮', label:'Finland' },
+  // Europe (4)
+  { name:'Germany — DAX',      short:'DAX',         ticker:'^GDAXI',    region:'europe', flag:'🇩🇪', label:'Germany' },
+  { name:'UK — FTSE 100',      short:'FTSE 100',    ticker:'^FTSE',     region:'europe', flag:'🇬🇧', label:'UK' },
+  { name:'Switzerland — SMI',  short:'SMI',         ticker:'^SSMI',     region:'europe', flag:'🇨🇭', label:'Swiss' },
+  { name:'Euro Stoxx 50',      short:'Stoxx 50',    ticker:'^STOXX50E', region:'europe', flag:'🇪🇺', label:'Eurozone' },
+  // US (3)
+  { name:'US — S&P 500',       short:'S&P 500',     ticker:'^GSPC',     region:'us',     flag:'🇺🇸', label:'US' },
+  { name:'US — Nasdaq 100',    short:'Nasdaq 100',  ticker:'^NDX',      region:'us',     flag:'🇺🇸', label:'US' },
+  { name:'US — Dow Jones',     short:'Dow Jones',   ticker:'^DJI',      region:'us',     flag:'🇺🇸', label:'US' },
+  // Asia-Pacific (9)
+  { name:'Japan — Nikkei 225', short:'Nikkei 225',  ticker:'^N225',     region:'asia',   flag:'🇯🇵', label:'Japan' },
+  { name:'Hong Kong — Hang Seng', short:'Hang Seng',ticker:'^HSI',      region:'asia',   flag:'🇭🇰', label:'HK' },
+  { name:'China — CSI 300',    short:'CSI 300',     ticker:'000300.SS', region:'asia',   flag:'🇨🇳', label:'China' },
+  { name:'India — Nifty 50',   short:'Nifty 50',    ticker:'^NSEI',     region:'asia',   flag:'🇮🇳', label:'India' },
+  { name:'Australia — ASX 200',short:'ASX 200',     ticker:'^AXJO',     region:'asia',   flag:'🇦🇺', label:'Australia' },
+  { name:'South Korea — KOSPI',short:'KOSPI',       ticker:'^KS11',     region:'asia',   flag:'🇰🇷', label:'S. Korea' },
+  { name:'Canada — TSX',       short:'TSX',         ticker:'^GSPTSE',   region:'asia',   flag:'🇨🇦', label:'Canada' },
+  { name:'Brazil — Bovespa',   short:'Bovespa',     ticker:'^BVSP',     region:'asia',   flag:'🇧🇷', label:'Brazil' },
+];
+
+// Region line colors for chart
+const REGION_COLORS = {
+  se:     '#00e5a0',
+  nordic: '#60cfff',
+  europe: '#a78bfa',
+  us:     '#f0c040',
+  asia:   '#ff9966',
+};
+
+const RSL_PERIOD = 130;
+let allResults    = [];
+let allHistories  = {};   // ticker -> array of {date, rsl}
+let smaN          = 38;
+let periodYears   = 5;
+let showAvg       = true;
+let showLines     = false;
+let activeLines   = new Set(INDICES.map(i => i.ticker));
+let activeRegion  = 'all';
+let klimaChart    = null;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FETCH — 5+ years of daily data
+// ─────────────────────────────────────────────────────────────────────────────
+async function fetchHistory(ticker) {
+  const end   = Math.floor(Date.now() / 1000);
+  const start = end - (10 * 365 + 30) * 86400; // 10 years back for full history
+  const url   = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}` +
+                `?interval=1d&period1=${start}&period2=${end}&includePrePost=false`;
+  const res   = await fetch(url, { headers:{ Accept:'application/json' } });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const json  = await res.json();
+  const result = json?.chart?.result?.[0];
+  if (!result) throw new Error('No result');
+
+  const timestamps = result.timestamp || [];
+  const closes     = result.indicators?.quote?.[0]?.close || [];
+
+  // Build clean array of {date, price}
+  const raw = [];
+  for (let i = 0; i < timestamps.length; i++) {
+    if (closes[i] != null && !isNaN(closes[i])) {
+      raw.push({ date: new Date(timestamps[i] * 1000), price: closes[i] });
+    }
+  }
+  if (raw.length < RSL_PERIOD) throw new Error(`Only ${raw.length} days`);
+
+  // Compute RSL for each day (rolling SMA-130)
+  const history = [];
+  for (let i = RSL_PERIOD - 1; i < raw.length; i++) {
+    const window = raw.slice(i - RSL_PERIOD + 1, i + 1);
+    const sma    = window.reduce((s, d) => s + d.price, 0) / RSL_PERIOD;
+    const rsl    = raw[i].price / sma;
+    history.push({ date: raw[i].date, rsl });
+  }
+
+  // Current stats
+  const last    = raw[raw.length - 1];
+  const prev    = raw.length >= 2 ? raw[raw.length - 2] : last;
+  const sma130  = raw.slice(-RSL_PERIOD).reduce((s, d) => s + d.price, 0) / RSL_PERIOD;
+  const rsl     = last.price / sma130;
+  const chg1d   = ((last.price - prev.price) / prev.price) * 100;
+  const currency = result.meta?.currency || '';
+
+  return { price: last.price, sma130, rsl, chg1d, currency, history };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LOAD ALL
+// ─────────────────────────────────────────────────────────────────────────────
+async function loadAll() {
+  let done = 0;
+  const results = [];
+
+  await Promise.all(INDICES.map(async (idx) => {
+    try {
+      const d = await fetchHistory(idx.ticker);
+      allHistories[idx.ticker] = d.history;
+      results.push({ ...idx, price:d.price, sma130:d.sma130, rsl:d.rsl, chg1d:d.chg1d, currency:d.currency, ok:true });
+    } catch(e) {
+      results.push({ ...idx, ok:false, error:e.message, price:null, sma130:null, rsl:null, chg1d:null, currency:'' });
+    }
+    done++;
+    document.getElementById('loader-progress').textContent = `Loaded ${done} / ${INDICES.length}`;
+  }));
+
+  results.sort((a, b) => {
+    if (!a.ok && !b.ok) return 0;
+    if (!a.ok) return 1;
+    if (!b.ok) return -1;
+    return b.rsl - a.rsl;
+  });
+
+  allResults = results;
+  render(results);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────────────────────────────────────────
+function render(results) {
+  document.getElementById('loader').style.display          = 'none';
+  document.getElementById('klima-section').style.display   = 'block';
+  document.getElementById('table-container').style.display = 'block';
+  document.getElementById('phase-box').style.display       = 'block';
+
+  const now = new Date();
+  document.getElementById('updated-time').textContent =
+    'Updated: ' + now.toLocaleString('sv-SE', { hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit', year:'numeric' });
+
+  updateStats(results);
+  buildIndexPills();
+  buildTable(results);
+  buildKlimaChart();
+  setActiveRegionBtn('all');
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// STATS
+// ─────────────────────────────────────────────────────────────────────────────
+function updateStats(results) {
+  const valid  = results.filter(r => r.ok && r.rsl !== null);
+  const above  = valid.filter(r => r.rsl >= 1);
+  document.getElementById('stat-total').textContent  = valid.length;
+  document.getElementById('stat-above').textContent  = `${above.length}/${valid.length}`;
+  if (valid.length) {
+    document.getElementById('stat-top').textContent    = valid[0].rsl.toFixed(3);
+    document.getElementById('stat-leader').textContent = valid[0].short;
+  }
+  // Global climate based on average RSL vs GD
+  const avgRSL = valid.length ? valid.reduce((s, r) => s + r.rsl, 0) / valid.length : 1;
+  const phase  = getPhaseLabel(avgRSL, null);
+  document.getElementById('stat-phase').textContent  = phase.label;
+  document.getElementById('stat-phase').style.color  = phase.color;
+}
+
+function getPhaseLabel(rsl, prevRsl) {
+  // Simplified phase detection on current RSL value
+  if (rsl >= 1.0)  return { label:'Bull Market', color:'#00e5a0' };
+  return { label:'Bear Market', color:'#ff4455' };
+}
+
+function getPhaseForRow(rsl) {
+  if (rsl >= 1.03)  return { text:'Bull Market',   cls:'phase-hausse' };
+  if (rsl >= 1.0)   return { text:'Consolidation', cls:'phase-konsol' };
+  if (rsl >= 0.97)  return { text:'Recovery',      cls:'phase-erholung' };
+  return              { text:'Bear Market',       cls:'phase-baisse' };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TABLE
+// ─────────────────────────────────────────────────────────────────────────────
+function buildTable(results) {
+  const valid  = results.filter(r => r.ok && r.rsl !== null);
+  const maxRSL = valid.length ? Math.max(...valid.map(r => r.rsl)) : 2;
+  const minRSL = valid.length ? Math.min(...valid.map(r => r.rsl)) : 0;
+
+  const tbody = document.getElementById('index-tbody');
+  tbody.innerHTML = '';
+  let vrank = 1;
+
+  results.forEach(r => {
+    const rank    = r.ok && r.rsl !== null ? vrank++ : '—';
+    const rankCls = rank === 1 ? ' rank-1' : rank === 2 ? ' rank-2' : rank === 3 ? ' rank-3' : '';
+    const rankStr = typeof rank === 'number' ? String(rank).padStart(2, '0') : rank;
+
+    let rslHtml = '<span style="color:var(--muted)">N/A</span>';
+    if (r.ok && r.rsl !== null) {
+      const pct    = ((r.rsl - minRSL) / (maxRSL - minRSL + 0.0001)) * 100;
+      const vClass = r.rsl >= 1.15 ? 'rsl-high' : r.rsl >= 1.0 ? 'rsl-above' : 'rsl-below';
+      const bClass = r.rsl >= 1.0 ? 'rsl-fill-pos' : 'rsl-fill-neg';
+      rslHtml = `<div class="rsl-bar-wrap">
+        <span class="rsl-value ${vClass}">${r.rsl.toFixed(3)}</span>
+        <div class="rsl-bar-bg"><div class="rsl-bar-fill ${bClass}" style="width:${pct.toFixed(1)}%"></div></div>
+      </div>`;
+    }
+
+    let chgHtml = '<span style="color:var(--muted)">—</span>';
+    if (r.ok && r.chg1d !== null) {
+      const cls  = r.chg1d > 0.01 ? 'chg-pos' : r.chg1d < -0.01 ? 'chg-neg' : 'chg-flat';
+      chgHtml    = `<span class="${cls}">${r.chg1d > 0 ? '+' : ''}${r.chg1d.toFixed(2)}%</span>`;
+    }
+
+    const phase    = r.ok && r.rsl !== null ? getPhaseForRow(r.rsl) : null;
+    const phaseHtml = phase
+      ? `<span class="phase-badge ${phase.cls}">${phase.text}</span>`
+      : '<span style="color:var(--muted)">—</span>';
+
+    const tr = document.createElement('tr');
+    tr.dataset.region = r.region;
+    tr.innerHTML = `
+      <td><span class="rank-num${rankCls}">${rankStr}</span></td>
+      <td>
+        <span class="index-main">${esc(r.name)}</span>
+        <span class="index-sub">${esc(r.ticker)}${r.currency ? ' · ' + r.currency : ''}</span>
+      </td>
+      <td class="center"><span class="region-badge badge-${r.region}">${r.flag} ${r.label}</span></td>
+      <td class="right">${rslHtml}</td>
+      <td class="right price-val">${r.ok ? fmtNum(r.price) : '—'}</td>
+      <td class="right sma-val">${r.ok ? fmtNum(r.sma130) : '—'}</td>
+      <td class="right">${chgHtml}</td>
+      <td class="center">${phaseHtml}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BUILD INDEX PILLS
+// ─────────────────────────────────────────────────────────────────────────────
+function buildIndexPills() {
+  const wrap = document.getElementById('pill-selector');
+  wrap.innerHTML = '';
+  INDICES.forEach(idx => {
+    const pill = document.createElement('button');
+    pill.className = `idx-pill region-${idx.region} on`;
+    pill.textContent = idx.short;
+    pill.dataset.ticker = idx.ticker;
+    pill.onclick = () => {
+      if (activeLines.has(idx.ticker)) activeLines.delete(idx.ticker);
+      else activeLines.add(idx.ticker);
+      pill.classList.toggle('on', activeLines.has(idx.ticker));
+      buildKlimaChart();
+    };
+    wrap.appendChild(pill);
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// AKTIENKLIMA CHART
+// ─────────────────────────────────────────────────────────────────────────────
+function computeSMA(arr, n) {
+  return arr.map((v, i) => {
+    if (i < n - 1) return null;
+    const slice = arr.slice(i - n + 1, i + 1);
+    const valid = slice.filter(x => x !== null);
+    return valid.length > 0 ? valid.reduce((a, b) => a + b, 0) / valid.length : null;
+  });
+}
+
+function buildKlimaChart() {
+  const cutoffMs = Date.now() - periodYears * 365.25 * 86400 * 1000;
+
+  // Gather all dates from histories, filter by period
+  const allDates = new Set();
+  Object.values(allHistories).forEach(hist => {
+    hist.forEach(p => { if (p.date.getTime() >= cutoffMs) allDates.add(p.date.toISOString().slice(0, 10)); });
+  });
+  const dates = Array.from(allDates).sort();
+  if (!dates.length) return;
+
+  // Build RSL lookup per ticker per date
+  const rslByTickerDate = {};
+  INDICES.forEach(idx => {
+    const hist = allHistories[idx.ticker];
+    if (!hist) return;
+    rslByTickerDate[idx.ticker] = {};
+    hist.forEach(p => {
+      const d = p.date.toISOString().slice(0, 10);
+      rslByTickerDate[idx.ticker][d] = p.rsl;
+    });
+  });
+
+  // Equal-weight average RSL per date
+  const avgRSL = dates.map(d => {
+    const vals = INDICES
+      .filter(idx => allHistories[idx.ticker])
+      .map(idx => rslByTickerDate[idx.ticker]?.[d])
+      .filter(v => v !== undefined && v !== null && !isNaN(v));
+    return vals.length > 0 ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
+  });
+
+  // GD (SMA of avgRSL)
+  const gdLine = computeSMA(avgRSL, smaN);
+
+  // Datasets
+  const datasets = [];
+
+  // Individual index lines (thin, semi-transparent)
+  if (showLines) {
+    INDICES.forEach(idx => {
+      if (!activeLines.has(idx.ticker)) return;
+      const hist = allHistories[idx.ticker];
+      if (!hist) return;
+      const lookup = rslByTickerDate[idx.ticker];
+      const data   = dates.map(d => lookup[d] ?? null);
+      const col    = REGION_COLORS[idx.region];
+      datasets.push({
+        label: idx.short,
+        data,
+        borderColor: col + '55',
+        backgroundColor: 'transparent',
+        borderWidth: 1,
+        pointRadius: 0,
+        spanGaps: true,
+        tension: 0.2,
+      });
+    });
+  }
+
+  // Average line (bold white/light)
+  if (showAvg) {
+    datasets.push({
+      label: 'Global avg RSL (equal weight)',
+      data: avgRSL,
+      borderColor: 'rgba(240,244,248,0.85)',
+      backgroundColor: 'transparent',
+      borderWidth: 2.5,
+      pointRadius: 0,
+      spanGaps: true,
+      tension: 0.3,
+      order: 0,
+    });
+  }
+
+  // GD line (teal, thicker)
+  datasets.push({
+    label: `SMA-${smaN} of avg RSL`,
+    data: gdLine,
+    borderColor: '#00ccbb',
+    backgroundColor: 'transparent',
+    borderWidth: 2.5,
+    pointRadius: 0,
+    spanGaps: true,
+    tension: 0.4,
+    borderDash: [],
+    order: -1,
+  });
+
+  const ctx = document.getElementById('klima-chart').getContext('2d');
+  if (klimaChart) klimaChart.destroy();
+
+  klimaChart = new Chart(ctx, {
+    type: 'line',
+    data: { labels: dates, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode:'index', intersect:false },
+      plugins: {
+        legend: {
+          display: showLines,
+          labels: { color:'#4a6070', font:{ family:'IBM Plex Mono', size:9 }, boxWidth:12, padding:8 }
+        },
+        tooltip: {
+          backgroundColor:'#0d1318', borderColor:'#253340', borderWidth:1,
+          titleColor:'#6a8090', bodyColor:'#c8d8e8',
+          titleFont:{ family:'IBM Plex Mono', size:10 },
+          bodyFont: { family:'IBM Plex Mono', size:11 },
+          padding:12,
+          filter: item => item.datasetIndex >= (showLines ? INDICES.filter(i=>activeLines.has(i.ticker)&&allHistories[i.ticker]).length : 0),
+          callbacks: {
+            label: item => ` ${item.dataset.label}: ${item.raw !== null ? item.raw.toFixed(4) : '—'}`
+          }
+        },
+      },
+      scales: {
+        x: {
+          grid:   { color:'rgba(255,255,255,0.03)' },
+          ticks:  {
+            color:'#4a6070', font:{ family:'IBM Plex Mono', size:9 },
+            maxTicksLimit: 12,
+            callback: (val, i) => dates[i] ? dates[i].slice(0,7) : '',
+          },
+          border: { color:'#1c2830' },
+        },
+        y: {
+          grid:   { color:'rgba(255,255,255,0.04)' },
+          ticks:  { color:'#4a6070', font:{ family:'IBM Plex Mono', size:10 }, callback: v => v.toFixed(2) },
+          border: { color:'#1c2830' },
+        },
+      },
+      // Draw RSL=1.0 baseline + phase background zones
+      plugins: [{
+        id: 'baseline',
+        beforeDraw(chart) {
+          const { ctx: c, chartArea: { left, right, top, bottom }, scales: { y } } = chart;
+          const y1 = y.getPixelForValue(1.0);
+
+          // Phase zone fills
+          if (y1 > top && y1 < bottom) {
+            // Above 1.0 = bull zone (very subtle green)
+            c.save();
+            c.fillStyle = 'rgba(0,229,160,0.04)';
+            c.fillRect(left, top, right - left, y1 - top);
+            // Below 1.0 = bear zone (very subtle red)
+            c.fillStyle = 'rgba(255,68,85,0.04)';
+            c.fillRect(left, y1, right - left, bottom - y1);
+            c.restore();
+          }
+
+          // RSL = 1.0 line
+          if (y1 >= top && y1 <= bottom) {
+            c.save();
+            c.strokeStyle = 'rgba(255,255,255,0.25)';
+            c.lineWidth   = 1.5;
+            c.setLineDash([]);
+            c.beginPath();
+            c.moveTo(left, y1);
+            c.lineTo(right, y1);
+            c.stroke();
+            // Label
+            c.fillStyle = 'rgba(255,255,255,0.35)';
+            c.font      = '10px IBM Plex Mono';
+            c.fillText('RSL = 1.0', right - 70, y1 - 5);
+            c.restore();
+          }
+        }
+      }],
+    },
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CONTROLS
+// ─────────────────────────────────────────────────────────────────────────────
+function onSliderChange(val) {
+  smaN = parseInt(val);
+  document.getElementById('sma-label').textContent = `SMA-${smaN}`;
+  buildKlimaChart();
+}
+
+function setPeriod(years) {
+  periodYears = years;
+  document.querySelectorAll('.period-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent === years + 'Y');
+  });
+  buildKlimaChart();
+}
+
+function toggleAvg() {
+  showAvg = !showAvg;
+  document.getElementById('avg-toggle-box').classList.toggle('on', showAvg);
+  buildKlimaChart();
+}
+
+function toggleLines() {
+  showLines = !showLines;
+  document.getElementById('lines-toggle-box').classList.toggle('on', showLines);
+  const ps = document.getElementById('pill-selector');
+  ps.style.display = showLines ? 'flex' : 'none';
+  buildKlimaChart();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// REGION FILTER (for table)
+// ─────────────────────────────────────────────────────────────────────────────
+function filterRegion(region) {
+  activeRegion = region;
+  setActiveRegionBtn(region);
+  const rows = document.querySelectorAll('#index-tbody tr');
+  rows.forEach(row => {
+    row.classList.toggle('hidden-row', region !== 'all' && row.dataset.region !== region);
+  });
+  // Re-rank
+  let rank = 1;
+  rows.forEach(row => {
+    if (row.classList.contains('hidden-row')) return;
+    const numEl = row.querySelector('.rank-num');
+    if (!numEl) return;
+    const r = allResults.find(x => row.querySelector('.index-sub')?.textContent?.startsWith(x.ticker));
+    if (r && !r.ok) { numEl.textContent = '—'; numEl.className = 'rank-num'; return; }
+    numEl.textContent = String(rank).padStart(2,'0');
+    numEl.className   = 'rank-num' + (rank===1?' rank-1':rank===2?' rank-2':rank===3?' rank-3':'');
+    rank++;
+  });
+  const filtered = allResults.filter(r => region === 'all' || r.region === region);
+  updateStats(filtered);
+}
+
+function setActiveRegionBtn(region) {
+  ['all','se','nordic','europe','us','asia'].forEach(r => {
+    const btn = document.getElementById(`rbtn-${r}`);
+    if (!btn) return;
+    btn.className = `region-btn${region === r ? ` active-${r}` : ''}`;
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// UTILS
+// ─────────────────────────────────────────────────────────────────────────────
+function fmtNum(n) {
+  if (n == null) return '—';
+  if (n >= 10000) return n.toLocaleString('sv-SE', { maximumFractionDigits:0 });
+  if (n >= 1000)  return n.toLocaleString('sv-SE', { minimumFractionDigits:1, maximumFractionDigits:1 });
+  if (n >= 10)    return n.toLocaleString('sv-SE', { minimumFractionDigits:2, maximumFractionDigits:2 });
+  return n.toLocaleString('sv-SE', { minimumFractionDigits:2, maximumFractionDigits:4 });
+}
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BOOT
+// ─────────────────────────────────────────────────────────────────────────────
+loadAll();
+</script>
+</body>
+</html>
