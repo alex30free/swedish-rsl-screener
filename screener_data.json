@@ -1,232 +1,232 @@
 {
-  "updated": "2026-03-27 18:11 UTC",
+  "updated": "2026-04-03 18:01 UTC",
   "period_days": 130,
   "total_attempted": 276,
   "stocks_screened": 275,
   "skipped_count": 1,
   "top25": [
     {
-      "name": "Sivers Semiconductors",
-      "ticker": "SIVE.ST",
-      "price": 11.34,
-      "sma130": 4.12,
-      "rsl": 2.7514,
-      "rank": 1,
-      "prev_rank": 1
-    },
-    {
       "name": "Medivir",
       "ticker": "MVIR.ST",
-      "price": 2.44,
-      "sma130": 0.91,
-      "rsl": 2.6949,
-      "rank": 2,
+      "price": 2.35,
+      "sma130": 0.94,
+      "rsl": 2.5054,
+      "rank": 1,
       "prev_rank": 2
+    },
+    {
+      "name": "Sivers Semiconductors",
+      "ticker": "SIVE.ST",
+      "price": 9.9,
+      "sma130": 4.38,
+      "rsl": 2.2612,
+      "rank": 2,
+      "prev_rank": 1
     },
     {
       "name": "Anoto",
       "ticker": "ANOT.ST",
-      "price": 0.1,
+      "price": 0.09,
       "sma130": 0.05,
-      "rsl": 2.0808,
+      "rsl": 1.7678,
       "rank": 3,
-      "prev_rank": null
+      "prev_rank": 3
     },
     {
       "name": "Episurf Medical",
       "ticker": "EPIS-B.ST",
       "price": 0.06,
       "sma130": 0.04,
-      "rsl": 1.6678,
+      "rsl": 1.7038,
       "rank": 4,
-      "prev_rank": 3
+      "prev_rank": 4
+    },
+    {
+      "name": "Eniro",
+      "ticker": "ENRO.ST",
+      "price": 0.64,
+      "sma130": 0.43,
+      "rsl": 1.4901,
+      "rank": 5,
+      "prev_rank": 13
     },
     {
       "name": "Maha Capital",
       "ticker": "MAHA-A.ST",
-      "price": 15.56,
-      "sma130": 9.8,
-      "rsl": 1.5877,
-      "rank": 5,
-      "prev_rank": 11
-    },
-    {
-      "name": "Hexatronic",
-      "ticker": "HTRO.ST",
-      "price": 33.94,
-      "sma130": 23.02,
-      "rsl": 1.4745,
+      "price": 14.32,
+      "sma130": 10.02,
+      "rsl": 1.4298,
       "rank": 6,
-      "prev_rank": 7
-    },
-    {
-      "name": "International Petroleum",
-      "ticker": "IPCO.ST",
-      "price": 248.0,
-      "sma130": 180.64,
-      "rsl": 1.3729,
-      "rank": 7,
-      "prev_rank": 4
-    },
-    {
-      "name": "Scandi Standard",
-      "ticker": "SCST.ST",
-      "price": 144.4,
-      "sma130": 106.32,
-      "rsl": 1.3582,
-      "rank": 8,
-      "prev_rank": 8
-    },
-    {
-      "name": "Ovzon",
-      "ticker": "OVZON.ST",
-      "price": 58.0,
-      "sma130": 43.79,
-      "rsl": 1.3245,
-      "rank": 9,
       "prev_rank": 5
     },
     {
       "name": "Midsona B",
       "ticker": "MSON-B.ST",
-      "price": 12.1,
-      "sma130": 9.29,
-      "rsl": 1.302,
-      "rank": 10,
-      "prev_rank": 15
+      "price": 13.5,
+      "sma130": 9.47,
+      "rsl": 1.4262,
+      "rank": 7,
+      "prev_rank": 10
     },
     {
-      "name": "Nokia",
-      "ticker": "NOKIA-SEK.ST",
-      "price": 78.5,
-      "sma130": 60.83,
-      "rsl": 1.2906,
-      "rank": 11,
-      "prev_rank": 14
+      "name": "Scandi Standard",
+      "ticker": "SCST.ST",
+      "price": 153.0,
+      "sma130": 108.31,
+      "rsl": 1.4126,
+      "rank": 8,
+      "prev_rank": 8
     },
     {
       "name": "FM Mattsson",
       "ticker": "FMM-B.ST",
-      "price": 85.6,
-      "sma130": 66.45,
-      "rsl": 1.2882,
-      "rank": 12,
-      "prev_rank": 10
-    },
-    {
-      "name": "Eniro",
-      "ticker": "ENRO.ST",
-      "price": 0.54,
-      "sma130": 0.42,
-      "rsl": 1.2831,
-      "rank": 13,
-      "prev_rank": 6
-    },
-    {
-      "name": "Wise Group",
-      "ticker": "WISE.ST",
-      "price": 18.2,
-      "sma130": 14.26,
-      "rsl": 1.2765,
-      "rank": 14,
+      "price": 94.4,
+      "sma130": 67.71,
+      "rsl": 1.3942,
+      "rank": 9,
       "prev_rank": 12
     },
     {
-      "name": "Viaplay B",
-      "ticker": "VPLAY-B.ST",
-      "price": 1.42,
-      "sma130": 1.13,
-      "rsl": 1.2605,
-      "rank": 15,
-      "prev_rank": 25
+      "name": "Hexatronic",
+      "ticker": "HTRO.ST",
+      "price": 32.04,
+      "sma130": 23.48,
+      "rsl": 1.3647,
+      "rank": 10,
+      "prev_rank": 6
     },
     {
-      "name": "Orrön Energy",
-      "ticker": "ORRON.ST",
-      "price": 6.78,
-      "sma130": 5.48,
-      "rsl": 1.238,
-      "rank": 16,
-      "prev_rank": 9
+      "name": "International Petroleum",
+      "ticker": "IPCO.ST",
+      "price": 247.6,
+      "sma130": 184.05,
+      "rsl": 1.3453,
+      "rank": 11,
+      "prev_rank": 7
     },
     {
       "name": "Meren Energy",
       "ticker": "MER.ST",
-      "price": 15.5,
-      "sma130": 12.57,
-      "rsl": 1.2329,
-      "rank": 17,
-      "prev_rank": 22
-    },
-    {
-      "name": "Cloetta",
-      "ticker": "CLA-B.ST",
-      "price": 51.05,
-      "sma130": 41.59,
-      "rsl": 1.2273,
-      "rank": 18,
+      "price": 16.37,
+      "sma130": 12.74,
+      "rsl": 1.2847,
+      "rank": 12,
       "prev_rank": 17
-    },
-    {
-      "name": "Rusta",
-      "ticker": "RUSTA.ST",
-      "price": 91.7,
-      "sma130": 75.08,
-      "rsl": 1.2213,
-      "rank": 19,
-      "prev_rank": 16
     },
     {
       "name": "Xvivo Perfusion",
       "ticker": "XVIVO.ST",
-      "price": 226.0,
-      "sma130": 185.05,
-      "rsl": 1.2213,
-      "rank": 20,
-      "prev_rank": null
+      "price": 240.2,
+      "sma130": 187.09,
+      "rsl": 1.2838,
+      "rank": 13,
+      "prev_rank": 20
+    },
+    {
+      "name": "Orrön Energy",
+      "ticker": "ORRON.ST",
+      "price": 7.14,
+      "sma130": 5.57,
+      "rsl": 1.2831,
+      "rank": 14,
+      "prev_rank": 16
+    },
+    {
+      "name": "Cloetta",
+      "ticker": "CLA-B.ST",
+      "price": 53.3,
+      "sma130": 42.34,
+      "rsl": 1.2589,
+      "rank": 15,
+      "prev_rank": 18
     },
     {
       "name": "Inission",
       "ticker": "INISS-B.ST",
-      "price": 57.0,
-      "sma130": 47.2,
-      "rsl": 1.2075,
-      "rank": 21,
-      "prev_rank": 13
+      "price": 59.6,
+      "sma130": 47.88,
+      "rsl": 1.2447,
+      "rank": 16,
+      "prev_rank": 21
     },
     {
-      "name": "Telia Company",
-      "ticker": "TELIA.ST",
-      "price": 47.4,
-      "sma130": 39.54,
-      "rsl": 1.1988,
-      "rank": 22,
-      "prev_rank": 21
+      "name": "Nokia",
+      "ticker": "NOKIA-SEK.ST",
+      "price": 76.86,
+      "sma130": 62.04,
+      "rsl": 1.2389,
+      "rank": 17,
+      "prev_rank": 11
+    },
+    {
+      "name": "Rusta",
+      "ticker": "RUSTA.ST",
+      "price": 93.9,
+      "sma130": 76.22,
+      "rsl": 1.232,
+      "rank": 18,
+      "prev_rank": 19
     },
     {
       "name": "Attendo",
       "ticker": "ATT.ST",
-      "price": 100.8,
-      "sma130": 85.09,
-      "rsl": 1.1846,
+      "price": 104.8,
+      "sma130": 86.38,
+      "rsl": 1.2133,
+      "rank": 19,
+      "prev_rank": 23
+    },
+    {
+      "name": "Telia Company",
+      "ticker": "TELIA.ST",
+      "price": 47.88,
+      "sma130": 40.04,
+      "rsl": 1.1957,
+      "rank": 20,
+      "prev_rank": 22
+    },
+    {
+      "name": "Ovzon",
+      "ticker": "OVZON.ST",
+      "price": 52.8,
+      "sma130": 44.48,
+      "rsl": 1.1871,
+      "rank": 21,
+      "prev_rank": 9
+    },
+    {
+      "name": "Tele2 B",
+      "ticker": "TEL2-B.ST",
+      "price": 195.3,
+      "sma130": 164.63,
+      "rsl": 1.1863,
+      "rank": 22,
+      "prev_rank": null
+    },
+    {
+      "name": "Wise Group",
+      "ticker": "WISE.ST",
+      "price": 16.95,
+      "sma130": 14.36,
+      "rsl": 1.1805,
       "rank": 23,
-      "prev_rank": 20
+      "prev_rank": 14
     },
     {
-      "name": "Better Collective",
-      "ticker": "BETCO.ST",
-      "price": 140.6,
-      "sma130": 119.19,
-      "rsl": 1.1796,
+      "name": "Lundin Mining",
+      "ticker": "LUMI.ST",
+      "price": 231.2,
+      "sma130": 197.09,
+      "rsl": 1.1731,
       "rank": 24,
-      "prev_rank": 19
+      "prev_rank": null
     },
     {
-      "name": "Ericsson B",
-      "ticker": "ERIC-B.ST",
-      "price": 109.4,
-      "sma130": 92.82,
-      "rsl": 1.1786,
+      "name": "Infrea",
+      "ticker": "INFREA.ST",
+      "price": 16.8,
+      "sma130": 14.37,
+      "rsl": 1.1691,
       "rank": 25,
       "prev_rank": null
     }
@@ -235,8 +235,8 @@
     {
       "name": "Verisure",
       "ticker": "VSURE.ST",
-      "reason": "No price data returned",
-      "days_available": 0
+      "reason": "Insufficient history — needs 130 days, only 1 available",
+      "days_available": 1
     }
   ]
 }
