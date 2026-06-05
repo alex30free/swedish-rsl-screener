@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-29 19:53 UTC",
+  "updated": "2026-06-05 19:18 UTC",
   "period_days": 130,
   "total_attempted": 276,
   "stocks_screened": 274,
@@ -8,225 +8,225 @@
     {
       "name": "Sivers Semiconductors",
       "ticker": "SIVE.ST",
-      "price": 70.2,
-      "sma130": 14.82,
-      "rsl": 4.738,
+      "price": 86.75,
+      "sma130": 17.81,
+      "rsl": 4.8708,
       "rank": 1,
       "prev_rank": 1
     },
     {
       "name": "Episurf Medical",
       "ticker": "EPIS-B.ST",
-      "price": 0.17,
+      "price": 0.14,
       "sma130": 0.06,
-      "rsl": 2.9728,
+      "rsl": 2.2779,
       "rank": 2,
       "prev_rank": 2
     },
     {
       "name": "Anoto",
       "ticker": "ANOT.ST",
-      "price": 0.17,
+      "price": 0.13,
       "sma130": 0.06,
-      "rsl": 2.9442,
+      "rsl": 2.1703,
       "rank": 3,
-      "prev_rank": null
+      "prev_rank": 3
     },
     {
       "name": "Nokia",
       "ticker": "NOKIA-SEK.ST",
-      "price": 143.8,
-      "sma130": 77.78,
-      "rsl": 1.8488,
+      "price": 151.3,
+      "sma130": 81.21,
+      "rsl": 1.8631,
       "rank": 4,
-      "prev_rank": 3
-    },
-    {
-      "name": "Tobii",
-      "ticker": "TOBII.ST",
-      "price": 3.1,
-      "sma130": 1.91,
-      "rsl": 1.6205,
-      "rank": 5,
-      "prev_rank": 10
-    },
-    {
-      "name": "Cint Group",
-      "ticker": "CINT.ST",
-      "price": 5.9,
-      "sma130": 3.67,
-      "rsl": 1.6097,
-      "rank": 6,
-      "prev_rank": 5
-    },
-    {
-      "name": "Medivir",
-      "ticker": "MVIR.ST",
-      "price": 2.05,
-      "sma130": 1.28,
-      "rsl": 1.6014,
-      "rank": 7,
       "prev_rank": 4
     },
     {
       "name": "Hexatronic",
       "ticker": "HTRO.ST",
-      "price": 44.35,
-      "sma130": 29.09,
-      "rsl": 1.5246,
-      "rank": 8,
-      "prev_rank": 7
+      "price": 46.97,
+      "sma130": 30.2,
+      "rsl": 1.5554,
+      "rank": 5,
+      "prev_rank": 8
     },
     {
-      "name": "Orrön Energy",
-      "ticker": "ORRON.ST",
-      "price": 9.95,
-      "sma130": 6.74,
-      "rsl": 1.4765,
-      "rank": 9,
+      "name": "Cint Group",
+      "ticker": "CINT.ST",
+      "price": 5.77,
+      "sma130": 3.77,
+      "rsl": 1.5314,
+      "rank": 6,
       "prev_rank": 6
+    },
+    {
+      "name": "Tobii",
+      "ticker": "TOBII.ST",
+      "price": 2.98,
+      "sma130": 1.97,
+      "rsl": 1.5111,
+      "rank": 7,
+      "prev_rank": 5
     },
     {
       "name": "NCAB Group",
       "ticker": "NCAB.ST",
-      "price": 80.7,
-      "sma130": 55.33,
-      "rsl": 1.4586,
+      "price": 84.9,
+      "sma130": 56.57,
+      "rsl": 1.5007,
+      "rank": 8,
+      "prev_rank": 10
+    },
+    {
+      "name": "Sinch",
+      "ticker": "SINCH.ST",
+      "price": 42.15,
+      "sma130": 28.36,
+      "rsl": 1.4864,
+      "rank": 9,
+      "prev_rank": 15
+    },
+    {
+      "name": "Ferronordic",
+      "ticker": "FNM.ST",
+      "price": 64.8,
+      "sma130": 46.35,
+      "rsl": 1.3979,
       "rank": 10,
-      "prev_rank": 8
-    },
-    {
-      "name": "Viaplay B",
-      "ticker": "VPLAY-B.ST",
-      "price": 1.74,
-      "sma130": 1.2,
-      "rsl": 1.4509,
-      "rank": 11,
-      "prev_rank": 11
-    },
-    {
-      "name": "Inission",
-      "ticker": "INISS-B.ST",
-      "price": 77.0,
-      "sma130": 54.8,
-      "rsl": 1.4051,
-      "rank": 12,
-      "prev_rank": 9
+      "prev_rank": null
     },
     {
       "name": "Net Insight",
       "ticker": "NETI-B.ST",
       "price": 4.25,
-      "sma130": 3.06,
-      "rsl": 1.3884,
-      "rank": 13,
-      "prev_rank": 21
-    },
-    {
-      "name": "BTS Group",
-      "ticker": "BTS-B.ST",
-      "price": 194.2,
-      "sma130": 140.05,
-      "rsl": 1.3866,
-      "rank": 14,
-      "prev_rank": 14
-    },
-    {
-      "name": "Sinch",
-      "ticker": "SINCH.ST",
-      "price": 38.0,
-      "sma130": 27.8,
-      "rsl": 1.3668,
-      "rank": 15,
-      "prev_rank": 12
-    },
-    {
-      "name": "Mildef Group",
-      "ticker": "MILDEF.ST",
-      "price": 191.9,
-      "sma130": 141.38,
-      "rsl": 1.3574,
-      "rank": 16,
-      "prev_rank": 17
-    },
-    {
-      "name": "Ovzon",
-      "ticker": "OVZON.ST",
-      "price": 68.8,
-      "sma130": 50.72,
-      "rsl": 1.3564,
-      "rank": 17,
-      "prev_rank": 23
-    },
-    {
-      "name": "Xvivo Perfusion",
-      "ticker": "XVIVO.ST",
-      "price": 290.0,
-      "sma130": 217.0,
-      "rsl": 1.3364,
-      "rank": 18,
+      "sma130": 3.07,
+      "rsl": 1.3852,
+      "rank": 11,
       "prev_rank": 13
     },
     {
-      "name": "Asmodee",
-      "ticker": "ASMDEE-B.ST",
-      "price": 148.5,
-      "sma130": 111.85,
-      "rsl": 1.3277,
-      "rank": 19,
+      "name": "Active Biotech",
+      "ticker": "ACTI.ST",
+      "price": 7.2,
+      "sma130": 5.28,
+      "rsl": 1.3623,
+      "rank": 12,
       "prev_rank": null
     },
     {
-      "name": "Eltel",
-      "ticker": "ELTEL.ST",
-      "price": 12.4,
-      "sma130": 9.34,
-      "rsl": 1.3273,
-      "rank": 20,
-      "prev_rank": 22
+      "name": "Ependion",
+      "ticker": "EPEN.ST",
+      "price": 148.0,
+      "sma130": 110.09,
+      "rsl": 1.3443,
+      "rank": 13,
+      "prev_rank": 24
     },
     {
-      "name": "Enad Global 7",
-      "ticker": "EG7.ST",
-      "price": 19.88,
-      "sma130": 15.0,
-      "rsl": 1.3252,
-      "rank": 21,
-      "prev_rank": 18
+      "name": "Inission",
+      "ticker": "INISS-B.ST",
+      "price": 75.4,
+      "sma130": 56.14,
+      "rsl": 1.343,
+      "rank": 14,
+      "prev_rank": 12
+    },
+    {
+      "name": "Orrön Energy",
+      "ticker": "ORRON.ST",
+      "price": 9.32,
+      "sma130": 6.96,
+      "rsl": 1.3394,
+      "rank": 15,
+      "prev_rank": 9
+    },
+    {
+      "name": "Proact IT",
+      "ticker": "PACT.ST",
+      "price": 143.8,
+      "sma130": 107.84,
+      "rsl": 1.3334,
+      "rank": 16,
+      "prev_rank": null
     },
     {
       "name": "Midsona B",
       "ticker": "MSON-B.ST",
-      "price": 14.1,
-      "sma130": 10.65,
-      "rsl": 1.324,
-      "rank": 22,
+      "price": 14.5,
+      "sma130": 10.88,
+      "rsl": 1.3328,
+      "rank": 17,
+      "prev_rank": 22
+    },
+    {
+      "name": "Acast",
+      "ticker": "ACAST.ST",
+      "price": 40.8,
+      "sma130": 30.62,
+      "rsl": 1.3324,
+      "rank": 18,
       "prev_rank": null
     },
     {
       "name": "Mycronic",
       "ticker": "MYCR.ST",
-      "price": 300.8,
-      "sma130": 227.71,
-      "rsl": 1.321,
+      "price": 306.6,
+      "sma130": 231.49,
+      "rsl": 1.3245,
+      "rank": 19,
+      "prev_rank": 23
+    },
+    {
+      "name": "Viaplay B",
+      "ticker": "VPLAY-B.ST",
+      "price": 1.62,
+      "sma130": 1.23,
+      "rsl": 1.317,
+      "rank": 20,
+      "prev_rank": 11
+    },
+    {
+      "name": "BTS Group",
+      "ticker": "BTS-B.ST",
+      "price": 186.0,
+      "sma130": 142.15,
+      "rsl": 1.3085,
+      "rank": 21,
+      "prev_rank": 14
+    },
+    {
+      "name": "SSAB B",
+      "ticker": "SSAB-B.ST",
+      "price": 98.54,
+      "sma130": 75.31,
+      "rsl": 1.3085,
+      "rank": 22,
+      "prev_rank": null
+    },
+    {
+      "name": "Mildef Group",
+      "ticker": "MILDEF.ST",
+      "price": 187.55,
+      "sma130": 143.57,
+      "rsl": 1.3063,
       "rank": 23,
-      "prev_rank": 15
+      "prev_rank": 16
     },
     {
-      "name": "Ependion",
-      "ticker": "EPEN.ST",
-      "price": 141.0,
-      "sma130": 108.67,
-      "rsl": 1.2975,
+      "name": "Medivir",
+      "ticker": "MVIR.ST",
+      "price": 1.73,
+      "sma130": 1.33,
+      "rsl": 1.298,
       "rank": 24,
-      "prev_rank": 24
+      "prev_rank": 7
     },
     {
-      "name": "Bioinvent",
-      "ticker": "BINV.ST",
-      "price": 33.75,
-      "sma130": 26.1,
-      "rsl": 1.2932,
+      "name": "Eniro",
+      "ticker": "ENRO.ST",
+      "price": 0.6,
+      "sma130": 0.47,
+      "rsl": 1.2889,
       "rank": 25,
       "prev_rank": null
     }
