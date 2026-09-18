@@ -1,240 +1,252 @@
 {
-  "updated": "2026-09-11 19:56 UTC",
+  "updated": "2026-09-18 19:52 UTC",
   "period_days": 130,
   "total_attempted": 276,
   "stocks_screened": 268,
   "skipped_count": 8,
   "top25": [
     {
-      "name": "Anoto",
-      "ticker": "ANOT.ST",
-      "price": 0.19,
-      "sma130": 0.11,
-      "rsl": 1.8217,
-      "rank": 1,
-      "prev_rank": 1
-    },
-    {
       "name": "Ferronordic",
       "ticker": "FNM.ST",
-      "price": 97.2,
-      "sma130": 58.79,
-      "rsl": 1.6532,
+      "price": 100.0,
+      "sma130": 60.74,
+      "rsl": 1.6462,
+      "rank": 1,
+      "prev_rank": 2
+    },
+    {
+      "name": "Yubico",
+      "ticker": "YUBICO.ST",
+      "price": 96.0,
+      "sma130": 61.68,
+      "rsl": 1.5564,
       "rank": 2,
       "prev_rank": 6
     },
     {
       "name": "Elon",
       "ticker": "ELON.ST",
-      "price": 32.7,
-      "sma130": 20.07,
-      "rsl": 1.6293,
+      "price": 32.1,
+      "sma130": 20.63,
+      "rsl": 1.5556,
       "rank": 3,
       "prev_rank": 3
     },
     {
       "name": "Truecaller",
       "ticker": "TRUE-B.ST",
-      "price": 21.78,
-      "sma130": 14.71,
-      "rsl": 1.4809,
+      "price": 22.69,
+      "sma130": 15.15,
+      "rsl": 1.4981,
       "rank": 4,
-      "prev_rank": 2
+      "prev_rank": 4
     },
     {
       "name": "Wästbygg",
       "ticker": "WBGR-B.ST",
-      "price": 2.63,
-      "sma130": 1.79,
-      "rsl": 1.4722,
+      "price": 2.61,
+      "sma130": 1.81,
+      "rsl": 1.4446,
       "rank": 5,
-      "prev_rank": 4
-    },
-    {
-      "name": "Yubico",
-      "ticker": "YUBICO.ST",
-      "price": 88.3,
-      "sma130": 60.05,
-      "rsl": 1.4705,
-      "rank": 6,
       "prev_rank": 5
     },
     {
       "name": "Alvotech SDB",
       "ticker": "ALVO-SDB.ST",
-      "price": 50.0,
-      "sma130": 35.94,
-      "rsl": 1.3912,
-      "rank": 7,
-      "prev_rank": 8
-    },
-    {
-      "name": "Gruvaktiebolaget Viscaria",
-      "ticker": "VISC.ST",
-      "price": 23.45,
-      "sma130": 17.4,
-      "rsl": 1.3477,
-      "rank": 8,
-      "prev_rank": 9
-    },
-    {
-      "name": "Bulten",
-      "ticker": "BULTEN.ST",
-      "price": 66.6,
-      "sma130": 49.88,
-      "rsl": 1.3352,
-      "rank": 9,
+      "price": 52.2,
+      "sma130": 36.56,
+      "rsl": 1.428,
+      "rank": 6,
       "prev_rank": 7
-    },
-    {
-      "name": "IRLAB Therapeutics",
-      "ticker": "IRLAB-A.ST",
-      "price": 1.9,
-      "sma130": 1.43,
-      "rsl": 1.3247,
-      "rank": 10,
-      "prev_rank": null
-    },
-    {
-      "name": "Sinch",
-      "ticker": "SINCH.ST",
-      "price": 46.39,
-      "sma130": 35.51,
-      "rsl": 1.3064,
-      "rank": 11,
-      "prev_rank": 19
-    },
-    {
-      "name": "Troax Group",
-      "ticker": "TROAX.ST",
-      "price": 151.4,
-      "sma130": 116.49,
-      "rsl": 1.2997,
-      "rank": 12,
-      "prev_rank": 10
-    },
-    {
-      "name": "Egetis Therapeutics",
-      "ticker": "EGTX.ST",
-      "price": 8.05,
-      "sma130": 6.2,
-      "rsl": 1.2989,
-      "rank": 13,
-      "prev_rank": 20
-    },
-    {
-      "name": "Eltel",
-      "ticker": "ELTEL.ST",
-      "price": 14.8,
-      "sma130": 11.6,
-      "rsl": 1.2753,
-      "rank": 14,
-      "prev_rank": null
-    },
-    {
-      "name": "Mips",
-      "ticker": "MIPS.ST",
-      "price": 374.0,
-      "sma130": 293.29,
-      "rsl": 1.2752,
-      "rank": 15,
-      "prev_rank": 12
-    },
-    {
-      "name": "Kabe",
-      "ticker": "KABE-B.ST",
-      "price": 242.0,
-      "sma130": 189.96,
-      "rsl": 1.274,
-      "rank": 16,
-      "prev_rank": 17
     },
     {
       "name": "Stillfront",
       "ticker": "SF.ST",
-      "price": 6.52,
-      "sma130": 5.14,
-      "rsl": 1.2694,
-      "rank": 17,
+      "price": 7.2,
+      "sma130": 5.23,
+      "rsl": 1.3758,
+      "rank": 7,
+      "prev_rank": 17
+    },
+    {
+      "name": "Bulten",
+      "ticker": "BULTEN.ST",
+      "price": 67.5,
+      "sma130": 50.87,
+      "rsl": 1.3269,
+      "rank": 8,
+      "prev_rank": 9
+    },
+    {
+      "name": "Embracer",
+      "ticker": "EMBRAC-B.ST",
+      "price": 84.46,
+      "sma130": 64.37,
+      "rsl": 1.3121,
+      "rank": 9,
+      "prev_rank": 24
+    },
+    {
+      "name": "Troax Group",
+      "ticker": "TROAX.ST",
+      "price": 153.8,
+      "sma130": 118.6,
+      "rsl": 1.2968,
+      "rank": 10,
+      "prev_rank": 12
+    },
+    {
+      "name": "Sinch",
+      "ticker": "SINCH.ST",
+      "price": 47.18,
+      "sma130": 36.45,
+      "rsl": 1.2946,
+      "rank": 11,
       "prev_rank": 11
     },
     {
       "name": "Evolution",
       "ticker": "EVO.ST",
-      "price": 864.4,
-      "sma130": 685.47,
-      "rsl": 1.261,
-      "rank": 18,
-      "prev_rank": null
-    },
-    {
-      "name": "FM Mattsson",
-      "ticker": "FMM-B.ST",
-      "price": 107.5,
-      "sma130": 85.43,
-      "rsl": 1.2583,
-      "rank": 19,
-      "prev_rank": null
-    },
-    {
-      "name": "Mildef Group",
-      "ticker": "MILDEF.ST",
-      "price": 227.2,
-      "sma130": 181.63,
-      "rsl": 1.2509,
-      "rank": 20,
-      "prev_rank": null
+      "price": 898.6,
+      "sma130": 697.61,
+      "rsl": 1.2881,
+      "rank": 12,
+      "prev_rank": 18
     },
     {
       "name": "Humana",
       "ticker": "HUM.ST",
-      "price": 68.0,
-      "sma130": 54.39,
-      "rsl": 1.2502,
-      "rank": 21,
+      "price": 70.3,
+      "sma130": 55.27,
+      "rsl": 1.2719,
+      "rank": 13,
+      "prev_rank": 21
+    },
+    {
+      "name": "FM Mattsson",
+      "ticker": "FMM-B.ST",
+      "price": 109.5,
+      "sma130": 86.2,
+      "rsl": 1.2703,
+      "rank": 14,
+      "prev_rank": 19
+    },
+    {
+      "name": "Mips",
+      "ticker": "MIPS.ST",
+      "price": 376.0,
+      "sma130": 298.43,
+      "rsl": 1.2599,
+      "rank": 15,
       "prev_rank": 15
     },
     {
-      "name": "Hansa Biopharma",
-      "ticker": "HNSA.ST",
-      "price": 41.96,
-      "sma130": 33.64,
-      "rsl": 1.2473,
-      "rank": 22,
+      "name": "Eltel",
+      "ticker": "ELTEL.ST",
+      "price": 14.9,
+      "sma130": 11.84,
+      "rsl": 1.2583,
+      "rank": 16,
       "prev_rank": 14
     },
     {
-      "name": "Rottneros",
-      "ticker": "RROS.ST",
-      "price": 2.95,
-      "sma130": 2.39,
-      "rsl": 1.2388,
-      "rank": 23,
+      "name": "Egetis Therapeutics",
+      "ticker": "EGTX.ST",
+      "price": 7.88,
+      "sma130": 6.29,
+      "rsl": 1.2518,
+      "rank": 17,
       "prev_rank": 13
     },
     {
-      "name": "Embracer",
-      "ticker": "EMBRAC-B.ST",
-      "price": 77.74,
-      "sma130": 63.17,
-      "rsl": 1.2307,
+      "name": "Karnell Group",
+      "ticker": "KARNEL-B.ST",
+      "price": 99.9,
+      "sma130": 79.92,
+      "rsl": 1.2501,
+      "rank": 18,
+      "prev_rank": null
+    },
+    {
+      "name": "IRLAB Therapeutics",
+      "ticker": "IRLAB-A.ST",
+      "price": 1.79,
+      "sma130": 1.44,
+      "rsl": 1.2452,
+      "rank": 19,
+      "prev_rank": 10
+    },
+    {
+      "name": "BICO Group",
+      "ticker": "BICO.ST",
+      "price": 21.75,
+      "sma130": 17.63,
+      "rsl": 1.2336,
+      "rank": 20,
+      "prev_rank": null
+    },
+    {
+      "name": "Eolus",
+      "ticker": "EOLU-B.ST",
+      "price": 50.2,
+      "sma130": 41.12,
+      "rsl": 1.2209,
+      "rank": 21,
+      "prev_rank": null
+    },
+    {
+      "name": "Hacksaw",
+      "ticker": "HACK.ST",
+      "price": 92.25,
+      "sma130": 75.69,
+      "rsl": 1.2188,
+      "rank": 22,
+      "prev_rank": null
+    },
+    {
+      "name": "Kabe",
+      "ticker": "KABE-B.ST",
+      "price": 234.0,
+      "sma130": 192.09,
+      "rsl": 1.2182,
+      "rank": 23,
+      "prev_rank": 16
+    },
+    {
+      "name": "Alleima",
+      "ticker": "ALLEI.ST",
+      "price": 115.6,
+      "sma130": 94.99,
+      "rsl": 1.217,
       "rank": 24,
       "prev_rank": null
     },
     {
-      "name": "Dedicare",
-      "ticker": "DEDI.ST",
-      "price": 57.8,
-      "sma130": 46.99,
-      "rsl": 1.2301,
+      "name": "Asmodee",
+      "ticker": "ASMDEE-B.ST",
+      "price": 166.7,
+      "sma130": 137.1,
+      "rsl": 1.2159,
       "rank": 25,
-      "prev_rank": 23
+      "prev_rank": null
     }
   ],
   "skipped": [
     {
+      "name": "Cint Group",
+      "ticker": "CINT.ST",
+      "reason": "No price data returned",
+      "days_available": 0
+    },
+    {
       "name": "CoinShares",
       "ticker": "CS.ST",
+      "reason": "No price data returned",
+      "days_available": 0
+    },
+    {
+      "name": "Fingerprint Cards",
+      "ticker": "FING-B.ST",
       "reason": "No price data returned",
       "days_available": 0
     },
@@ -251,34 +263,22 @@
       "days_available": 0
     },
     {
+      "name": "Nilörngruppen",
+      "ticker": "NIL-B.ST",
+      "reason": "No price data returned",
+      "days_available": 0
+    },
+    {
       "name": "TradeDoubler",
       "ticker": "TRAD.ST",
       "reason": "No price data returned",
       "days_available": 0
     },
     {
-      "name": "Verisure",
-      "ticker": "VSURE.ST",
-      "reason": "No price data returned",
-      "days_available": 0
-    },
-    {
-      "name": "Fingerprint Cards",
-      "ticker": "FING-B.ST",
-      "reason": "Insufficient history — needs 130 days, only 1 available",
-      "days_available": 1
-    },
-    {
-      "name": "Cint Group",
-      "ticker": "CINT.ST",
-      "reason": "Insufficient history — needs 130 days, only 20 available",
-      "days_available": 20
-    },
-    {
-      "name": "Nilörngruppen",
-      "ticker": "NIL-B.ST",
-      "reason": "Insufficient history — needs 130 days, only 20 available",
-      "days_available": 20
+      "name": "Anoto",
+      "ticker": "ANOT.ST",
+      "reason": "Insufficient history — needs 130 days, only 44 available",
+      "days_available": 44
     }
   ]
 }
