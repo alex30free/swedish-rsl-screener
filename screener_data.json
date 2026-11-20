@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-13 22:46 UTC",
+  "updated": "2026-11-20 23:16 UTC",
   "period_days": 130,
   "total_attempted": 276,
   "stocks_screened": 266,
@@ -8,227 +8,227 @@
     {
       "name": "Yubico",
       "ticker": "YUBICO.ST",
-      "price": 176.0,
-      "sma130": 88.44,
-      "rsl": 1.99,
+      "price": 184.0,
+      "sma130": 93.12,
+      "rsl": 1.9759,
       "rank": 1,
       "prev_rank": 1
     },
     {
       "name": "Elon",
       "ticker": "ELON.ST",
-      "price": 51.0,
-      "sma130": 28.3,
-      "rsl": 1.8019,
+      "price": 58.4,
+      "sma130": 29.61,
+      "rsl": 1.9725,
       "rank": 2,
       "prev_rank": 2
+    },
+    {
+      "name": "Bulten",
+      "ticker": "BULTEN.ST",
+      "price": 90.3,
+      "sma130": 61.46,
+      "rsl": 1.4692,
+      "rank": 3,
+      "prev_rank": 6
     },
     {
       "name": "Egetis Therapeutics",
       "ticker": "EGTX.ST",
       "price": 11.12,
-      "sma130": 7.46,
-      "rsl": 1.4912,
-      "rank": 3,
-      "prev_rank": 4
-    },
-    {
-      "name": "Ferronordic",
-      "ticker": "FNM.ST",
-      "price": 110.0,
-      "sma130": 76.69,
-      "rsl": 1.4344,
+      "sma130": 7.63,
+      "rsl": 1.4581,
       "rank": 4,
-      "prev_rank": null
-    },
-    {
-      "name": "Isofol Medical",
-      "ticker": "ISOFOL.ST",
-      "price": 1.16,
-      "sma130": 0.83,
-      "rsl": 1.4012,
-      "rank": 5,
       "prev_rank": 3
     },
     {
-      "name": "Bulten",
-      "ticker": "BULTEN.ST",
-      "price": 83.8,
-      "sma130": 59.89,
-      "rsl": 1.3992,
-      "rank": 6,
-      "prev_rank": 5
-    },
-    {
-      "name": "BTS Group",
-      "ticker": "BTS-B.ST",
-      "price": 267.0,
-      "sma130": 194.28,
-      "rsl": 1.3743,
-      "rank": 7,
+      "name": "Pricer",
+      "ticker": "PRIC-B.ST",
+      "price": 5.8,
+      "sma130": 4.04,
+      "rsl": 1.4365,
+      "rank": 5,
       "prev_rank": null
     },
     {
-      "name": "Mips",
-      "ticker": "MIPS.ST",
-      "price": 470.0,
-      "sma130": 348.14,
-      "rsl": 1.35,
-      "rank": 8,
-      "prev_rank": 8
-    },
-    {
-      "name": "Embracer",
-      "ticker": "EMBRAC-B.ST",
-      "price": 100.85,
-      "sma130": 75.33,
-      "rsl": 1.3388,
-      "rank": 9,
-      "prev_rank": 15
+      "name": "Truecaller",
+      "ticker": "TRUE-B.ST",
+      "price": 26.09,
+      "sma130": 19.3,
+      "rsl": 1.3521,
+      "rank": 6,
+      "prev_rank": 22
     },
     {
       "name": "Bonesupport",
       "ticker": "BONEX.ST",
-      "price": 316.8,
-      "sma130": 237.2,
-      "rsl": 1.3356,
-      "rank": 10,
-      "prev_rank": 6
+      "price": 323.8,
+      "sma130": 240.03,
+      "rsl": 1.349,
+      "rank": 7,
+      "prev_rank": 10
     },
     {
-      "name": "Addnode",
-      "ticker": "ANOD-B.ST",
-      "price": 63.0,
-      "sma130": 47.55,
-      "rsl": 1.3249,
-      "rank": 11,
-      "prev_rank": 9
+      "name": "Ferronordic",
+      "ticker": "FNM.ST",
+      "price": 106.0,
+      "sma130": 79.08,
+      "rsl": 1.3404,
+      "rank": 8,
+      "prev_rank": 4
+    },
+    {
+      "name": "BTS Group",
+      "ticker": "BTS-B.ST",
+      "price": 263.0,
+      "sma130": 198.6,
+      "rsl": 1.3243,
+      "rank": 9,
+      "prev_rank": 7
     },
     {
       "name": "CellaVision",
       "ticker": "CEVI.ST",
-      "price": 202.0,
-      "sma130": 153.52,
-      "rsl": 1.3158,
-      "rank": 12,
-      "prev_rank": 11
+      "price": 204.0,
+      "sma130": 156.62,
+      "rsl": 1.3025,
+      "rank": 10,
+      "prev_rank": 12
+    },
+    {
+      "name": "Embracer",
+      "ticker": "EMBRAC-B.ST",
+      "price": 99.26,
+      "sma130": 76.54,
+      "rsl": 1.2969,
+      "rank": 11,
+      "prev_rank": 9
     },
     {
       "name": "Arjo",
       "ticker": "ARJO-B.ST",
-      "price": 36.26,
-      "sma130": 27.73,
-      "rsl": 1.3078,
+      "price": 36.24,
+      "sma130": 28.16,
+      "rsl": 1.2868,
+      "rank": 12,
+      "prev_rank": 13
+    },
+    {
+      "name": "Dedicare",
+      "ticker": "DEDI.ST",
+      "price": 68.5,
+      "sma130": 53.51,
+      "rsl": 1.2802,
       "rank": 13,
-      "prev_rank": 10
-    },
-    {
-      "name": "Scandi Standard",
-      "ticker": "SCST.ST",
-      "price": 195.6,
-      "sma130": 152.04,
-      "rsl": 1.2865,
-      "rank": 14,
-      "prev_rank": 17
-    },
-    {
-      "name": "Kabe",
-      "ticker": "KABE-B.ST",
-      "price": 275.0,
-      "sma130": 213.99,
-      "rsl": 1.2851,
-      "rank": 15,
-      "prev_rank": 7
-    },
-    {
-      "name": "Clas Ohlson",
-      "ticker": "CLAS-B.ST",
-      "price": 552.0,
-      "sma130": 431.48,
-      "rsl": 1.2793,
-      "rank": 16,
       "prev_rank": null
     },
     {
       "name": "Hansa Biopharma",
       "ticker": "HNSA.ST",
-      "price": 46.28,
-      "sma130": 36.41,
-      "rsl": 1.271,
-      "rank": 17,
-      "prev_rank": null
-    },
-    {
-      "name": "Apotea",
-      "ticker": "APOTEA.ST",
-      "price": 99.8,
-      "sma130": 79.45,
-      "rsl": 1.2561,
-      "rank": 18,
-      "prev_rank": 12
-    },
-    {
-      "name": "KnowIT",
-      "ticker": "KNOW.ST",
-      "price": 117.4,
-      "sma130": 93.85,
-      "rsl": 1.2509,
-      "rank": 19,
-      "prev_rank": 16
+      "price": 47.32,
+      "sma130": 37.06,
+      "rsl": 1.2767,
+      "rank": 14,
+      "prev_rank": 17
     },
     {
       "name": "Vimian Group",
       "ticker": "VIMIAN.ST",
-      "price": 42.25,
-      "sma130": 34.02,
-      "rsl": 1.242,
-      "rank": 20,
+      "price": 44.0,
+      "sma130": 34.51,
+      "rsl": 1.2749,
+      "rank": 15,
       "prev_rank": 20
+    },
+    {
+      "name": "Apotea",
+      "ticker": "APOTEA.ST",
+      "price": 101.5,
+      "sma130": 80.46,
+      "rsl": 1.2614,
+      "rank": 16,
+      "prev_rank": 18
+    },
+    {
+      "name": "Scandi Standard",
+      "ticker": "SCST.ST",
+      "price": 194.4,
+      "sma130": 154.22,
+      "rsl": 1.2606,
+      "rank": 17,
+      "prev_rank": 14
+    },
+    {
+      "name": "Mips",
+      "ticker": "MIPS.ST",
+      "price": 447.0,
+      "sma130": 355.88,
+      "rsl": 1.256,
+      "rank": 18,
+      "prev_rank": 8
+    },
+    {
+      "name": "Clas Ohlson",
+      "ticker": "CLAS-B.ST",
+      "price": 540.0,
+      "sma130": 436.8,
+      "rsl": 1.2363,
+      "rank": 19,
+      "prev_rank": 16
+    },
+    {
+      "name": "Kabe",
+      "ticker": "KABE-B.ST",
+      "price": 268.0,
+      "sma130": 217.22,
+      "rsl": 1.2338,
+      "rank": 20,
+      "prev_rank": 15
     },
     {
       "name": "Byggmax",
       "ticker": "BMAX.ST",
-      "price": 65.3,
-      "sma130": 52.6,
-      "rsl": 1.2414,
+      "price": 65.2,
+      "sma130": 53.31,
+      "rsl": 1.223,
       "rank": 21,
       "prev_rank": 21
     },
     {
-      "name": "Truecaller",
-      "ticker": "TRUE-B.ST",
-      "price": 23.34,
-      "sma130": 18.89,
-      "rsl": 1.2357,
+      "name": "Vitrolife",
+      "ticker": "VITR.ST",
+      "price": 117.4,
+      "sma130": 96.42,
+      "rsl": 1.2176,
       "rank": 22,
-      "prev_rank": 22
-    },
-    {
-      "name": "PION Group",
-      "ticker": "PION-B.ST",
-      "price": 7.56,
-      "sma130": 6.14,
-      "rsl": 1.2312,
-      "rank": 23,
       "prev_rank": 25
     },
     {
       "name": "Camurus",
       "ticker": "CAMX.ST",
-      "price": 739.0,
-      "sma130": 600.33,
-      "rsl": 1.231,
-      "rank": 24,
-      "prev_rank": null
+      "price": 740.0,
+      "sma130": 608.82,
+      "rsl": 1.2155,
+      "rank": 23,
+      "prev_rank": 24
     },
     {
-      "name": "Vitrolife",
-      "ticker": "VITR.ST",
-      "price": 117.8,
-      "sma130": 95.93,
-      "rsl": 1.2279,
+      "name": "PION Group",
+      "ticker": "PION-B.ST",
+      "price": 7.54,
+      "sma130": 6.23,
+      "rsl": 1.2106,
+      "rank": 24,
+      "prev_rank": 23
+    },
+    {
+      "name": "AcadeMedia",
+      "ticker": "ACAD.ST",
+      "price": 125.2,
+      "sma130": 103.8,
+      "rsl": 1.2061,
       "rank": 25,
-      "prev_rank": 19
+      "prev_rank": null
     }
   ],
   "skipped": [
@@ -289,8 +289,8 @@
     {
       "name": "Anoto",
       "ticker": "ANOT.ST",
-      "reason": "Insufficient history — needs 130 days, only 85 available",
-      "days_available": 85
+      "reason": "Insufficient history — needs 130 days, only 90 available",
+      "days_available": 90
     }
   ]
 }
